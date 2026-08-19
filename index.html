@@ -1,96 +1,71 @@
-<!doctype html>
-<html lang="de">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="ATOMSPHERE Kaffee – eine außergewöhnliche Bohnenmischung für außergewöhnliche Momente.">
-  <title>ATOMSPHERE Kaffee — Für außergewöhnliche Menschen.</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Black Website</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 60px;
+      font-weight: 700;
+      letter-spacing: -2px;
+    }
+
+    p {
+      margin-top: 15px;
+      color: #888;
+      font-size: 18px;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 14px 30px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ccc;
+    }
+  </style>
 </head>
+
 <body>
-<header class="nav">
-  <a class="brand" href="#">ATOMSPHERE <small>KAFFEE</small></a>
-  <nav>
-    <a class="active" href="#">HOME</a>
-    <a href="#kaffee">KAFFEE</a>
-    <a href="#mission">MISSION</a>
-    <a href="#herkunft">HERKUNFT</a>
-    <a href="#qualitaet">QUALITÄT</a>
-  </nav>
-  <span class="cart">♢</span>
-</header>
 
-<main>
-  <section class="hero">
-    <div class="hero-copy">
-      <h1>ATOMSPHERE Kaffee.<br>Für außergewöhnliche<br>Menschen.</h1>
-      <div class="gold-line"></div>
-      <p>
-        ATOMSPHERE Kaffee ist mehr als nur ein Getränk.
-        Es ist ein Erlebnis. Eine exotische Mischung aus ausgewählten
-        Bohnen – für alle, die das Außergewöhnliche suchen und
-        das Unmögliche möglich machen.
-      </p>
-      <p>
-        Ein Schluck. Ein Moment.<br>
-        Die Fähigkeit, außergewöhnliche Dinge zu tun, beginnt genau hier.
-      </p>
-      <a class="button" href="#kaufen">JETZT KAUFEN <span>→</span></a>
-      <div class="stripe">♢ &nbsp; SICHERE ZAHLUNG MIT STRIPE</div>
-    </div>
+  <div class="content">
+    <h1>BLACK</h1>
+    <p>A completely black website.</p>
+    <button>ENTER</button>
+  </div>
 
-    <div class="product-stage">
-      <div class="gold-glow"></div>
-      <img src="assets/1000013675.png" alt="ATOMSPHERE Kaffee Verpackung">
-      <div class="beans"></div>
-    </div>
-  </section>
-
-  <section class="features" id="kaffee">
-    <article><div class="icon">◎</div><h3>EXOTISCHE HERKUNFT</h3><p>Sorgfältig ausgewählte Bohnen aus den exotischsten Regionen der Welt.</p></article>
-    <article><div class="icon">◯</div><h3>PREMIUM QUALITÄT</h3><p>Hochwertige Bohnen und schonende Röstung für ein unvergleichliches Aroma.</p></article>
-    <article><div class="icon">♕</div><h3>FÜR VISIONÄRE</h3><p>Kaffee für Menschen mit Zielen. Für alle, die mehr wollen und außergewöhnliche Dinge tun.</p></article>
-    <article><div class="icon">ϟ</div><h3>ENERGIE &amp; KLARHEIT</h3><p>Intensiver Geschmack für deinen Fokus, deine Energie und deinen nächsten großen Schritt.</p></article>
-  </section>
-
-  <section class="origin" id="herkunft">
-    <div class="mountains"></div>
-    <div class="origin-copy">
-      <span class="label">DIE HERKUNFT</span>
-      <h2>Exotische Länder.<br>Einzigartige Mischung.</h2>
-      <p>
-        Unsere Bohnen kommen aus ausgewählten Anbaugebieten rund um den Globus –
-        von den Höhen Äthiopiens über Kolumbien bis zu sonnenverwöhnten
-        Plantagen in Brasilien und Indonesien.
-      </p>
-      <p>
-        Jede Bohne wird mit Sorgfalt ausgewählt und geröstet, damit aus
-        außergewöhnlicher Herkunft ein außergewöhnlicher Kaffee entsteht.
-      </p>
-      <strong>ATOMSPHERE Kaffee. Ein Geschmack, so selten wie du.</strong>
-    </div>
-  </section>
-
-  <section class="cta" id="mission">
-    <h2>Bereit für außergewöhnliche Momente?</h2>
-    <a class="button" href="#kaufen">JETZT KAUFEN <span>→</span></a>
-  </section>
-
-  <section class="trust" id="qualitaet">
-    <div><b>♧</b><span>NACHHALTIG<small>Fair. Sozial. Nachhaltig.</small></span></div>
-    <div><b>♨</b><span>FRISCH GERÖSTET<small>Schonende Langzeitröstung.</small></span></div>
-    <div><b>♡</b><span>MIT LEIDENSCHAFT<small>Handwerk mit Charakter.</small></span></div>
-    <div><b>♙</b><span>SICHER BEZAHLEN<small>SSL verschlüsselt. Mit Stripe.</small></span></div>
-  </section>
-
-  <section class="hidden-checkout" id="kaufen">
-    <h2>ATOMSPHERE Kaffee</h2>
-    <p>Der Stripe-Link wird später hier hinterlegt.</p>
-    <button class="button" id="buyButton">JETZT KAUFEN <span>→</span></button>
-  </section>
-</main>
-
-<footer>© 2026 ATOMSPHERE Kaffee. Alle Rechte vorbehalten.</footer>
-<script src="script.js"></script>
 </body>
 </html>
