@@ -1,163 +1,457 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netzwerk & Verbindungen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <title>Netzwerk & Verbindungen</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f9ff;
-      color: #10233f;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.18), transparent 35%),
-        linear-gradient(135deg, #ffffff 0%, #eaf3ff 100%);
-    }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #e9eef5;
+            color: #172033;
+            min-height: 100vh;
+        }
 
-    .container {
-      max-width: 900px;
-      width: 100%;
-      text-align: center;
-    }
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
 
-    .badge {
-      display: inline-block;
-      padding: 9px 18px;
-      margin-bottom: 25px;
-      border-radius: 50px;
-      background: #dbeafe;
-      color: #2563eb;
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-    }
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
 
-    h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.05;
-      margin-bottom: 28px;
-      letter-spacing: -2px;
-    }
+        /* =========================
+           BLUE SIDE AREA
+        ========================= */
 
-    h1 span {
-      color: #2563eb;
-    }
+        .sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 31%;
+            height: 100%;
+            background: #102a56;
+            overflow: hidden;
+        }
 
-    .intro {
-      max-width: 700px;
-      margin: 0 auto 45px;
-      font-size: 21px;
-      line-height: 1.7;
-      color: #52657d;
-    }
+        .sidebar::after {
+            content: "";
+            position: absolute;
+            width: 180%;
+            height: 300px;
+            right: -70%;
+            bottom: 80px;
+            background: #1769aa;
+            transform: rotate(-18deg);
+            opacity: 0.9;
+        }
 
-    .card {
-      max-width: 720px;
-      margin: auto;
-      padding: 42px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid #dbe7f5;
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(37, 99, 235, 0.10);
-    }
+        .sidebar::before {
+            content: "";
+            position: absolute;
+            width: 160%;
+            height: 160px;
+            right: -55%;
+            bottom: 30px;
+            background: #2d8dcc;
+            transform: rotate(-18deg);
+            opacity: 0.65;
+        }
 
-    .card p {
-      font-size: 20px;
-      line-height: 1.7;
-      color: #263b55;
-    }
+        /* =========================
+           SIDEBAR CONTENT
+        ========================= */
 
-    .highlight {
-      color: #2563eb;
-      font-weight: bold;
-    }
+        .sidebar-content {
+            position: relative;
+            z-index: 5;
+            padding: 70px 42px;
+            color: white;
+        }
 
-    .button {
-      display: inline-block;
-      margin-top: 35px;
-      padding: 16px 30px;
-      border-radius: 12px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      font-size: 17px;
-      font-weight: bold;
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
-      transition: 0.2s;
-    }
+        .small-title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: bold;
+            opacity: 0.75;
+            margin-bottom: 35px;
+        }
 
-    .button:hover {
-      background: #1d4ed8;
-      transform: translateY(-2px);
-    }
+        .network-mark {
+            width: 65px;
+            height: 65px;
+            border: 2px solid rgba(255,255,255,0.75);
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 35px;
+        }
 
-    .footer {
-      margin-top: 35px;
-      color: #8291a5;
-      font-size: 14px;
-    }
-  </style>
+        .network-mark::before,
+        .network-mark::after {
+            content: "";
+            position: absolute;
+            background: white;
+            opacity: 0.8;
+        }
+
+        .network-mark::before {
+            width: 35px;
+            height: 2px;
+            top: 30px;
+            left: 13px;
+        }
+
+        .network-mark::after {
+            width: 2px;
+            height: 35px;
+            top: 13px;
+            left: 30px;
+        }
+
+        .sidebar h2 {
+            font-size: 26px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .sidebar p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.82);
+        }
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        .content {
+            position: relative;
+            z-index: 10;
+            margin-left: 31%;
+            width: 69%;
+            min-height: 100vh;
+            padding: 75px 75px 65px;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #1769aa;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 5vw, 72px);
+            line-height: 0.98;
+            letter-spacing: -2px;
+            color: #102a56;
+            max-width: 800px;
+            margin-bottom: 32px;
+        }
+
+        h1 span {
+            color: #1769aa;
+        }
+
+        .intro {
+            font-size: 19px;
+            line-height: 1.75;
+            color: #4c586b;
+            max-width: 720px;
+            margin-bottom: 50px;
+        }
+
+        /* =========================
+           CONTENT CARDS
+        ========================= */
+
+        .section {
+            border-top: 1px solid #dce3eb;
+            padding-top: 28px;
+            margin-top: 28px;
+            max-width: 760px;
+        }
+
+        .section-number {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #1769aa;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .section h3 {
+            font-size: 23px;
+            color: #102a56;
+            margin-bottom: 12px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.75;
+            color: #566174;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            margin-top: 55px;
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            background: #102a56;
+            color: white;
+            text-decoration: none;
+            padding: 18px 28px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: 0.25s ease;
+        }
+
+        .cta:hover {
+            background: #1769aa;
+            transform: translateY(-2px);
+        }
+
+        .arrow {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            margin-top: 75px;
+            padding-top: 22px;
+            border-top: 1px solid #dce3eb;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #8a94a4;
+        }
+
+        /* =========================
+           DECORATIVE ELEMENT
+        ========================= */
+
+        .corner {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 270px;
+            height: 270px;
+            background: #1769aa;
+            transform: rotate(45deg);
+            opacity: 0.08;
+        }
+
+        .line {
+            position: absolute;
+            right: 55px;
+            top: 100px;
+            width: 90px;
+            height: 4px;
+            background: #1769aa;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                min-height: 320px;
+            }
+
+            .sidebar-content {
+                padding: 45px 35px;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+                padding: 55px 35px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .intro {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .sidebar {
+                min-height: 280px;
+            }
+
+            .sidebar-content {
+                padding: 35px 25px;
+            }
+
+            .content {
+                padding: 45px 25px;
+            }
+
+            h1 {
+                font-size: 40px;
+                letter-spacing: -1px;
+            }
+
+            .cta {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <section class="hero">
-    <div class="container">
+<div class="page">
 
-      <div class="badge">
-        NETWORK · BUSINESS · CONNECTIONS
-      </div>
+    <!-- BLAUER BEREICH -->
+    <aside class="sidebar">
 
-      <h1>
-        Menschen verbinden.<br>
-        <span>Möglichkeiten schaffen.</span>
-      </h1>
+        <div class="sidebar-content">
 
-      <p class="intro">
-        Ich bin junger Unternehmer und glaube daran,
-        dass Menschen den größten Wert darstellen.
-      </p>
+            <div class="small-title">
+                NETWORK · BUSINESS · CONNECTIONS
+            </div>
 
-      <div class="card">
-        <p>
-          Deshalb möchte ich Sie einfach kennenlernen
-          und den Personenkreis, den ich kenne,
-          <span class="highlight">ausbauen.</span>
+            <div class="network-mark"></div>
+
+            <h2>
+                Menschen.<br>
+                Unternehmen.<br>
+                Verbindungen.
+            </h2>
+
+            <p>
+                Offene Gespräche · Neue Kontakte ·
+                Gemeinsame Möglichkeiten
+            </p>
+
+        </div>
+
+    </aside>
+
+
+    <!-- HAUPTBEREICH -->
+    <main class="content">
+
+        <div class="corner"></div>
+        <div class="line"></div>
+
+        <div class="eyebrow">
+            NETWORK & VERBINDUNGEN
+        </div>
+
+        <h1>
+            Menschen verbinden.<br>
+            <span>Möglichkeiten schaffen.</span>
+        </h1>
+
+        <p class="intro">
+            Ich bin junger Unternehmer und glaube daran,
+            dass Menschen den größten Wert darstellen.
         </p>
 
-        <p style="margin-top: 22px;">
-          Ich möchte interessante Unternehmer kennenlernen,
-          voneinander lernen und dort, wo es passt,
-          wertvolle Verbindungen zwischen Menschen
-          und Unternehmen herstellen.
-        </p>
 
-        <a href="mailto:deine@email.at" class="button">
-          Kontakt aufnehmen
+        <section class="section">
+
+            <div class="section-number">
+                01 — KONTAKT
+            </div>
+
+            <h3>
+                Neue Menschen kennenlernen
+            </h3>
+
+            <p>
+                Deshalb möchte ich Sie einfach kennenlernen
+                und den Personenkreis, den ich kenne,
+                ausbauen.
+            </p>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="section-number">
+                02 — NETWORKING
+            </div>
+
+            <h3>
+                Interessante Unternehmer
+            </h3>
+
+            <p>
+                Ich möchte interessante Unternehmer
+                kennenlernen, voneinander lernen und
+                neue Perspektiven entdecken.
+            </p>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="section-number">
+                03 — MÖGLICHKEITEN
+            </div>
+
+            <h3>
+                Wertvolle Verbindungen schaffen
+            </h3>
+
+            <p>
+                Dort, wo es passt, möchte ich wertvolle
+                Verbindungen zwischen Menschen und
+                Unternehmen herstellen.
+            </p>
+
+        </section>
+
+
+        <a href="mailto:deine@email.at" class="cta">
+            Kontakt aufnehmen
+            <span class="arrow">→</span>
         </a>
-      </div>
 
-      <div class="footer">
-        Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
-      </div>
 
-    </div>
-  </section>
+        <div class="footer">
+            Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
+        </div>
+
+    </main>
+
+</div>
 
 </body>
 </html>
