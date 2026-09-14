@@ -89,11 +89,6 @@
             overflow: hidden;
         }
 
-        /*
-            Große diagonale Fläche –
-            angelehnt an das blaue CV-Design.
-        */
-
         .sidebar::before {
             content: "";
             position: absolute;
@@ -111,10 +106,6 @@
             opacity: 0.95;
         }
 
-        /*
-            Zweite blaue Fläche
-        */
-
         .sidebar::after {
             content: "";
             position: absolute;
@@ -131,10 +122,6 @@
 
             opacity: 0.85;
         }
-
-        /*
-            zusätzliche dezente diagonale Linie
-        */
 
         .sidebar-decoration {
             position: absolute;
@@ -446,10 +433,6 @@
                 1px solid var(--line);
         }
 
-        /*
-            Kleine blaue Linie links
-        */
-
         .section::before {
             content: "";
 
@@ -477,6 +460,18 @@
         }
 
         .section h3 {
+            font-size: 22px;
+
+            line-height: 1.3;
+
+            color: var(--navy);
+
+            margin-bottom: 10px;
+
+            font-weight: 700;
+        }
+
+        .section h4 {
             font-size: 22px;
 
             line-height: 1.3;
@@ -759,6 +754,10 @@
                 font-size: 20px;
             }
 
+            .section h4 {
+                font-size: 20px;
+            }
+
             .cta {
                 width: 100%;
 
@@ -943,6 +942,10 @@
 
             <p>
                 Wir haben den Kunden, den du suchst.
+            </p>
+
+            <p>
+                Vernetz dich mit uns
             </p>
 
         </section>
