@@ -1,11 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Netzwerk & Verbindungen</title>
 
   <style>
@@ -15,17 +12,11 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       font-family: Arial, sans-serif;
       background: #f5f9ff;
       color: #10233f;
     }
-
-    /* HERO */
 
     .hero {
       min-height: 100vh;
@@ -33,18 +24,9 @@
       align-items: center;
       justify-content: center;
       padding: 40px 20px;
-
       background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(37, 99, 235, 0.18),
-          transparent 35%
-        ),
-        linear-gradient(
-          135deg,
-          #ffffff 0%,
-          #eaf3ff 100%
-        );
+        radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.18), transparent 35%),
+        linear-gradient(135deg, #ffffff 0%, #eaf3ff 100%);
     }
 
     .container {
@@ -58,10 +40,8 @@
       padding: 9px 18px;
       margin-bottom: 25px;
       border-radius: 50px;
-
       background: #dbeafe;
       color: #2563eb;
-
       font-size: 14px;
       font-weight: bold;
       letter-spacing: 0.5px;
@@ -81,7 +61,6 @@
     .intro {
       max-width: 700px;
       margin: 0 auto 45px;
-
       font-size: 21px;
       line-height: 1.7;
       color: #52657d;
@@ -91,13 +70,10 @@
       max-width: 720px;
       margin: auto;
       padding: 42px;
-
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid #dbe7f5;
       border-radius: 24px;
-
-      box-shadow:
-        0 20px 60px rgba(37, 99, 235, 0.10);
+      box-shadow: 0 20px 60px rgba(37, 99, 235, 0.10);
     }
 
     .card p {
@@ -114,20 +90,14 @@
     .button {
       display: inline-block;
       margin-top: 35px;
-
       padding: 16px 30px;
       border-radius: 12px;
-
       background: #2563eb;
       color: white;
-
       text-decoration: none;
       font-size: 17px;
       font-weight: bold;
-
-      box-shadow:
-        0 10px 25px rgba(37, 99, 235, 0.25);
-
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
       transition: 0.2s;
     }
 
@@ -141,94 +111,12 @@
       color: #8291a5;
       font-size: 14px;
     }
-
-    .footer a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    /* IMPRESSUM */
-
-    .impressum {
-      padding: 80px 20px;
-      background: #ffffff;
-      border-top: 1px solid #dbe7f5;
-    }
-
-    .impressum-container {
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .impressum h2 {
-      font-size: 36px;
-      color: #10233f;
-      margin-bottom: 35px;
-    }
-
-    .impressum-content {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-
-      color: #52657d;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    .impressum-content p {
-      background: #f5f9ff;
-      padding: 25px;
-
-      border-radius: 16px;
-      border: 1px solid #e1ebf7;
-    }
-
-    .impressum-content strong {
-      color: #10233f;
-    }
-
-    .placeholder {
-      grid-column: 1 / -1;
-      color: #8291a5;
-      font-size: 14px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 650px) {
-
-      .card {
-        padding: 28px 22px;
-      }
-
-      .intro {
-        font-size: 18px;
-      }
-
-      .card p {
-        font-size: 17px;
-      }
-
-      .impressum-content {
-        grid-template-columns: 1fr;
-      }
-
-      .placeholder {
-        grid-column: auto;
-      }
-    }
   </style>
-
 </head>
-
 
 <body>
 
-  <!-- HAUPTBEREICH -->
-
   <section class="hero">
-
     <div class="container">
 
       <div class="badge">
@@ -246,7 +134,6 @@
       </p>
 
       <div class="card">
-
         <p>
           Deshalb möchte ich Sie einfach kennenlernen
           und den Personenkreis, den ich kenne,
@@ -260,80 +147,17 @@
           und Unternehmen herstellen.
         </p>
 
-        <a
-          href="mailto:deine@email.at"
-          class="button"
-        >
+        <a href="mailto:deine@email.at" class="button">
           Kontakt aufnehmen
         </a>
-
       </div>
 
       <div class="footer">
-
         Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
-
-        <br><br>
-
-        <a href="#impressum">
-          Impressum
-        </a>
-
       </div>
 
     </div>
-
   </section>
-
-
-  <!-- IMPRESSUM -->
-
-  <section id="impressum" class="impressum">
-
-    <div class="impressum-container">
-
-      <h2>Impressum</h2>
-
-      <div class="impressum-content">
-
-        <p>
-          <strong>[Vorname Nachname]</strong><br>
-          [Unternehmensname]<br>
-          [Straße und Hausnummer]<br>
-          [PLZ Ort]<br>
-          [Land]
-        </p>
-
-        <p>
-          <strong>Kontakt</strong><br>
-          E-Mail: [E-Mail-Adresse]<br>
-          Telefon: [Telefonnummer]
-        </p>
-
-        <p>
-          <strong>Unternehmensdaten</strong><br>
-          Firmenbuchnummer: [Firmenbuchnummer]<br>
-          Firmenbuchgericht: [Firmenbuchgericht]<br>
-          UID-Nummer: [UID-Nummer]
-        </p>
-
-        <p>
-          <strong>Vertretungsberechtigt</strong><br>
-          [Vorname Nachname]
-        </p>
-
-        <p class="placeholder">
-          [Hier können später weitere gesetzlich erforderliche Angaben ergänzt werden.]
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
 
 </body>
-
 </html>
-```
