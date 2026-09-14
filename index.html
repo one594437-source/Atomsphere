@@ -11,7 +11,98 @@
       padding: 0;
       box-sizing: border-box;
     }
+<section id="impressum" class="impressum">
+  <div class="impressum-container">
+    <h2>Impressum</h2>
 
+    <div class="impressum-content">
+      <p>
+        <strong>[Vorname Nachname]</strong><br>
+        [Unternehmensname]<br>
+        [Straße und Hausnummer]<br>
+        [PLZ Ort]<br>
+        [Land]
+      </p>
+
+      <p>
+        <strong>Kontakt</strong><br>
+        E-Mail: [E-Mail-Adresse]<br>
+        Telefon: [Telefonnummer]
+      </p>
+
+      <p>
+        <strong>Unternehmensdaten</strong><br>
+        Firmenbuchnummer: [Firmenbuchnummer]<br>
+        Firmenbuchgericht: [Firmenbuchgericht]<br>
+        UID-Nummer: [UID-Nummer]
+      </p>
+
+      <p>
+        <strong>Vertretungsberechtigt</strong><br>
+        [Vorname Nachname]
+      </p>
+
+      <p class="placeholder">
+        [Hier können später weitere gesetzlich erforderliche Angaben ergänzt werden.]
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impressum {
+    padding: 80px 20px;
+    background: #ffffff;
+    border-top: 1px solid #dbe7f5;
+  }
+
+  .impressum-container {
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .impressum h2 {
+    font-size: 36px;
+    color: #10233f;
+    margin-bottom: 35px;
+  }
+
+  .impressum-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    color: #52657d;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .impressum-content p {
+    background: #f5f9ff;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #e1ebf7;
+  }
+
+  .impressum-content strong {
+    color: #10233f;
+  }
+
+  .impressum .placeholder {
+    grid-column: 1 / -1;
+    color: #8291a5;
+    font-size: 14px;
+  }
+
+  @media (max-width: 650px) {
+    .impressum-content {
+      grid-template-columns: 1fr;
+    }
+
+    .impressum .placeholder {
+      grid-column: auto;
+    }
+  }
+</style>
     body {
       font-family: Arial, sans-serif;
       background: #f5f9ff;
@@ -155,7 +246,7 @@
       <div class="footer">
         Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
       </div>
-
+<a href="#impressum">Impressum</a>
     </div>
   </section>
 
