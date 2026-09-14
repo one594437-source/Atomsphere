@@ -1,963 +1,388 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Netzwerk & Verbindungen</title>
-
-    <style>
-        /* =========================================================
-           RESET
-        ========================================================= */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            background: #e7edf4;
-            color: #17243a;
-            min-height: 100vh;
-        }
-
-        /* =========================================================
-           COLORS
-        ========================================================= */
-
-        :root {
-            --navy: #102a56;
-            --navy-dark: #0b2044;
-            --blue: #1676b9;
-            --blue-light: #3b9bd1;
-            --blue-soft: #eaf4fb;
-
-            --text: #182438;
-            --text-light: #687487;
-            --line: #dbe3ec;
-
-            --white: #ffffff;
-        }
-
-        /* =========================================================
-           PAGE
-        ========================================================= */
-
-        .page {
-            position: relative;
-            width: min(1500px, 100%);
-            min-height: 100vh;
-            margin: 0 auto;
-            background: var(--white);
-            overflow: hidden;
-
-            box-shadow:
-                0 20px 70px rgba(16, 42, 86, 0.12);
-        }
-
-        /* =========================================================
-           LEFT BLUE PANEL
-        ========================================================= */
-
-        .sidebar {
-            position: absolute;
-            left: 0;
-            top: 0;
-
-            width: 31%;
-            min-height: 100%;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    var(--navy-dark) 0%,
-                    var(--navy) 58%,
-                    #123c70 100%
-                );
-
-            overflow: hidden;
-        }
-
-        /*
-            Große diagonale Fläche –
-            angelehnt an das blaue CV-Design.
-        */
-
-        .sidebar::before {
-            content: "";
-            position: absolute;
-
-            width: 125%;
-            height: 300px;
-
-            right: -45%;
-            bottom: 115px;
-
-            background: var(--blue);
-
-            transform: rotate(-18deg);
-
-            opacity: 0.95;
-        }
-
-        /*
-            Zweite blaue Fläche
-        */
-
-        .sidebar::after {
-            content: "";
-            position: absolute;
-
-            width: 125%;
-            height: 125px;
-
-            right: -38%;
-            bottom: 45px;
-
-            background: var(--blue-light);
-
-            transform: rotate(-18deg);
-
-            opacity: 0.85;
-        }
-
-        /*
-            zusätzliche dezente diagonale Linie
-        */
-
-        .sidebar-decoration {
-            position: absolute;
-
-            width: 120%;
-            height: 2px;
-
-            right: -35%;
-            bottom: 275px;
-
-            background: rgba(255,255,255,0.18);
-
-            transform: rotate(-18deg);
-        }
-
-        /* =========================================================
-           SIDEBAR CONTENT
-        ========================================================= */
-
-        .sidebar-content {
-            position: relative;
-            z-index: 5;
-
-            padding: 72px 48px 70px;
-
-            color: var(--white);
-        }
-
-        .eyebrow-side {
-            font-size: 11px;
-            font-weight: 700;
-
-            letter-spacing: 3px;
-
-            color: rgba(255,255,255,0.72);
-
-            margin-bottom: 48px;
-        }
-
-        /* =========================================================
-           NETWORK ICON
-        ========================================================= */
-
-        .network-mark {
-            position: relative;
-
-            width: 74px;
-            height: 74px;
-
-            margin-bottom: 38px;
-
-            border:
-                1px solid rgba(255,255,255,0.55);
-
-            border-radius: 50%;
-        }
-
-        .network-mark::before,
-        .network-mark::after {
-            content: "";
-
-            position: absolute;
-
-            background: rgba(255,255,255,0.85);
-        }
-
-        .network-mark::before {
-            width: 38px;
-            height: 2px;
-
-            left: 17px;
-            top: 35px;
-        }
-
-        .network-mark::after {
-            width: 2px;
-            height: 38px;
-
-            left: 35px;
-            top: 17px;
-        }
-
-        .network-dot {
-            position: absolute;
-
-            width: 8px;
-            height: 8px;
-
-            background: white;
-
-            border-radius: 50%;
-        }
-
-        .dot-one {
-            left: 12px;
-            top: 31px;
-        }
-
-        .dot-two {
-            right: 12px;
-            top: 31px;
-        }
-
-        .dot-three {
-            left: 31px;
-            top: 12px;
-        }
-
-        .dot-four {
-            left: 31px;
-            bottom: 12px;
-        }
-
-        /* =========================================================
-           SIDEBAR TITLE
-        ========================================================= */
-
-        .sidebar h2 {
-            font-size: clamp(27px, 2.5vw, 38px);
-
-            line-height: 1.12;
-
-            letter-spacing: -0.8px;
-
-            font-weight: 700;
-
-            margin-bottom: 28px;
-        }
-
-        .sidebar-text {
-            max-width: 270px;
-
-            font-size: 14px;
-
-            line-height: 1.8;
-
-            color:
-                rgba(255,255,255,0.75);
-        }
-
-        /* =========================================================
-           SIDEBAR BOTTOM
-        ========================================================= */
-
-        .side-bottom {
-            position: absolute;
-
-            left: 48px;
-            bottom: 45px;
-
-            z-index: 10;
-
-            font-size: 10px;
-
-            letter-spacing: 1.8px;
-
-            color:
-                rgba(255,255,255,0.62);
-
-            text-transform: uppercase;
-        }
-
-        /* =========================================================
-           MAIN CONTENT
-        ========================================================= */
-
-        .content {
-            position: relative;
-            z-index: 10;
-
-            margin-left: 31%;
-
-            width: 69%;
-
-            min-height: 100vh;
-
-            padding:
-                72px
-                75px
-                65px;
-        }
-
-        /* =========================================================
-           DECORATIVE TOP RIGHT
-        ========================================================= */
-
-        .corner {
-            position: absolute;
-
-            top: -135px;
-            right: -135px;
-
-            width: 300px;
-            height: 300px;
-
-            background: var(--blue);
-
-            transform: rotate(45deg);
-
-            opacity: 0.055;
-        }
-
-        .top-line {
-            position: absolute;
-
-            right: 70px;
-            top: 85px;
-
-            width: 70px;
-            height: 4px;
-
-            background: var(--blue);
-        }
-
-        /* =========================================================
-           HEADER
-        ========================================================= */
-
-        .eyebrow {
-            display: inline-block;
-
-            font-size: 11px;
-
-            font-weight: 700;
-
-            letter-spacing: 3px;
-
-            color: var(--blue);
-
-            margin-bottom: 22px;
-        }
-
-        .eyebrow::after {
-            content: "";
-
-            display: block;
-
-            width: 42px;
-            height: 2px;
-
-            margin-top: 10px;
-
-            background: var(--blue);
-        }
-
-        /* =========================================================
-           MAIN TITLE
-        ========================================================= */
-
-        h1 {
-            max-width: 850px;
-
-            font-size:
-                clamp(
-                    42px,
-                    5vw,
-                    68px
-                );
-
-            line-height: 1.02;
-
-            letter-spacing: -2.4px;
-
-            color: var(--navy);
-
-            font-weight: 700;
-
-            margin-bottom: 30px;
-        }
-
-        h1 span {
-            color: var(--blue);
-        }
-
-        /* =========================================================
-           INTRO
-        ========================================================= */
-
-        .intro {
-            max-width: 700px;
-
-            font-size: 18px;
-
-            line-height: 1.75;
-
-            color: var(--text-light);
-
-            margin-bottom: 48px;
-        }
-
-        /* =========================================================
-           SECTION
-        ========================================================= */
-
-        .section {
-            position: relative;
-
-            max-width: 800px;
-
-            padding:
-                27px
-                0
-                0
-                32px;
-
-            margin-top: 28px;
-
-            border-top:
-                1px solid var(--line);
-        }
-
-        /*
-            Kleine blaue Linie links
-        */
-
-        .section::before {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            top: 27px;
-
-            width: 4px;
-            height: 34px;
-
-            background: var(--blue);
-        }
-
-        .section-number {
-            font-size: 10px;
-
-            font-weight: 700;
-
-            letter-spacing: 2px;
-
-            color: var(--blue);
-
-            margin-bottom: 11px;
-        }
-
-        .section h3 {
-            font-size: 22px;
-
-            line-height: 1.3;
-
-            color: var(--navy);
-
-            margin-bottom: 10px;
-
-            font-weight: 700;
-        }
-
-        .section p {
-            max-width: 700px;
-
-            font-size: 15px;
-
-            line-height: 1.75;
-
-            color: var(--text-light);
-        }
-
-        /* =========================================================
-           CTA
-        ========================================================= */
-
-        .cta {
-            position: relative;
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 22px;
-
-            margin-top: 48px;
-
-            padding:
-                17px
-                24px;
-
-            background: var(--navy);
-
-            color: white;
-
-            text-decoration: none;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            letter-spacing: 1px;
-
-            overflow: hidden;
-
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .cta::before {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            top: 0;
-
-            width: 4px;
-            height: 100%;
-
-            background: var(--blue-light);
-        }
-
-        .cta:hover {
-            background: var(--blue);
-
-            transform:
-                translateY(-2px);
-        }
-
-        .arrow {
-            font-size: 19px;
-
-            line-height: 1;
-
-            transition:
-                transform 0.25s ease;
-        }
-
-        .cta:hover .arrow {
-            transform:
-                translateX(5px);
-        }
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
-        .footer {
-            max-width: 800px;
-
-            margin-top: 58px;
-
-            padding-top: 20px;
-
-            border-top:
-                1px solid var(--line);
-
-            font-size: 10px;
-
-            letter-spacing: 1.5px;
-
-            color: #909baa;
-
-            text-transform: uppercase;
-        }
-
-        /* =========================================================
-           BLUE BOTTOM DECORATION
-        ========================================================= */
-
-        .content-decoration {
-            position: absolute;
-
-            right: -80px;
-            bottom: -120px;
-
-            width: 350px;
-            height: 250px;
-
-            background:
-                var(--blue);
-
-            transform:
-                rotate(-18deg);
-
-            opacity: 0.035;
-        }
-
-        /* =========================================================
-           RESPONSIVE TABLET
-        ========================================================= */
-
-        @media (max-width: 1000px) {
-
-            .sidebar-content {
-                padding-left: 35px;
-                padding-right: 35px;
-            }
-
-            .content {
-                padding-left: 55px;
-                padding-right: 55px;
-            }
-
-            h1 {
-                font-size: 48px;
-            }
-        }
-
-        /* =========================================================
-           RESPONSIVE MOBILE
-        ========================================================= */
-
-        @media (max-width: 760px) {
-
-            body {
-                background: white;
-            }
-
-            .page {
-                width: 100%;
-                box-shadow: none;
-            }
-
-            .sidebar {
-                position: relative;
-
-                width: 100%;
-
-                min-height: 380px;
-            }
-
-            .sidebar-content {
-                padding:
-                    48px
-                    30px
-                    80px;
-            }
-
-            .side-bottom {
-                left: 30px;
-                bottom: 28px;
-            }
-
-            .content {
-                margin-left: 0;
-
-                width: 100%;
-
-                min-height: auto;
-
-                padding:
-                    50px
-                    30px
-                    55px;
-            }
-
-            .top-line {
-                right: 30px;
-                top: 55px;
-            }
-
-            h1 {
-                font-size: 43px;
-
-                letter-spacing:
-                    -1.5px;
-            }
-
-            .intro {
-                font-size: 17px;
-            }
-        }
-
-        /* =========================================================
-           SMALL MOBILE
-        ========================================================= */
-
-        @media (max-width: 480px) {
-
-            .sidebar {
-                min-height: 340px;
-            }
-
-            .sidebar h2 {
-                font-size: 29px;
-            }
-
-            .network-mark {
-                width: 64px;
-                height: 64px;
-            }
-
-            .network-mark::before {
-                width: 32px;
-                left: 15px;
-                top: 30px;
-            }
-
-            .network-mark::after {
-                height: 32px;
-                left: 30px;
-                top: 15px;
-            }
-
-            .content {
-                padding:
-                    42px
-                    24px
-                    50px;
-            }
-
-            h1 {
-                font-size: 37px;
-
-                letter-spacing:
-                    -1.2px;
-            }
-
-            .intro {
-                font-size: 16px;
-            }
-
-            .section {
-                padding-left: 24px;
-            }
-
-            .section h3 {
-                font-size: 20px;
-            }
-
-            .cta {
-                width: 100%;
-
-                justify-content:
-                    space-between;
-            }
-
-            .footer {
-                line-height: 1.7;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netzwerk & Verbindungen</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f9ff;
+    color: #10233f;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(37, 99, 235, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #eaf3ff 100%
+        );
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 9px 18px;
+    margin-bottom: 25px;
+    border-radius: 50px;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1.05;
+    margin-bottom: 28px;
+    letter-spacing: -2px;
+}
+
+h1 span {
+    color: #2563eb;
+}
+
+.intro {
+    max-width: 700px;
+    margin: 0 auto 45px;
+    font-size: 21px;
+    line-height: 1.7;
+    color: #52657d;
+}
+
+.card {
+    max-width: 720px;
+    margin: auto;
+    padding: 42px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #dbe7f5;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(37, 99, 235, 0.10);
+}
+
+.card p {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #263b55;
+}
+
+.highlight {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.offer {
+    margin-top: 30px;
+    padding: 25px;
+    background: #f5f9ff;
+    border: 1px solid #dbe7f5;
+    border-radius: 16px;
+}
+
+.offer-title {
+    font-size: 24px !important;
+    font-weight: bold;
+    color: #10233f !important;
+    margin-bottom: 10px;
+}
+
+.commission {
+    color: #2563eb !important;
+    font-weight: bold;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 16px 30px;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    transition: 0.2s;
+}
+
+.button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.footer {
+    margin-top: 35px;
+    color: #8291a5;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+/* 4. PUNKT */
+
+.offer-four {
+    margin-top: 30px;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #dbe7f5;
+    border-radius: 16px;
+}
+
+.offer-four-title {
+    font-size: 24px !important;
+    font-weight: bold;
+    color: #10233f !important;
+    margin-bottom: 10px;
+}
+
+.offer-four .commission {
+    color: #2563eb !important;
+    font-weight: bold;
+}
+
+/* IMPRESSUM */
+
+.impressum {
+    padding: 80px 20px;
+    background: #ffffff;
+    border-top: 1px solid #dbe7f5;
+}
+
+.impressum-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.impressum h2 {
+    font-size: 36px;
+    color: #10233f;
+    margin-bottom: 35px;
+}
+
+.impressum-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    color: #52657d;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.impressum-content p {
+    background: #f5f9ff;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #e1ebf7;
+}
+
+.impressum-content strong {
+    color: #10233f;
+}
+
+@media (max-width: 650px) {
+
+    .card {
+        padding: 28px 22px;
+    }
+
+    .intro {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 17px;
+    }
+
+    .offer-title,
+    .offer-four-title {
+        font-size: 21px !important;
+    }
+
+    .impressum-content {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-<div class="page">
+<section class="hero">
 
-    <!-- =====================================================
-         LINKER BLAUER BEREICH
-    ====================================================== -->
+    <div class="container">
 
-    <aside class="sidebar">
-
-        <div class="sidebar-decoration"></div>
-
-        <div class="sidebar-content">
-
-            <div class="eyebrow-side">
-                NETWORK · BUSINESS · CONNECTIONS
-            </div>
-
-
-            <!-- Netzwerk-Symbol -->
-
-            <div class="network-mark">
-
-                <span class="network-dot dot-one"></span>
-                <span class="network-dot dot-two"></span>
-                <span class="network-dot dot-three"></span>
-                <span class="network-dot dot-four"></span>
-
-            </div>
-
-
-            <h2>
-                Menschen.<br>
-                Unternehmen.<br>
-                Verbindungen.
-            </h2>
-
-
-            <p class="sidebar-text">
-                Offene Gespräche · Neue Kontakte ·
-                Gemeinsame Möglichkeiten
-            </p>
-
+        <div class="badge">
+            NETWORK · BUSINESS · CONNECTIONS
         </div>
-
-
-        <div class="side-bottom">
-            Netzwerk &amp; Verbindungen
-        </div>
-
-    </aside>
-
-
-    <!-- =====================================================
-         HAUPTBEREICH
-    ====================================================== -->
-
-    <main class="content">
-
-        <div class="corner"></div>
-
-        <div class="top-line"></div>
-
-
-        <!-- HEADER -->
-
-        <div class="eyebrow">
-            NETWORK &amp; VERBINDUNGEN
-        </div>
-
 
         <h1>
             Menschen verbinden.<br>
             <span>Möglichkeiten schaffen.</span>
         </h1>
 
-
         <p class="intro">
             Ich bin junger Unternehmer und glaube daran,
             dass Menschen den größten Wert darstellen.
         </p>
 
-
-        <!-- =================================================
-             SECTION 01
-        ================================================== -->
-
-        <section class="section">
-
-            <div class="section-number">
-                01 — KONTAKT
-            </div>
-
-            <h3>
-                Neue Menschen kennenlernen
-            </h3>
+        <div class="card">
 
             <p>
-                Deshalb möchte ich Sie einfach kennenlernen
-                und den Personenkreis, den ich kenne,
-                ausbauen.
+                Deshalb möchte ich Sie einfach kennenlernen und
+                den Personenkreis, den ich kenne,
+                <span class="highlight">ausbauen.</span>
             </p>
 
-        </section>
-
-
-        <!-- =================================================
-             SECTION 02
-        ================================================== -->
-
-        <section class="section">
-
-            <div class="section-number">
-                02 — NETWORKING
-            </div>
-
-            <h3>
-                Interessante Unternehmer
-            </h3>
-
-            <p>
-                Ich möchte interessante Unternehmer
-                kennenlernen, voneinander lernen und
-                neue Perspektiven entdecken.
-            </p>
-
-        </section>
-
-
-        <!-- =================================================
-             SECTION 03
-        ================================================== -->
-
-        <section class="section">
-
-            <div class="section-number">
-                03 — MÖGLICHKEITEN
-            </div>
-
-            <h3>
-                Wertvolle Verbindungen schaffen
-            </h3>
-
-            <p>
-                Dort, wo es passt, möchte ich wertvolle
-                Verbindungen zwischen Menschen und
+            <p style="margin-top: 22px;">
+                Ich möchte interessante Unternehmer kennenlernen,
+                voneinander lernen und dort, wo es passt,
+                wertvolle Verbindungen zwischen Menschen und
                 Unternehmen herstellen.
             </p>
 
-        </section>
+            <!-- ANGEBOT -->
 
+            <div class="offer">
 
-        <!-- =================================================
-             BUTTON
-        ================================================== -->
+                <p class="offer-title">
+                    Sie haben eine gute Dienstleistung?
+                </p>
 
-        <a
-            href="mailto:deine@email.at"
-            class="cta"
-        >
-            Kontakt aufnehmen
+                <p>
+                    Wir bringen Ihre Dienstleistung zu den richtigen
+                    Kunden und übernehmen die Vermittlung für Sie.
+                </p>
 
-            <span class="arrow">
-                →
-            </span>
+                <p style="margin-top: 15px;">
+                    Bei einem erfolgreich vermittelten Auftrag erhalten wir
+                    <span class="commission">
+                        20 % des Auftragswertes
+                    </span>
+                    als Vermittlungsprovision.
+                </p>
 
-        </a>
+            </div>
 
+            <!-- 4. PUNKT -->
 
-        <!-- =================================================
-             FOOTER
-        ================================================== -->
+            <div class="offer-four">
 
-        <div class="footer">
-            Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
+                <p class="offer-four-title">
+                    Wir haben den Kunden, den du suchst.
+                </p>
+
+                <p>
+                    Wir bringen deine Dienstleistung zu den Kunden die du suchst
+                    und übernehmen die Vermittlung für dich.
+                </p>
+
+                <p style="margin-top: 15px;">
+                    Bei einem erfolgreich vermittelten Auftrag erhalten wir
+                    <span class="commission">
+                        20 % des Auftragswertes
+                    </span>
+                    als Vermittlungsprovision.
+                </p>
+
+            </div>
+
+            <a href="mailto:deine@email.at" class="button">
+                Kontakt aufnehmen
+            </a>
+
         </div>
 
+        <div class="footer">
 
-        <div class="content-decoration"></div>
+            Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
 
-    </main>
+            <br><br>
 
-</div>
+            <a href="#impressum">
+                Impressum
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- IMPRESSUM -->
+
+<section id="impressum" class="impressum">
+
+    <div class="impressum-container">
+
+        <h2>
+            Impressum
+        </h2>
+
+        <div class="impressum-content">
+
+            <p>
+                <strong>[Vorname Nachname]</strong><br>
+                [Unternehmensname]<br>
+                [Straße und Hausnummer]<br>
+                [PLZ Ort]<br>
+                [Land]
+            </p>
+
+            <p>
+                <strong>Kontakt</strong><br>
+                E-Mail: [E-Mail-Adresse]<br>
+                Telefon: [Telefonnummer]
+            </p>
+
+            <p>
+                <strong>Unternehmensdaten</strong><br>
+                Firmenbuchnummer: [Firmenbuchnummer]<br>
+                Firmenbuchgericht: [Firmenbuchgericht]<br>
+                UID-Nummer: [UID-Nummer]
+            </p>
+
+            <p>
+                <strong>Vertretungsberechtigt</strong><br>
+                [Vorname Nachname]
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 </body>
-  </html>
+</html>
