@@ -4,272 +4,495 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CV Design</title>
+<title>Netzwerk & Verbindungen</title>
 
 <style>
 
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding: 30px;
-    background: #dce5ec;
-    font-family: Arial, Helvetica, sans-serif;
+html {
+    scroll-behavior: smooth;
 }
 
-.cv {
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #dce5ec;
+    color: #173e66;
+}
+
+
+/* =========================================================
+   COLORS – CV STYLE
+========================================================= */
+
+:root {
+
+    --cv-dark: #001c35;
+    --cv-dark-2: #062e51;
+    --cv-blue: #0b4f82;
+    --cv-blue-light: #2698d5;
+    --cv-line: #399ddd;
+
+    --cv-white: #ffffff;
+    --cv-light: #f7fafc;
+
+    --cv-text: #153e67;
+    --cv-muted: #57718b;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
     width: 1050px;
     max-width: 100%;
-    margin: auto;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
     background: white;
-    box-shadow: 0 15px 50px rgba(0,0,0,.2);
-    overflow: hidden;
-}
 
-/* =========================
-   HEADER
-========================= */
-
-.header {
-    height: 185px;
     position: relative;
+
     overflow: hidden;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.18);
+}
+
+
+/* =========================================================
+   TOP HEADER – WIE BEIM CV
+========================================================= */
+
+.top-header {
+
+    height: 185px;
+
+    position: relative;
+
+    overflow: hidden;
+
     background:
-        linear-gradient(135deg,
-        #0b4779 0%,
-        #031e3a 55%,
-        #06416d 100%);
+        linear-gradient(
+            135deg,
+            #0a4778 0%,
+            #021d38 54%,
+            #063b68 100%
+        );
 }
 
-/* Diagonal shapes */
 
-.header::before {
+/* große diagonale Fläche */
+
+.top-header::before {
+
     content: "";
+
     position: absolute;
-    width: 260px;
-    height: 300px;
+
+    width: 270px;
+    height: 350px;
+
     right: -60px;
-    top: -120px;
-    transform: skewX(-32deg);
-    background: linear-gradient(
-        90deg,
-        #0b5488,
-        #70bdf0
-    );
+    top: -145px;
+
+    transform: skewX(-31deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            #0b568d,
+            #65b8ed
+        );
 }
 
-.header::after {
+
+/* zweite helle Fläche */
+
+.top-header::after {
+
     content: "";
-    position: absolute;
-    width: 150px;
-    height: 300px;
-    right: 30px;
-    top: -120px;
-    transform: skewX(-32deg);
-    background: rgba(150,210,250,.35);
-}
 
-/* Profile image placeholder */
-
-.profile {
-    position: absolute;
-    z-index: 5;
-
-    left: 55px;
-    top: 18px;
-
-    width: 210px;
-    height: 210px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    border: 3px solid #4ab9f4;
-
-    overflow: hidden;
-}
-
-/* simple placeholder person */
-
-.profile-head {
     position: absolute;
 
-    width: 65px;
-    height: 75px;
+    width: 120px;
+    height: 350px;
 
-    left: 72px;
-    top: 34px;
+    right: 60px;
+    top: -150px;
 
-    border-radius: 50%;
+    transform: skewX(-31deg);
 
-    background: #c4d0d8;
+    background:
+        rgba(140,205,247,.38);
 }
 
-.profile-body {
-    position: absolute;
 
-    width: 140px;
-    height: 125px;
-
-    left: 35px;
-    bottom: -30px;
-
-    border-radius: 60% 60% 0 0;
-
-    background: linear-gradient(
-        135deg,
-        #173e64,
-        #061c34
-    );
-}
-
-/* Header content */
+/* =========================================================
+   HEADER TITLE
+========================================================= */
 
 .header-content {
+
     position: absolute;
 
-    left: 320px;
+    z-index: 5;
+
+    left: 330px;
+    top: 48px;
+
     right: 50px;
-    top: 55px;
-
-    z-index: 4;
 }
 
-.title-line {
-    width: 520px;
-    max-width: 90%;
-    height: 48px;
 
-    border-bottom: 3px solid #4db8ec;
+.header-small {
 
-    position: relative;
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: rgba(255,255,255,.85);
+
+    margin-bottom: 13px;
 }
 
-.title-line::before {
-    content: "";
 
-    position: absolute;
+.header-title {
 
-    left: 0;
-    top: 2px;
+    color: white;
 
-    width: 70%;
-    height: 30px;
+    font-size: 47px;
 
-    background: white;
-    border-radius: 2px;
+    font-weight: 700;
+
+    letter-spacing: -1.5px;
+
+    line-height: 1.05;
+
+    padding-bottom: 12px;
+
+    border-bottom:
+        3px solid #47afe9;
 }
 
-.subtitle {
+
+.header-subtitle {
+
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
+    gap: 13px;
 
     margin-top: 12px;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 500;
 }
 
-.subtitle span {
-    height: 9px;
 
-    width: 90px;
+.header-subtitle i {
 
-    border-radius: 10px;
-
-    background: #e1f1fc;
-}
-
-.subtitle span:nth-child(2) {
-    width: 120px;
-}
-
-.subtitle span:nth-child(3) {
-    width: 85px;
-}
-
-.subtitle span:nth-child(4) {
-    width: 130px;
-}
-
-.subtitle i {
     width: 2px;
+
     height: 15px;
 
-    background: #6abcec;
+    background: #62b9eb;
 }
 
 
-/* =========================
+/* =========================================================
+   NETWORK ICON IM HEADER
+========================================================= */
+
+.network-logo {
+
+    position: absolute;
+
+    z-index: 6;
+
+    left: 58px;
+    top: 24px;
+
+    width: 155px;
+    height: 155px;
+
+    border-radius: 50%;
+
+    background: #f8fbfd;
+
+    border: 3px solid #45b7f2;
+
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.5);
+}
+
+
+/* inner circle */
+
+.network-logo::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    left: 22px;
+    top: 22px;
+
+    border-radius: 50%;
+
+    border: 2px solid #173e66;
+}
+
+
+/* center */
+
+.network-center {
+
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: #173e66;
+
+    left: 65px;
+    top: 65px;
+}
+
+
+/* connections */
+
+.connection {
+
+    position: absolute;
+
+    background: #173e66;
+
+    transform-origin: left center;
+
+    height: 3px;
+}
+
+
+.connection.one {
+
+    width: 43px;
+
+    left: 77px;
+    top: 75px;
+
+    transform: rotate(-45deg);
+}
+
+
+.connection.two {
+
+    width: 43px;
+
+    left: 77px;
+    top: 78px;
+
+    transform: rotate(45deg);
+}
+
+
+.connection.three {
+
+    width: 43px;
+
+    left: 77px;
+    top: 78px;
+
+    transform: rotate(180deg);
+}
+
+
+.connection.four {
+
+    width: 43px;
+
+    left: 77px;
+    top: 78px;
+
+    transform: rotate(90deg);
+}
+
+
+.network-dot {
+
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background: #173e66;
+
+    border: 2px solid white;
+}
+
+
+.network-dot.one {
+    left: 112px;
+    top: 35px;
+}
+
+
+.network-dot.two {
+    right: 28px;
+    top: 70px;
+}
+
+
+.network-dot.three {
+    left: 69px;
+    bottom: 23px;
+}
+
+
+.network-dot.four {
+    left: 23px;
+    top: 70px;
+}
+
+
+/* =========================================================
    MAIN LAYOUT
-========================= */
+========================================================= */
 
 .layout {
+
     display: grid;
 
     grid-template-columns: 32% 68%;
+
+    min-height: calc(100vh - 185px);
 }
 
 
-/* =========================
-   SIDEBAR
-========================= */
+/* =========================================================
+   LEFT SIDEBAR
+========================================================= */
 
 .sidebar {
+
     position: relative;
 
-    padding: 48px 30px 70px;
+    overflow: hidden;
+
+    padding:
+        42px
+        30px
+        70px;
 
     color: white;
 
     background:
         linear-gradient(
-            155deg,
+            160deg,
             #07375e,
             #001b35 80%
         );
-
-    overflow: hidden;
 }
 
-.sidebar::after {
+
+/* diagonal CV design */
+
+.sidebar::before {
+
     content: "";
 
     position: absolute;
 
-    width: 450px;
-    height: 130px;
+    width: 500px;
+    height: 150px;
 
-    bottom: -30px;
-    left: -80px;
+    left: -160px;
+    bottom: 130px;
 
     transform: rotate(-48deg);
 
     background:
         linear-gradient(
             90deg,
-            transparent 0 20%,
-            #0b4e80 20% 27%,
-            #187bbb 27% 31%,
-            transparent 31%
+            transparent 0 22%,
+            #0a4e80 22% 30%,
+            #197cba 30% 35%,
+            transparent 35%
         );
+
+    opacity: .9;
 }
 
 
-/* Sidebar sections */
+.sidebar::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 150px;
+
+    left: -160px;
+    bottom: 60px;
+
+    transform: rotate(-48deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0 22%,
+            #0a4e80 22% 30%,
+            #197cba 30% 35%,
+            transparent 35%
+        );
+
+    opacity: .55;
+}
+
+
+/* =========================================================
+   SIDEBAR SECTION
+========================================================= */
 
 .side-section {
+
     position: relative;
 
-    z-index: 2;
+    z-index: 4;
 
-    margin-bottom: 30px;
+    margin-bottom: 38px;
 }
 
-.side-title {
+
+.side-heading {
+
     display: flex;
 
     align-items: center;
@@ -278,123 +501,93 @@ body {
 
     padding-bottom: 9px;
 
-    border-bottom: 2px solid #299cdd;
+    border-bottom:
+        2px solid #299cdd;
 }
 
+
 .side-icon {
-    width: 48px;
-    height: 48px;
+
+    width: 46px;
+    height: 46px;
 
     flex-shrink: 0;
 
     border-radius: 50%;
 
+    border:
+        2px solid #42b4ed;
+
+    background:
+        #0a3157;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    background: #0a3157;
-
-    border: 2px solid #42b4ed;
+    color: white;
 
     font-size: 20px;
 }
 
+
 .side-title-line {
-    width: 180px;
+
     height: 18px;
 
-    border-radius: 5px;
+    flex: 1;
+
+    max-width: 175px;
 
     background:
         linear-gradient(
             90deg,
-            white 0 75%,
-            transparent 75%
+            white 0 72%,
+            transparent 72%
         );
+
+    border-radius: 5px;
 }
 
 
-/* Lines */
+/* =========================================================
+   SIDEBAR TEXT
+========================================================= */
 
-.lines {
-    padding: 18px 0 0 60px;
+.side-content {
 
-    display: flex;
-    flex-direction: column;
+    padding:
 
-    gap: 13px;
-}
-
-.lines div {
-    height: 10px;
-
-    border-radius: 10px;
-
-    background: #d5e9f6;
-}
-
-.lines div:nth-child(2) {
-    width: 80%;
-}
-
-.lines div:nth-child(3) {
-    width: 90%;
-}
-
-.lines div:nth-child(4) {
-    width: 70%;
-}
-
-.lines div:nth-child(5) {
-    width: 85%;
+        17px
+        4px
+        0
+        58px;
 }
 
 
-/* Check lists */
-
-.check-list {
-    padding-top: 15px;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-.check {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-}
-
-.check-circle {
-    width: 23px;
-    height: 23px;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #123d62;
-
-    background: white;
-
-    font-weight: bold;
+.side-content p {
 
     font-size: 13px;
+
+    line-height: 1.8;
+
+    color:
+        rgba(255,255,255,.82);
+
+    margin-bottom: 8px;
 }
 
-.check-line {
+
+/* white fake lines */
+
+.white-line {
+
     height: 9px;
 
-    flex: 1;
+    width: 100%;
+
+    margin-bottom: 12px;
 
     border-radius: 10px;
 
@@ -402,42 +595,132 @@ body {
 }
 
 
-/* Languages */
-
-.languages {
-    padding-top: 16px;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 13px;
+.white-line.short {
+    width: 72%;
 }
 
-.language {
+
+.white-line.medium {
+    width: 86%;
+}
+
+
+/* =========================================================
+   SIDEBAR CHECK LIST
+========================================================= */
+
+.side-list {
+
+    padding:
+        16px
+        0
+        0
+        4px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+.side-list-item {
+
     display: flex;
 
     align-items: center;
-    justify-content: space-between;
+
+    gap: 10px;
 }
 
-.language-label {
-    width: 75px;
-    height: 11px;
+
+.side-check {
+
+    width: 22px;
+    height: 22px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #153e67;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.side-list-line {
+
+    height: 9px;
+
+    flex: 1;
 
     border-radius: 10px;
 
     background: #d9ebf7;
 }
 
-.dots {
+
+/* =========================================================
+   NETWORK CATEGORIES
+========================================================= */
+
+.network-categories {
+
     display: flex;
 
-    gap: 7px;
+    flex-direction: column;
+
+    gap: 13px;
+
+    padding-top: 15px;
 }
 
-.dots span {
-    width: 14px;
-    height: 14px;
+
+.category {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.category-name {
+
+    width: 80px;
+
+    height: 9px;
+
+    border-radius: 10px;
+
+    background: #d9ebf7;
+}
+
+
+.category-dots {
+
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.category-dots span {
+
+    width: 11px;
+    height: 11px;
 
     border-radius: 50%;
 
@@ -445,12 +728,19 @@ body {
 }
 
 
-/* =========================
-   CONTENT
-========================= */
+/* =========================================================
+   RIGHT WHITE CONTENT
+========================================================= */
 
 .content {
-    padding: 18px 28px 55px 20px;
+
+    position: relative;
+
+    padding:
+        28px
+        28px
+        65px
+        20px;
 
     background:
         linear-gradient(
@@ -459,13 +749,22 @@ body {
             #f8fbfd
         );
 
-    color: #153f68;
+    color: #153e67;
 }
 
 
-/* Main heading */
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.main-section {
+
+    margin-bottom: 32px;
+}
+
 
 .main-heading {
+
     display: flex;
 
     align-items: center;
@@ -474,368 +773,572 @@ body {
 
     padding-bottom: 7px;
 
-    border-bottom: 2px solid #48a9dd;
+    border-bottom:
+        2px solid #49a9dc;
 
-    margin-bottom: 12px;
+    margin-bottom: 17px;
 }
 
+
 .main-icon {
+
     width: 50px;
     height: 50px;
+
+    flex-shrink: 0;
 
     border-radius: 50%;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    color: white;
-
     background: #173e65;
 
-    font-size: 20px;
+    color: white;
+
+    font-size: 19px;
 }
 
-.heading-line {
+
+.main-heading-line {
+
     flex: 1;
 
-    height: 19px;
+    height: 20px;
 
     border-radius: 5px;
 
     background:
         linear-gradient(
             90deg,
-            #173e65 0 45%,
-            transparent 45%
+            #173e65 0 48%,
+            transparent 48%
         );
 }
 
 
-/* =========================
-   TWO COLUMNS
-========================= */
+/* =========================================================
+   INTRO
+========================================================= */
 
-.two-columns {
+.intro-title {
+
+    font-size: 27px;
+
+    line-height: 1.25;
+
+    font-weight: 700;
+
+    color: #153e67;
+
+    margin-bottom: 12px;
+}
+
+
+.intro-text {
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+    color: #496b87;
+
+    max-width: 690px;
+}
+
+
+/* =========================================================
+   NETWORK BLOCKS
+========================================================= */
+
+.network-grid {
+
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        1fr
+        1fr;
 
-    gap: 35px;
-}
-
-.main-check {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-bottom: 10px;
-}
-
-.main-check .circle {
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-
-    color: white;
-
-    background: #153e66;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 11px;
-}
-
-.main-check .line {
-    height: 9px;
-
-    flex: 1;
-
-    border-radius: 10px;
-
-    background: #315a80;
+    gap: 18px 28px;
 }
 
 
-/* =========================
-   ABOUT
-========================= */
+.network-card {
 
-.about {
+    position: relative;
+
+    padding:
+        17px
+        17px
+        17px
+        20px;
+
+    border:
+        1px solid #dbe5ed;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 4px 15px rgba(16,42,86,.045);
+}
+
+
+.network-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: #1d87ca;
+}
+
+
+.card-number {
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #1d87ca;
+
+    margin-bottom: 7px;
+}
+
+
+.network-card h3 {
+
+    font-size: 17px;
+
+    color: #153e67;
+
+    margin-bottom: 7px;
+}
+
+
+.network-card p {
+
+    font-size: 13px;
+
+    line-height: 1.65;
+
+    color: #5d758b;
+}
+
+
+/* =========================================================
+   BIG SECTION
+========================================================= */
+
+.big-section {
+
+    position: relative;
+
+    padding-left: 22px;
+
+    border-top:
+        1px solid #dbe3ec;
+
+    padding-top: 22px;
+
     margin-top: 22px;
 }
 
-.paragraphs {
-    padding: 5px 5px 0;
-}
 
-.paragraph {
-    height: 11px;
+.big-section::before {
 
-    margin-bottom: 9px;
+    content: "";
 
-    border-radius: 10px;
-
-    background: #315f88;
-}
-
-.paragraph.short {
-    width: 90%;
-}
-
-.paragraph.small {
-    width: 75%;
-}
-
-
-/* =========================
-   TIMELINE
-========================= */
-
-.timeline {
-    margin-left: 22px;
-
-    padding-left: 27px;
-
-    border-left: 3px solid #173e67;
-}
-
-.timeline-item {
-    position: relative;
-
-    display: grid;
-
-    grid-template-columns: 120px 1fr;
-
-    gap: 15px;
-
-    padding: 5px 0 25px;
-
-    margin-bottom: 10px;
-
-    border-bottom: 1px dotted #4198c9;
-}
-
-.timeline-item:last-child {
-    border-bottom: none;
-}
-
-.timeline-dot {
     position: absolute;
 
-    left: -39px;
+    left: 0;
+    top: 22px;
+
+    width: 4px;
+    height: 40px;
+
+    background: #1688ca;
+}
+
+
+.number {
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #1888c9;
+
+    margin-bottom: 9px;
+}
+
+
+.big-section h2 {
+
+    font-size: 22px;
+
+    color: #153e67;
+
+    margin-bottom: 9px;
+}
+
+
+.big-section p {
+
+    font-size: 14px;
+
+    line-height: 1.75;
+
+    color: #5c7489;
+
+    max-width: 700px;
+}
+
+
+/* =========================================================
+   SALES SECTION
+========================================================= */
+
+.sales {
+
+    margin-top: 22px;
+
+    padding:
+        22px;
+
+    background:
+        #f3f8fc;
+
+    border:
+        1px solid #d7e5ef;
+
+    position: relative;
+}
+
+
+.sales::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
     top: 0;
 
-    width: 18px;
-    height: 18px;
+    width: 5px;
+    height: 100%;
 
-    border-radius: 50%;
-
-    background: #153d64;
-
-    border: 3px solid white;
-}
-
-.date-lines {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-}
-
-.date-lines div {
-    width: 85px;
-    height: 13px;
-
-    border-radius: 10px;
-
-    background: #173f67;
-}
-
-.date-lines div:nth-child(2) {
-    width: 60px;
-}
-
-.role {
-    width: 75%;
-
-    height: 15px;
-
-    margin-bottom: 12px;
-
-    border-radius: 10px;
-
-    background: #173f67;
-}
-
-.bullets {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 7px;
-}
-
-.bullets div {
-    width: 95%;
-
-    height: 8px;
-
-    border-radius: 10px;
-
-    background: #4c789d;
-}
-
-.bullets div:nth-child(2) {
-    width: 85%;
-}
-
-.bullets div:nth-child(3) {
-    width: 75%;
+    background: #1688ca;
 }
 
 
-/* =========================
-   EDUCATION
-========================= */
+.sales-label {
 
-.education {
-    margin-top: 5px;
-}
+    font-size: 10px;
 
-.education-item {
-    display: grid;
+    letter-spacing: 2px;
 
-    grid-template-columns: 30px 1fr 90px;
+    color: #1688ca;
 
-    gap: 12px;
+    font-weight: bold;
 
-    padding: 13px 0;
-}
-
-.education-dot {
-    width: 15px;
-    height: 15px;
-
-    border-radius: 50%;
-
-    background: #153d64;
-
-    margin-top: 3px;
-}
-
-.education-lines {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-}
-
-.education-lines div {
-    height: 10px;
-
-    border-radius: 10px;
-
-    background: #234e77;
-}
-
-.education-lines div:nth-child(2) {
-    width: 75%;
-}
-
-.education-lines div:nth-child(3) {
-    width: 85%;
-}
-
-.year {
-    height: 12px;
-
-    border-radius: 10px;
-
-    background: #234e77;
+    margin-bottom: 10px;
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+.sales h2 {
 
-@media(max-width: 760px) {
+    font-size: 22px;
+
+    line-height: 1.35;
+
+    color: #153e67;
+
+    margin-bottom: 9px;
+}
+
+
+.sales p {
+
+    color: #60788d;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   BUTTON – CV STYLE
+========================================================= */
+
+.cta {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-top: 25px;
+
+    padding:
+        14px
+        21px;
+
+    color: white;
+
+    background: #123a60;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    transition: .25s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.cta::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: #2a9bd5;
+}
+
+
+.cta:hover {
+
+    background: #1688ca;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.arrow {
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    margin-top: 35px;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid #dbe3ec;
+
+    color: #8795a3;
+
+    font-size: 9px;
+
+    letter-spacing: 1.4px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 800px) {
 
     body {
         padding: 0;
         background: white;
     }
 
-    .cv {
+    .page {
         width: 100%;
         box-shadow: none;
     }
 
-    .header {
-        height: 165px;
+    .top-header {
+        height: 180px;
     }
 
-    .profile {
-        width: 135px;
-        height: 135px;
+    .network-logo {
 
-        left: 20px;
-        top: 20px;
+        width: 120px;
+        height: 120px;
+
+        left: 25px;
+        top: 28px;
     }
 
-    .profile-head {
-        width: 42px;
-        height: 50px;
+    .network-logo::before {
 
-        left: 46px;
-        top: 23px;
+        width: 80px;
+        height: 80px;
+
+        left: 18px;
+        top: 18px;
     }
 
-    .profile-body {
-        width: 90px;
-        height: 85px;
+    .network-center {
 
-        left: 23px;
+        left: 49px;
+        top: 49px;
+
+        width: 20px;
+        height: 20px;
     }
 
     .header-content {
-        left: 175px;
-        top: 50px;
-        right: 15px;
+
+        left: 180px;
+        right: 20px;
+        top: 52px;
     }
 
-    .subtitle {
+    .header-title {
+
+        font-size: 30px;
+    }
+
+    .header-subtitle {
+
         display: none;
     }
 
     .layout {
+
         grid-template-columns: 1fr;
     }
 
     .sidebar {
-        padding: 35px 22px;
+
+        min-height: auto;
+
+        padding:
+            35px
+            25px
+            60px;
     }
 
     .content {
-        padding: 25px 18px;
+
+        padding:
+            30px
+            22px
+            50px;
     }
 
-    .two-columns {
+    .network-grid {
+
         grid-template-columns: 1fr;
-        gap: 0;
+    }
+}
+
+
+@media(max-width: 480px) {
+
+    .top-header {
+        height: 155px;
     }
 
-    .timeline-item {
-        grid-template-columns: 80px 1fr;
+    .network-logo {
+
+        width: 100px;
+        height: 100px;
+
+        left: 18px;
+        top: 27px;
+    }
+
+    .network-logo::before {
+
+        width: 66px;
+        height: 66px;
+
+        left: 15px;
+        top: 15px;
+    }
+
+    .network-center {
+
+        left: 40px;
+        top: 40px;
+
+        width: 18px;
+        height: 18px;
+    }
+
+    .header-content {
+
+        left: 140px;
+        top: 42px;
+    }
+
+    .header-title {
+
+        font-size: 24px;
+    }
+
+    .sidebar {
+
+        padding:
+            30px
+            20px
+            55px;
+    }
+
+    .content {
+
+        padding:
+            25px
+            16px
+            45px;
+    }
+
+    .main-heading-line {
+
+        background:
+            linear-gradient(
+                90deg,
+                #173e65 0 35%,
+                transparent 35%
+            );
+    }
+
+    .intro-title {
+        font-size: 23px;
     }
 }
 
@@ -845,51 +1348,97 @@ body {
 
 <body>
 
-<div class="cv">
 
-    <!-- HEADER -->
+<div class="page">
 
-    <header class="header">
 
-        <div class="profile">
-            <div class="profile-head"></div>
-            <div class="profile-body"></div>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="top-header">
+
+
+        <div class="network-logo">
+
+            <div class="network-center"></div>
+
+            <div class="connection one"></div>
+            <div class="connection two"></div>
+            <div class="connection three"></div>
+            <div class="connection four"></div>
+
+            <div class="network-dot one"></div>
+            <div class="network-dot two"></div>
+            <div class="network-dot three"></div>
+            <div class="network-dot four"></div>
+
         </div>
+
 
         <div class="header-content">
 
-            <div class="title-line"></div>
+            <div class="header-small">
+                NETWORK &amp; VERBINDUNGEN
+            </div>
 
-            <div class="subtitle">
-                <span></span>
+            <div class="header-title">
+                Menschen verbinden
+            </div>
+
+            <div class="header-subtitle">
+
+                <span>
+                    NETWORKING
+                </span>
+
                 <i></i>
-                <span></span>
+
+                <span>
+                    BUSINESS
+                </span>
+
                 <i></i>
-                <span></span>
+
+                <span>
+                    KONTAKTE
+                </span>
+
                 <i></i>
-                <span></span>
+
+                <span>
+                    VERTRIEB
+                </span>
+
             </div>
 
         </div>
 
+
     </header>
 
+
+
+    <!-- =====================================================
+         LAYOUT
+    ====================================================== -->
 
     <div class="layout">
 
 
-        <!-- =====================
+
+        <!-- =================================================
              SIDEBAR
-        ====================== -->
+        ================================================== -->
 
         <aside class="sidebar">
 
 
-            <!-- SECTION -->
+            <!-- SIDEBAR SECTION 1 -->
 
             <section class="side-section">
 
-                <div class="side-title">
+                <div class="side-heading">
 
                     <div class="side-icon">
                         ●
@@ -900,27 +1449,27 @@ body {
                 </div>
 
 
-                <div class="lines">
+                <div class="side-content">
 
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div class="white-line"></div>
+                    <div class="white-line medium"></div>
+                    <div class="white-line short"></div>
+                    <div class="white-line"></div>
 
                 </div>
 
             </section>
 
 
-            <!-- SECTION -->
+
+            <!-- SIDEBAR SECTION 2 -->
 
             <section class="side-section">
 
-                <div class="side-title">
+                <div class="side-heading">
 
                     <div class="side-icon">
-                        ▣
+                        +
                     </div>
 
                     <div class="side-title-line"></div>
@@ -928,96 +1477,59 @@ body {
                 </div>
 
 
-                <div class="check-list">
+                <div class="side-list">
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
-                    </div>
+                    <div class="side-list-item">
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
-                    </div>
-
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
-                    </div>
-
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
-                    </div>
-
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- LANGUAGES -->
-
-            <section class="side-section">
-
-                <div class="side-title">
-
-                    <div class="side-icon">
-                        ●
-                    </div>
-
-                    <div class="side-title-line"></div>
-
-                </div>
-
-
-                <div class="languages">
-
-                    <div class="language">
-
-                        <div class="language-label"></div>
-
-                        <div class="dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        <div class="side-check">
+                            ✓
                         </div>
 
-                    </div>
-
-
-                    <div class="language">
-
-                        <div class="language-label"></div>
-
-                        <div class="dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+                        <div class="side-list-line"></div>
 
                     </div>
 
 
-                    <div class="language">
+                    <div class="side-list-item">
 
-                        <div class="language-label"></div>
-
-                        <div class="dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        <div class="side-check">
+                            ✓
                         </div>
+
+                        <div class="side-list-line"></div>
+
+                    </div>
+
+
+                    <div class="side-list-item">
+
+                        <div class="side-check">
+                            ✓
+                        </div>
+
+                        <div class="side-list-line"></div>
+
+                    </div>
+
+
+                    <div class="side-list-item">
+
+                        <div class="side-check">
+                            ✓
+                        </div>
+
+                        <div class="side-list-line"></div>
+
+                    </div>
+
+
+                    <div class="side-list-item">
+
+                        <div class="side-check">
+                            ✓
+                        </div>
+
+                        <div class="side-list-line"></div>
 
                     </div>
 
@@ -1026,11 +1538,12 @@ body {
             </section>
 
 
-            <!-- STRENGTHS -->
+
+            <!-- SIDEBAR SECTION 3 -->
 
             <section class="side-section">
 
-                <div class="side-title">
+                <div class="side-heading">
 
                     <div class="side-icon">
                         ●
@@ -1041,36 +1554,124 @@ body {
                 </div>
 
 
-                <div class="check-list">
+                <div class="network-categories">
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
+
+                    <div class="category">
+
+                        <div class="category-name"></div>
+
+                        <div class="category-dots">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
                     </div>
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
+
+                    <div class="category">
+
+                        <div class="category-name"></div>
+
+                        <div class="category-dots">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
                     </div>
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
+
+                    <div class="category">
+
+                        <div class="category-name"></div>
+
+                        <div class="category-dots">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
                     </div>
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- SIDEBAR SECTION 4 -->
+
+            <section class="side-section">
+
+                <div class="side-heading">
+
+                    <div class="side-icon">
+                        ✓
                     </div>
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
+                    <div class="side-title-line"></div>
+
+                </div>
+
+
+                <div class="side-list">
+
+                    <div class="side-list-item">
+
+                        <div class="side-check">
+                            ✓
+                        </div>
+
+                        <div class="side-list-line"></div>
+
                     </div>
 
-                    <div class="check">
-                        <div class="check-circle">✓</div>
-                        <div class="check-line"></div>
+
+                    <div class="side-list-item">
+
+                        <div class="side-check">
+                            ✓
+                        </div>
+
+                        <div class="side-list-line"></div>
+
+                    </div>
+
+
+                    <div class="side-list-item">
+
+                        <div class="side-check">
+                            ✓
+                        </div>
+
+                        <div class="side-list-line"></div>
+
+                    </div>
+
+
+                    <div class="side-list-item">
+
+                        <div class="side-check">
+                            ✓
+                        </div>
+
+                        <div class="side-list-line"></div>
+
                     </div>
 
                 </div>
@@ -1082,105 +1683,17 @@ body {
 
 
 
-        <!-- =====================
+        <!-- =================================================
              MAIN CONTENT
-        ====================== -->
+        ================================================== -->
 
         <main class="content">
 
 
-            <!-- COMPETENCIES -->
 
-            <section>
+            <!-- INTRO -->
 
-                <div class="main-heading">
-
-                    <div class="main-icon">
-                        ▣
-                    </div>
-
-                    <div class="heading-line"></div>
-
-                </div>
-
-
-                <div class="two-columns">
-
-
-                    <div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                        <div class="main-check">
-                            <div class="circle">✓</div>
-                            <div class="line"></div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </section>
-
-
-
-            <!-- ABOUT -->
-
-            <section class="about">
+            <section class="main-section">
 
                 <div class="main-heading">
 
@@ -1188,112 +1701,122 @@ body {
                         ●
                     </div>
 
-                    <div class="heading-line"></div>
+                    <div class="main-heading-line"></div>
 
                 </div>
 
 
-                <div class="paragraphs">
+                <div class="intro-title">
 
-                    <div class="paragraph"></div>
-                    <div class="paragraph short"></div>
-                    <div class="paragraph"></div>
-                    <div class="paragraph small"></div>
+                    Menschen verbinden.<br>
 
-                    <br>
-
-                    <div class="paragraph"></div>
-                    <div class="paragraph short"></div>
-                    <div class="paragraph"></div>
-
-                    <br>
-
-                    <div class="paragraph"></div>
-                    <div class="paragraph short"></div>
+                    Möglichkeiten schaffen.
 
                 </div>
+
+
+                <p class="intro-text">
+
+                    Ich bin junger Unternehmer und glaube daran,
+                    dass Menschen den größten Wert darstellen.
+
+                </p>
 
             </section>
 
 
 
-            <!-- EXPERIENCE -->
+            <!-- NETWORK -->
 
-            <section>
+            <section class="main-section">
 
                 <div class="main-heading">
 
                     <div class="main-icon">
-                        ▣
+                        +
                     </div>
 
-                    <div class="heading-line"></div>
+                    <div class="main-heading-line"></div>
 
                 </div>
 
 
-                <div class="timeline">
+                <div class="network-grid">
 
 
-                    <article class="timeline-item">
+                    <article class="network-card">
 
-                        <div class="timeline-dot"></div>
-
-
-                        <div class="date-lines">
-
-                            <div></div>
-                            <div></div>
-
+                        <div class="card-number">
+                            01
                         </div>
 
+                        <h3>
+                            Neue Menschen kennenlernen
+                        </h3>
 
-                        <div>
-
-                            <div class="role"></div>
-
-                            <div class="bullets">
-
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-
-                            </div>
-
-                        </div>
+                        <p>
+                            Neue Kontakte aufbauen und
+                            interessante Menschen kennenlernen.
+                        </p>
 
                     </article>
 
 
 
-                    <article class="timeline-item">
+                    <article class="network-card">
 
-                        <div class="timeline-dot"></div>
-
-
-                        <div class="date-lines">
-
-                            <div></div>
-                            <div></div>
-
+                        <div class="card-number">
+                            02
                         </div>
 
+                        <h3>
+                            Interessante Unternehmer
+                        </h3>
 
-                        <div>
+                        <p>
+                            Unternehmer kennenlernen,
+                            voneinander lernen und neue
+                            Perspektiven entdecken.
+                        </p>
 
-                            <div class="role"></div>
+                    </article>
 
-                            <div class="bullets">
 
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
 
-                            </div>
+                    <article class="network-card">
 
+                        <div class="card-number">
+                            03
                         </div>
+
+                        <h3>
+                            Wertvolle Verbindungen
+                        </h3>
+
+                        <p>
+                            Menschen und Unternehmen
+                            miteinander verbinden.
+                        </p>
+
+                    </article>
+
+
+
+                    <article class="network-card">
+
+                        <div class="card-number">
+                            04
+                        </div>
+
+                        <h3>
+                            Gemeinsame Möglichkeiten
+                        </h3>
+
+                        <p>
+                            Gemeinsam neue Möglichkeiten
+                            entwickeln und langfristige
+                            Beziehungen aufbauen.
+                        </p>
 
                     </article>
 
@@ -1304,61 +1827,86 @@ body {
 
 
 
-            <!-- EDUCATION -->
+            <!-- CONTACT -->
 
-            <section class="education">
+            <section class="big-section">
 
-                <div class="main-heading">
-
-                    <div class="main-icon">
-                        ◇
-                    </div>
-
-                    <div class="heading-line"></div>
-
+                <div class="number">
+                    05 — KONTAKT
                 </div>
 
+                <h2>
+                    Offene Gespräche
+                </h2>
 
-                <div class="education-item">
-
-                    <div class="education-dot"></div>
-
-                    <div class="education-lines">
-
-                        <div></div>
-                        <div></div>
-                        <div></div>
-
-                    </div>
-
-                    <div class="year"></div>
-
-                </div>
-
-
-                <div class="education-item">
-
-                    <div class="education-dot"></div>
-
-                    <div class="education-lines">
-
-                        <div></div>
-                        <div></div>
-
-                    </div>
-
-                    <div class="year"></div>
-
-                </div>
+                <p>
+                    Ich möchte meinen persönlichen
+                    Austausch erweitern und mit Menschen
+                    ins Gespräch kommen, die ähnliche
+                    Interessen und Ziele verfolgen.
+                </p>
 
             </section>
+
+
+
+            <!-- SALES -->
+
+            <section class="sales">
+
+                <div class="sales-label">
+                    06 — VERTRIEB
+                </div>
+
+                <h2>
+                    Wir verkaufen deine Dienstleistung
+                    für 20% des Auftragswertes
+                </h2>
+
+                <p>
+                    Wir haben den Kunden, den du suchst.
+                </p>
+
+                <p style="margin-top:8px;">
+                    Vernetz dich mit uns.
+                </p>
+
+
+                <a
+                    href="mailto:deine@email.at"
+                    class="cta"
+                >
+
+                    Vernetzen
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+            </section>
+
+
+
+            <!-- FOOTER -->
+
+            <div class="footer">
+
+                Offene Gespräche · Neue Kontakte ·
+                Gemeinsame Möglichkeiten
+
+            </div>
 
 
         </main>
 
+
     </div>
 
+
 </div>
+
 
 </body>
 </html>
