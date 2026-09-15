@@ -1,1912 +1,987 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Netzwerk & Verbindungen</title>
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
-<title>Netzwerk & Verbindungen</title>
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-<style>
+            background: #e7edf4;
+            color: #17243a;
+            min-height: 100vh;
+        }
 
-/* =========================================================
-   RESET
-========================================================= */
+        /* =========================================================
+           COLORS
+        ========================================================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        :root {
+            --navy: #102a56;
+            --navy-dark: #0b2044;
+            --blue: #1676b9;
+            --blue-light: #3b9bd1;
+            --blue-soft: #eaf4fb;
 
-html {
-    scroll-behavior: smooth;
-}
+            --text: #182438;
+            --text-light: #687487;
+            --line: #dbe3ec;
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #dce5ec;
-    color: #173e66;
-}
+            --white: #ffffff;
+        }
 
+        /* =========================================================
+           PAGE
+        ========================================================= */
 
-/* =========================================================
-   COLORS – CV STYLE
-========================================================= */
+        .page {
+            position: relative;
+            width: min(1500px, 100%);
+            min-height: 100vh;
+            margin: 0 auto;
+            background: var(--white);
+            overflow: hidden;
 
-:root {
+            box-shadow:
+                0 20px 70px rgba(16, 42, 86, 0.12);
+        }
 
-    --cv-dark: #001c35;
-    --cv-dark-2: #062e51;
-    --cv-blue: #0b4f82;
-    --cv-blue-light: #2698d5;
-    --cv-line: #399ddd;
+        /* =========================================================
+           LEFT BLUE PANEL
+        ========================================================= */
 
-    --cv-white: #ffffff;
-    --cv-light: #f7fafc;
+        .sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
 
-    --cv-text: #153e67;
-    --cv-muted: #57718b;
-}
+            width: 31%;
+            min-height: 100%;
 
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--navy-dark) 0%,
+                    var(--navy) 58%,
+                    #123c70 100%
+                );
 
-/* =========================================================
-   PAGE
-========================================================= */
+            overflow: hidden;
+        }
 
-.page {
+        .sidebar::before {
+            content: "";
+            position: absolute;
 
-    width: 1050px;
-    max-width: 100%;
+            width: 125%;
+            height: 300px;
 
-    min-height: 100vh;
+            right: -45%;
+            bottom: 115px;
 
-    margin: 0 auto;
+            background: var(--blue);
 
-    background: white;
+            transform: rotate(-18deg);
 
-    position: relative;
+            opacity: 0.95;
+        }
 
-    overflow: hidden;
+        .sidebar::after {
+            content: "";
+            position: absolute;
 
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.18);
-}
+            width: 125%;
+            height: 125px;
 
+            right: -38%;
+            bottom: 45px;
 
-/* =========================================================
-   TOP HEADER – WIE BEIM CV
-========================================================= */
+            background: var(--blue-light);
 
-.top-header {
+            transform: rotate(-18deg);
 
-    height: 185px;
+            opacity: 0.85;
+        }
 
-    position: relative;
+        .sidebar-decoration {
+            position: absolute;
 
-    overflow: hidden;
+            width: 120%;
+            height: 2px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #0a4778 0%,
-            #021d38 54%,
-            #063b68 100%
-        );
-}
+            right: -35%;
+            bottom: 275px;
 
+            background: rgba(255,255,255,0.18);
 
-/* große diagonale Fläche */
+            transform: rotate(-18deg);
+        }
 
-.top-header::before {
+        /* =========================================================
+           SIDEBAR CONTENT
+        ========================================================= */
 
-    content: "";
+        .sidebar-content {
+            position: relative;
+            z-index: 5;
 
-    position: absolute;
+            padding: 72px 48px 70px;
 
-    width: 270px;
-    height: 350px;
+            color: var(--white);
+        }
 
-    right: -60px;
-    top: -145px;
+        .eyebrow-side {
+            font-size: 11px;
+            font-weight: 700;
 
-    transform: skewX(-31deg);
+            letter-spacing: 3px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #0b568d,
-            #65b8ed
-        );
-}
+            color: rgba(255,255,255,0.72);
 
+            margin-bottom: 48px;
+        }
 
-/* zweite helle Fläche */
+        /* =========================================================
+           NETWORK ICON
+        ========================================================= */
 
-.top-header::after {
+        .network-mark {
+            position: relative;
 
-    content: "";
+            width: 74px;
+            height: 74px;
 
-    position: absolute;
+            margin-bottom: 38px;
 
-    width: 120px;
-    height: 350px;
+            border:
+                1px solid rgba(255,255,255,0.55);
 
-    right: 60px;
-    top: -150px;
+            border-radius: 50%;
+        }
 
-    transform: skewX(-31deg);
+        .network-mark::before,
+        .network-mark::after {
+            content: "";
 
-    background:
-        rgba(140,205,247,.38);
-}
+            position: absolute;
 
+            background: rgba(255,255,255,0.85);
+        }
 
-/* =========================================================
-   HEADER TITLE
-========================================================= */
+        .network-mark::before {
+            width: 38px;
+            height: 2px;
 
-.header-content {
+            left: 17px;
+            top: 35px;
+        }
 
-    position: absolute;
+        .network-mark::after {
+            width: 2px;
+            height: 38px;
 
-    z-index: 5;
+            left: 35px;
+            top: 17px;
+        }
 
-    left: 330px;
-    top: 48px;
+        .network-dot {
+            position: absolute;
 
-    right: 50px;
-}
+            width: 8px;
+            height: 8px;
 
+            background: white;
 
-.header-small {
+            border-radius: 50%;
+        }
 
-    font-size: 12px;
+        .dot-one {
+            left: 12px;
+            top: 31px;
+        }
 
-    font-weight: bold;
+        .dot-two {
+            right: 12px;
+            top: 31px;
+        }
 
-    letter-spacing: 2px;
+        .dot-three {
+            left: 31px;
+            top: 12px;
+        }
 
-    color: rgba(255,255,255,.85);
+        .dot-four {
+            left: 31px;
+            bottom: 12px;
+        }
 
-    margin-bottom: 13px;
-}
+        /* =========================================================
+           SIDEBAR TITLE
+        ========================================================= */
 
+        .sidebar h2 {
+            font-size: clamp(27px, 2.5vw, 38px);
 
-.header-title {
+            line-height: 1.12;
 
-    color: white;
+            letter-spacing: -0.8px;
 
-    font-size: 47px;
+            font-weight: 700;
 
-    font-weight: 700;
+            margin-bottom: 28px;
+        }
 
-    letter-spacing: -1.5px;
+        .sidebar-text {
+            max-width: 270px;
 
-    line-height: 1.05;
+            font-size: 14px;
 
-    padding-bottom: 12px;
+            line-height: 1.8;
 
-    border-bottom:
-        3px solid #47afe9;
-}
+            color:
+                rgba(255,255,255,0.75);
+        }
 
+        /* =========================================================
+           SIDEBAR BOTTOM
+        ========================================================= */
 
-.header-subtitle {
+        .side-bottom {
+            position: absolute;
 
-    display: flex;
+            left: 48px;
+            bottom: 45px;
 
-    align-items: center;
+            z-index: 10;
 
-    gap: 13px;
+            font-size: 10px;
 
-    margin-top: 12px;
+            letter-spacing: 1.8px;
 
-    color: white;
+            color:
+                rgba(255,255,255,0.62);
 
-    font-size: 13px;
+            text-transform: uppercase;
+        }
 
-    font-weight: 500;
-}
+        /* =========================================================
+           MAIN CONTENT
+        ========================================================= */
 
+        .content {
+            position: relative;
+            z-index: 10;
 
-.header-subtitle i {
+            margin-left: 31%;
 
-    width: 2px;
+            width: 69%;
 
-    height: 15px;
+            min-height: 100vh;
 
-    background: #62b9eb;
-}
+            padding:
+                72px
+                75px
+                65px;
+        }
 
+        /* =========================================================
+           DECORATIVE TOP RIGHT
+        ========================================================= */
 
-/* =========================================================
-   NETWORK ICON IM HEADER
-========================================================= */
+        .corner {
+            position: absolute;
 
-.network-logo {
+            top: -135px;
+            right: -135px;
 
-    position: absolute;
+            width: 300px;
+            height: 300px;
 
-    z-index: 6;
+            background: var(--blue);
 
-    left: 58px;
-    top: 24px;
+            transform: rotate(45deg);
 
-    width: 155px;
-    height: 155px;
+            opacity: 0.055;
+        }
 
-    border-radius: 50%;
+        .top-line {
+            position: absolute;
 
-    background: #f8fbfd;
+            right: 70px;
+            top: 85px;
 
-    border: 3px solid #45b7f2;
+            width: 70px;
+            height: 4px;
 
-    box-shadow:
-        0 0 0 2px rgba(255,255,255,.5);
-}
+            background: var(--blue);
+        }
 
+        /* =========================================================
+           HEADER
+        ========================================================= */
 
-/* inner circle */
+        .eyebrow {
+            display: inline-block;
 
-.network-logo::before {
+            font-size: 11px;
 
-    content: "";
+            font-weight: 700;
 
-    position: absolute;
+            letter-spacing: 3px;
 
-    width: 105px;
-    height: 105px;
+            color: var(--blue);
 
-    left: 22px;
-    top: 22px;
+            margin-bottom: 22px;
+        }
 
-    border-radius: 50%;
+        .eyebrow::after {
+            content: "";
 
-    border: 2px solid #173e66;
-}
+            display: block;
 
+            width: 42px;
+            height: 2px;
 
-/* center */
+            margin-top: 10px;
 
-.network-center {
+            background: var(--blue);
+        }
 
-    position: absolute;
+        /* =========================================================
+           MAIN TITLE
+        ========================================================= */
 
-    width: 22px;
-    height: 22px;
+        h1 {
+            max-width: 850px;
 
-    border-radius: 50%;
+            font-size:
+                clamp(
+                    42px,
+                    5vw,
+                    68px
+                );
 
-    background: #173e66;
+            line-height: 1.02;
 
-    left: 65px;
-    top: 65px;
-}
+            letter-spacing: -2.4px;
 
+            color: var(--navy);
 
-/* connections */
+            font-weight: 700;
 
-.connection {
+            margin-bottom: 30px;
+        }
 
-    position: absolute;
+        h1 span {
+            color: var(--blue);
+        }
 
-    background: #173e66;
+        /* =========================================================
+           INTRO
+        ========================================================= */
 
-    transform-origin: left center;
+        .intro {
+            max-width: 700px;
 
-    height: 3px;
-}
+            font-size: 18px;
 
+            line-height: 1.75;
 
-.connection.one {
+            color: var(--text-light);
 
-    width: 43px;
+            margin-bottom: 48px;
+        }
 
-    left: 77px;
-    top: 75px;
+        /* =========================================================
+           SECTION
+        ========================================================= */
 
-    transform: rotate(-45deg);
-}
+        .section {
+            position: relative;
 
+            max-width: 800px;
 
-.connection.two {
+            padding:
+                27px
+                0
+                0
+                32px;
 
-    width: 43px;
+            margin-top: 28px;
 
-    left: 77px;
-    top: 78px;
+            border-top:
+                1px solid var(--line);
+        }
 
-    transform: rotate(45deg);
-}
+        .section::before {
+            content: "";
 
+            position: absolute;
 
-.connection.three {
+            left: 0;
+            top: 27px;
 
-    width: 43px;
+            width: 4px;
+            height: 34px;
 
-    left: 77px;
-    top: 78px;
+            background: var(--blue);
+        }
 
-    transform: rotate(180deg);
-}
+        .section-number {
+            font-size: 10px;
 
+            font-weight: 700;
 
-.connection.four {
+            letter-spacing: 2px;
 
-    width: 43px;
+            color: var(--blue);
 
-    left: 77px;
-    top: 78px;
+            margin-bottom: 11px;
+        }
 
-    transform: rotate(90deg);
-}
+        .section h3 {
+            font-size: 22px;
 
+            line-height: 1.3;
 
-.network-dot {
+            color: var(--navy);
 
-    position: absolute;
+            margin-bottom: 10px;
 
-    width: 14px;
-    height: 14px;
+            font-weight: 700;
+        }
 
-    border-radius: 50%;
+        .section h4 {
+            font-size: 22px;
 
-    background: #173e66;
+            line-height: 1.3;
 
-    border: 2px solid white;
-}
+            color: var(--navy);
 
+            margin-bottom: 10px;
 
-.network-dot.one {
-    left: 112px;
-    top: 35px;
-}
+            font-weight: 700;
+        }
 
+        .section p {
+            max-width: 700px;
 
-.network-dot.two {
-    right: 28px;
-    top: 70px;
-}
+            font-size: 15px;
 
+            line-height: 1.75;
 
-.network-dot.three {
-    left: 69px;
-    bottom: 23px;
-}
+            color: var(--text-light);
+        }
 
+        /* =========================================================
+           CTA
+        ========================================================= */
 
-.network-dot.four {
-    left: 23px;
-    top: 70px;
-}
+        .cta {
+            position: relative;
 
+            display: inline-flex;
 
-/* =========================================================
-   MAIN LAYOUT
-========================================================= */
+            align-items: center;
 
-.layout {
+            gap: 22px;
 
-    display: grid;
+            margin-top: 48px;
 
-    grid-template-columns: 32% 68%;
+            padding:
+                17px
+                24px;
 
-    min-height: calc(100vh - 185px);
-}
+            background: var(--navy);
 
+            color: white;
 
-/* =========================================================
-   LEFT SIDEBAR
-========================================================= */
+            text-decoration: none;
 
-.sidebar {
+            font-size: 12px;
 
-    position: relative;
+            font-weight: 700;
 
-    overflow: hidden;
+            letter-spacing: 1px;
 
-    padding:
-        42px
-        30px
-        70px;
+            overflow: hidden;
 
-    color: white;
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
 
-    background:
-        linear-gradient(
-            160deg,
-            #07375e,
-            #001b35 80%
-        );
-}
+        .cta::before {
+            content: "";
 
+            position: absolute;
 
-/* diagonal CV design */
+            left: 0;
+            top: 0;
 
-.sidebar::before {
+            width: 4px;
+            height: 100%;
 
-    content: "";
+            background: var(--blue-light);
+        }
 
-    position: absolute;
+        .cta:hover {
+            background: var(--blue);
 
-    width: 500px;
-    height: 150px;
+            transform:
+                translateY(-2px);
+        }
 
-    left: -160px;
-    bottom: 130px;
+        .arrow {
+            font-size: 19px;
 
-    transform: rotate(-48deg);
+            line-height: 1;
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent 0 22%,
-            #0a4e80 22% 30%,
-            #197cba 30% 35%,
-            transparent 35%
-        );
+            transition:
+                transform 0.25s ease;
+        }
 
-    opacity: .9;
-}
+        .cta:hover .arrow {
+            transform:
+                translateX(5px);
+        }
 
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
-.sidebar::after {
+        .footer {
+            max-width: 800px;
 
-    content: "";
+            margin-top: 58px;
 
-    position: absolute;
+            padding-top: 20px;
 
-    width: 500px;
-    height: 150px;
+            border-top:
+                1px solid var(--line);
 
-    left: -160px;
-    bottom: 60px;
+            font-size: 10px;
 
-    transform: rotate(-48deg);
+            letter-spacing: 1.5px;
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent 0 22%,
-            #0a4e80 22% 30%,
-            #197cba 30% 35%,
-            transparent 35%
-        );
+            color: #909baa;
 
-    opacity: .55;
-}
+            text-transform: uppercase;
+        }
 
+        /* =========================================================
+           BLUE BOTTOM DECORATION
+        ========================================================= */
 
-/* =========================================================
-   SIDEBAR SECTION
-========================================================= */
+        .content-decoration {
+            position: absolute;
 
-.side-section {
+            right: -80px;
+            bottom: -120px;
 
-    position: relative;
+            width: 350px;
+            height: 250px;
 
-    z-index: 4;
+            background:
+                var(--blue);
 
-    margin-bottom: 38px;
-}
+            transform:
+                rotate(-18deg);
 
+            opacity: 0.035;
+        }
 
-.side-heading {
+        /* =========================================================
+           RESPONSIVE TABLET
+        ========================================================= */
 
-    display: flex;
+        @media (max-width: 1000px) {
 
-    align-items: center;
+            .sidebar-content {
+                padding-left: 35px;
+                padding-right: 35px;
+            }
 
-    gap: 12px;
+            .content {
+                padding-left: 55px;
+                padding-right: 55px;
+            }
 
-    padding-bottom: 9px;
+            h1 {
+                font-size: 48px;
+            }
+        }
 
-    border-bottom:
-        2px solid #299cdd;
-}
+        /* =========================================================
+           RESPONSIVE MOBILE
+        ========================================================= */
 
+        @media (max-width: 760px) {
 
-.side-icon {
+            body {
+                background: white;
+            }
 
-    width: 46px;
-    height: 46px;
+            .page {
+                width: 100%;
+                box-shadow: none;
+            }
 
-    flex-shrink: 0;
+            .sidebar {
+                position: relative;
 
-    border-radius: 50%;
+                width: 100%;
 
-    border:
-        2px solid #42b4ed;
+                min-height: 380px;
+            }
 
-    background:
-        #0a3157;
+            .sidebar-content {
+                padding:
+                    48px
+                    30px
+                    80px;
+            }
 
-    display: flex;
+            .side-bottom {
+                left: 30px;
+                bottom: 28px;
+            }
 
-    align-items: center;
-    justify-content: center;
+            .content {
+                margin-left: 0;
 
-    color: white;
+                width: 100%;
 
-    font-size: 20px;
-}
+                min-height: auto;
 
+                padding:
+                    50px
+                    30px
+                    55px;
+            }
 
-.side-title-line {
+            .top-line {
+                right: 30px;
+                top: 55px;
+            }
 
-    height: 18px;
+            h1 {
+                font-size: 43px;
 
-    flex: 1;
+                letter-spacing:
+                    -1.5px;
+            }
 
-    max-width: 175px;
+            .intro {
+                font-size: 17px;
+            }
+        }
 
-    background:
-        linear-gradient(
-            90deg,
-            white 0 72%,
-            transparent 72%
-        );
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
 
-    border-radius: 5px;
-}
+        @media (max-width: 480px) {
 
+            .sidebar {
+                min-height: 340px;
+            }
 
-/* =========================================================
-   SIDEBAR TEXT
-========================================================= */
+            .sidebar h2 {
+                font-size: 29px;
+            }
 
-.side-content {
+            .network-mark {
+                width: 64px;
+                height: 64px;
+            }
 
-    padding:
+            .network-mark::before {
+                width: 32px;
+                left: 15px;
+                top: 30px;
+            }
 
-        17px
-        4px
-        0
-        58px;
-}
+            .network-mark::after {
+                height: 32px;
+                left: 30px;
+                top: 15px;
+            }
 
+            .content {
+                padding:
+                    42px
+                    24px
+                    50px;
+            }
 
-.side-content p {
+            h1 {
+                font-size: 37px;
 
-    font-size: 13px;
+                letter-spacing:
+                    -1.2px;
+            }
 
-    line-height: 1.8;
+            .intro {
+                font-size: 16px;
+            }
 
-    color:
-        rgba(255,255,255,.82);
+            .section {
+                padding-left: 24px;
+            }
 
-    margin-bottom: 8px;
-}
+            .section h3 {
+                font-size: 20px;
+            }
 
+            .section h4 {
+                font-size: 20px;
+            }
 
-/* white fake lines */
+            .cta {
+                width: 100%;
 
-.white-line {
+                justify-content:
+                    space-between;
+            }
 
-    height: 9px;
+            .footer {
+                line-height: 1.7;
+            }
+        }
 
-    width: 100%;
-
-    margin-bottom: 12px;
-
-    border-radius: 10px;
-
-    background: #d8ebf7;
-}
-
-
-.white-line.short {
-    width: 72%;
-}
-
-
-.white-line.medium {
-    width: 86%;
-}
-
-
-/* =========================================================
-   SIDEBAR CHECK LIST
-========================================================= */
-
-.side-list {
-
-    padding:
-        16px
-        0
-        0
-        4px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 11px;
-}
-
-
-.side-list-item {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-}
-
-
-.side-check {
-
-    width: 22px;
-    height: 22px;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    background: white;
-
-    color: #153e67;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 12px;
-
-    font-weight: bold;
-}
-
-
-.side-list-line {
-
-    height: 9px;
-
-    flex: 1;
-
-    border-radius: 10px;
-
-    background: #d9ebf7;
-}
-
-
-/* =========================================================
-   NETWORK CATEGORIES
-========================================================= */
-
-.network-categories {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 13px;
-
-    padding-top: 15px;
-}
-
-
-.category {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-}
-
-
-.category-name {
-
-    width: 80px;
-
-    height: 9px;
-
-    border-radius: 10px;
-
-    background: #d9ebf7;
-}
-
-
-.category-dots {
-
-    display: flex;
-
-    gap: 5px;
-}
-
-
-.category-dots span {
-
-    width: 11px;
-    height: 11px;
-
-    border-radius: 50%;
-
-    background: white;
-}
-
-
-/* =========================================================
-   RIGHT WHITE CONTENT
-========================================================= */
-
-.content {
-
-    position: relative;
-
-    padding:
-        28px
-        28px
-        65px
-        20px;
-
-    background:
-        linear-gradient(
-            120deg,
-            #ffffff,
-            #f8fbfd
-        );
-
-    color: #153e67;
-}
-
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-.main-section {
-
-    margin-bottom: 32px;
-}
-
-
-.main-heading {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    padding-bottom: 7px;
-
-    border-bottom:
-        2px solid #49a9dc;
-
-    margin-bottom: 17px;
-}
-
-
-.main-icon {
-
-    width: 50px;
-    height: 50px;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #173e65;
-
-    color: white;
-
-    font-size: 19px;
-}
-
-
-.main-heading-line {
-
-    flex: 1;
-
-    height: 20px;
-
-    border-radius: 5px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #173e65 0 48%,
-            transparent 48%
-        );
-}
-
-
-/* =========================================================
-   INTRO
-========================================================= */
-
-.intro-title {
-
-    font-size: 27px;
-
-    line-height: 1.25;
-
-    font-weight: 700;
-
-    color: #153e67;
-
-    margin-bottom: 12px;
-}
-
-
-.intro-text {
-
-    font-size: 15px;
-
-    line-height: 1.75;
-
-    color: #496b87;
-
-    max-width: 690px;
-}
-
-
-/* =========================================================
-   NETWORK BLOCKS
-========================================================= */
-
-.network-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap: 18px 28px;
-}
-
-
-.network-card {
-
-    position: relative;
-
-    padding:
-        17px
-        17px
-        17px
-        20px;
-
-    border:
-        1px solid #dbe5ed;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 4px 15px rgba(16,42,86,.045);
-}
-
-
-.network-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 4px;
-    height: 100%;
-
-    background: #1d87ca;
-}
-
-
-.card-number {
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    color: #1d87ca;
-
-    margin-bottom: 7px;
-}
-
-
-.network-card h3 {
-
-    font-size: 17px;
-
-    color: #153e67;
-
-    margin-bottom: 7px;
-}
-
-
-.network-card p {
-
-    font-size: 13px;
-
-    line-height: 1.65;
-
-    color: #5d758b;
-}
-
-
-/* =========================================================
-   BIG SECTION
-========================================================= */
-
-.big-section {
-
-    position: relative;
-
-    padding-left: 22px;
-
-    border-top:
-        1px solid #dbe3ec;
-
-    padding-top: 22px;
-
-    margin-top: 22px;
-}
-
-
-.big-section::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 22px;
-
-    width: 4px;
-    height: 40px;
-
-    background: #1688ca;
-}
-
-
-.number {
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    color: #1888c9;
-
-    margin-bottom: 9px;
-}
-
-
-.big-section h2 {
-
-    font-size: 22px;
-
-    color: #153e67;
-
-    margin-bottom: 9px;
-}
-
-
-.big-section p {
-
-    font-size: 14px;
-
-    line-height: 1.75;
-
-    color: #5c7489;
-
-    max-width: 700px;
-}
-
-
-/* =========================================================
-   SALES SECTION
-========================================================= */
-
-.sales {
-
-    margin-top: 22px;
-
-    padding:
-        22px;
-
-    background:
-        #f3f8fc;
-
-    border:
-        1px solid #d7e5ef;
-
-    position: relative;
-}
-
-
-.sales::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 5px;
-    height: 100%;
-
-    background: #1688ca;
-}
-
-
-.sales-label {
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    color: #1688ca;
-
-    font-weight: bold;
-
-    margin-bottom: 10px;
-}
-
-
-.sales h2 {
-
-    font-size: 22px;
-
-    line-height: 1.35;
-
-    color: #153e67;
-
-    margin-bottom: 9px;
-}
-
-
-.sales p {
-
-    color: #60788d;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   BUTTON – CV STYLE
-========================================================= */
-
-.cta {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 25px;
-
-    margin-top: 25px;
-
-    padding:
-        14px
-        21px;
-
-    color: white;
-
-    background: #123a60;
-
-    text-decoration: none;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-
-    transition: .25s ease;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-
-.cta::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 4px;
-    height: 100%;
-
-    background: #2a9bd5;
-}
-
-
-.cta:hover {
-
-    background: #1688ca;
-
-    transform:
-        translateY(-2px);
-}
-
-
-.arrow {
-
-    font-size: 18px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-
-    margin-top: 35px;
-
-    padding-top: 15px;
-
-    border-top:
-        1px solid #dbe3ec;
-
-    color: #8795a3;
-
-    font-size: 9px;
-
-    letter-spacing: 1.4px;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width: 800px) {
-
-    body {
-        padding: 0;
-        background: white;
-    }
-
-    .page {
-        width: 100%;
-        box-shadow: none;
-    }
-
-    .top-header {
-        height: 180px;
-    }
-
-    .network-logo {
-
-        width: 120px;
-        height: 120px;
-
-        left: 25px;
-        top: 28px;
-    }
-
-    .network-logo::before {
-
-        width: 80px;
-        height: 80px;
-
-        left: 18px;
-        top: 18px;
-    }
-
-    .network-center {
-
-        left: 49px;
-        top: 49px;
-
-        width: 20px;
-        height: 20px;
-    }
-
-    .header-content {
-
-        left: 180px;
-        right: 20px;
-        top: 52px;
-    }
-
-    .header-title {
-
-        font-size: 30px;
-    }
-
-    .header-subtitle {
-
-        display: none;
-    }
-
-    .layout {
-
-        grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-
-        min-height: auto;
-
-        padding:
-            35px
-            25px
-            60px;
-    }
-
-    .content {
-
-        padding:
-            30px
-            22px
-            50px;
-    }
-
-    .network-grid {
-
-        grid-template-columns: 1fr;
-    }
-}
-
-
-@media(max-width: 480px) {
-
-    .top-header {
-        height: 155px;
-    }
-
-    .network-logo {
-
-        width: 100px;
-        height: 100px;
-
-        left: 18px;
-        top: 27px;
-    }
-
-    .network-logo::before {
-
-        width: 66px;
-        height: 66px;
-
-        left: 15px;
-        top: 15px;
-    }
-
-    .network-center {
-
-        left: 40px;
-        top: 40px;
-
-        width: 18px;
-        height: 18px;
-    }
-
-    .header-content {
-
-        left: 140px;
-        top: 42px;
-    }
-
-    .header-title {
-
-        font-size: 24px;
-    }
-
-    .sidebar {
-
-        padding:
-            30px
-            20px
-            55px;
-    }
-
-    .content {
-
-        padding:
-            25px
-            16px
-            45px;
-    }
-
-    .main-heading-line {
-
-        background:
-            linear-gradient(
-                90deg,
-                #173e65 0 35%,
-                transparent 35%
-            );
-    }
-
-    .intro-title {
-        font-size: 23px;
-    }
-}
-
-</style>
+    </style>
 </head>
 
 
 <body>
 
-
 <div class="page">
 
-
     <!-- =====================================================
-         HEADER
+         LINKER BLAUER BEREICH
     ====================================================== -->
 
-    <header class="top-header">
+    <aside class="sidebar">
 
+        <div class="sidebar-decoration"></div>
 
-        <div class="network-logo">
+        <div class="sidebar-content">
 
-            <div class="network-center"></div>
-
-            <div class="connection one"></div>
-            <div class="connection two"></div>
-            <div class="connection three"></div>
-            <div class="connection four"></div>
-
-            <div class="network-dot one"></div>
-            <div class="network-dot two"></div>
-            <div class="network-dot three"></div>
-            <div class="network-dot four"></div>
-
-        </div>
-
-
-        <div class="header-content">
-
-            <div class="header-small">
-                NETWORK &amp; VERBINDUNGEN
+            <div class="eyebrow-side">
+                NETWORK · BUSINESS · CONNECTIONS
             </div>
 
-            <div class="header-title">
-                Menschen verbinden
-            </div>
 
-            <div class="header-subtitle">
+            <!-- Netzwerk-Symbol -->
 
-                <span>
-                    NETWORKING
-                </span>
+            <div class="network-mark">
 
-                <i></i>
-
-                <span>
-                    BUSINESS
-                </span>
-
-                <i></i>
-
-                <span>
-                    KONTAKTE
-                </span>
-
-                <i></i>
-
-                <span>
-                    VERTRIEB
-                </span>
+                <span class="network-dot dot-one"></span>
+                <span class="network-dot dot-two"></span>
+                <span class="network-dot dot-three"></span>
+                <span class="network-dot dot-four"></span>
 
             </div>
 
-        </div>
 
+            <h2>
+                Menschen.<br>
+                Unternehmen.<br>
+                Verbindungen.
+            </h2>
 
-    </header>
 
-
-
-    <!-- =====================================================
-         LAYOUT
-    ====================================================== -->
-
-    <div class="layout">
-
-
-
-        <!-- =================================================
-             SIDEBAR
-        ================================================== -->
-
-        <aside class="sidebar">
-
-
-            <!-- SIDEBAR SECTION 1 -->
-
-            <section class="side-section">
-
-                <div class="side-heading">
-
-                    <div class="side-icon">
-                        ●
-                    </div>
-
-                    <div class="side-title-line"></div>
-
-                </div>
-
-
-                <div class="side-content">
-
-                    <div class="white-line"></div>
-                    <div class="white-line medium"></div>
-                    <div class="white-line short"></div>
-                    <div class="white-line"></div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- SIDEBAR SECTION 2 -->
-
-            <section class="side-section">
-
-                <div class="side-heading">
-
-                    <div class="side-icon">
-                        +
-                    </div>
-
-                    <div class="side-title-line"></div>
-
-                </div>
-
-
-                <div class="side-list">
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- SIDEBAR SECTION 3 -->
-
-            <section class="side-section">
-
-                <div class="side-heading">
-
-                    <div class="side-icon">
-                        ●
-                    </div>
-
-                    <div class="side-title-line"></div>
-
-                </div>
-
-
-                <div class="network-categories">
-
-
-                    <div class="category">
-
-                        <div class="category-name"></div>
-
-                        <div class="category-dots">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="category">
-
-                        <div class="category-name"></div>
-
-                        <div class="category-dots">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="category">
-
-                        <div class="category-name"></div>
-
-                        <div class="category-dots">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </section>
-
-
-
-            <!-- SIDEBAR SECTION 4 -->
-
-            <section class="side-section">
-
-                <div class="side-heading">
-
-                    <div class="side-icon">
-                        ✓
-                    </div>
-
-                    <div class="side-title-line"></div>
-
-                </div>
-
-
-                <div class="side-list">
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-
-                    <div class="side-list-item">
-
-                        <div class="side-check">
-                            ✓
-                        </div>
-
-                        <div class="side-list-line"></div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-        </aside>
-
-
-
-        <!-- =================================================
-             MAIN CONTENT
-        ================================================== -->
-
-        <main class="content">
-
-
-
-            <!-- INTRO -->
-
-            <section class="main-section">
-
-                <div class="main-heading">
-
-                    <div class="main-icon">
-                        ●
-                    </div>
-
-                    <div class="main-heading-line"></div>
-
-                </div>
-
-
-                <div class="intro-title">
-
-                    Menschen verbinden.<br>
-
-                    Möglichkeiten schaffen.
-
-                </div>
-
-
-                <p class="intro-text">
-
-                    Ich bin junger Unternehmer und glaube daran,
-                    dass Menschen den größten Wert darstellen.
-
-                </p>
-
-            </section>
-
-
-
-            <!-- NETWORK -->
-
-            <section class="main-section">
-
-                <div class="main-heading">
-
-                    <div class="main-icon">
-                        +
-                    </div>
-
-                    <div class="main-heading-line"></div>
-
-                </div>
-
-
-                <div class="network-grid">
-
-
-                    <article class="network-card">
-
-                        <div class="card-number">
-                            01
-                        </div>
-
-                        <h3>
-                            Neue Menschen kennenlernen
-                        </h3>
-
-                        <p>
-                            Neue Kontakte aufbauen und
-                            interessante Menschen kennenlernen.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="network-card">
-
-                        <div class="card-number">
-                            02
-                        </div>
-
-                        <h3>
-                            Interessante Unternehmer
-                        </h3>
-
-                        <p>
-                            Unternehmer kennenlernen,
-                            voneinander lernen und neue
-                            Perspektiven entdecken.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="network-card">
-
-                        <div class="card-number">
-                            03
-                        </div>
-
-                        <h3>
-                            Wertvolle Verbindungen
-                        </h3>
-
-                        <p>
-                            Menschen und Unternehmen
-                            miteinander verbinden.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="network-card">
-
-                        <div class="card-number">
-                            04
-                        </div>
-
-                        <h3>
-                            Gemeinsame Möglichkeiten
-                        </h3>
-
-                        <p>
-                            Gemeinsam neue Möglichkeiten
-                            entwickeln und langfristige
-                            Beziehungen aufbauen.
-                        </p>
-
-                    </article>
-
-
-                </div>
-
-            </section>
-
-
-
-            <!-- CONTACT -->
-
-            <section class="big-section">
-
-                <div class="number">
-                    05 — KONTAKT
-                </div>
-
-                <h2>
-                    Offene Gespräche
-                </h2>
-
-                <p>
-                    Ich möchte meinen persönlichen
-                    Austausch erweitern und mit Menschen
-                    ins Gespräch kommen, die ähnliche
-                    Interessen und Ziele verfolgen.
-                </p>
-
-            </section>
-
-
-
-            <!-- SALES -->
-
-            <section class="sales">
-
-                <div class="sales-label">
-                    06 — VERTRIEB
-                </div>
-
-                <h2>
-                    Wir verkaufen deine Dienstleistung
-                    für 20% des Auftragswertes
-                </h2>
-
-                <p>
-                    Wir haben den Kunden, den du suchst.
-                </p>
-
-                <p style="margin-top:8px;">
-                    Vernetz dich mit uns.
-                </p>
-
-
-                <a
-                    href="mailto:deine@email.at"
-                    class="cta"
-                >
-
-                    Vernetzen
-
-                    <span class="arrow">
-                        →
-                    </span>
-
-                </a>
-
-            </section>
-
-
-
-            <!-- FOOTER -->
-
-            <div class="footer">
-
+            <p class="sidebar-text">
                 Offene Gespräche · Neue Kontakte ·
                 Gemeinsame Möglichkeiten
+            </p>
 
+        </div>
+
+
+        <div class="side-bottom">
+            Netzwerk &amp; Verbindungen
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         HAUPTBEREICH
+    ====================================================== -->
+
+    <main class="content">
+
+        <div class="corner"></div>
+
+        <div class="top-line"></div>
+
+
+        <!-- HEADER -->
+
+        <div class="eyebrow">
+            NETWORK &amp; VERBINDUNGEN
+        </div>
+
+
+        <h1>
+            Menschen verbinden.<br>
+            <span>Möglichkeiten schaffen.</span>
+        </h1>
+
+
+        <p class="intro">
+            Ich bin junger Unternehmer und glaube daran,
+            dass Menschen den größten Wert darstellen.
+        </p>
+
+
+        <!-- =================================================
+             SECTION 01
+        ================================================== -->
+
+        <section class="section">
+
+            <div class="section-number">
+                01 — KONTAKT
             </div>
 
+            <h3>
+                Neue Menschen kennenlernen
+            </h3>
 
-        </main>
+            <p>
+                Deshalb möchte ich Sie einfach kennenlernen
+                und den Personenkreis, den ich kenne,
+                ausbauen.
+            </p>
+
+        </section>
 
 
-    </div>
+        <!-- =================================================
+             SECTION 02
+        ================================================== -->
 
+        <section class="section">
+
+            <div class="section-number">
+                02 — NETWORKING
+            </div>
+
+            <h3>
+                Interessante Unternehmer
+            </h3>
+
+            <p>
+                Ich möchte interessante Unternehmer
+                kennenlernen, voneinander lernen und
+                neue Perspektiven entdecken.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             SECTION 03
+        ================================================== -->
+
+        <section class="section">
+
+            <div class="section-number">
+                03 — MÖGLICHKEITEN
+            </div>
+
+            <h3>
+                Wertvolle Verbindungen schaffen
+            </h3>
+
+            <p>
+                Dort, wo es passt, möchte ich wertvolle
+                Verbindungen zwischen Menschen und
+                Unternehmen herstellen.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             SECTION 04
+        ================================================== -->
+
+        <section class="section">
+
+            <div class="section-number">
+                04 — VERTRIEB
+            </div>
+
+            <h4>
+                Wir verkaufen deine Dienstleistung für 20% des Auftragwertes
+            </h4>
+
+            <p>
+                Wir haben den Kunden, den du suchst.
+            </p>
+
+            <p>
+                Vernetz dich mit uns
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             BUTTON
+        ================================================== -->
+
+        <a
+            href="mailto:deine@email.at"
+            class="cta"
+        >
+            Vernetzen
+
+            <span class="arrow">
+                →
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="footer">
+            Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
+        </div>
+
+
+        <div class="content-decoration"></div>
+
+    </main>
 
 </div>
-
 
 </body>
 </html>
