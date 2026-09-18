@@ -8,10 +8,6 @@
 
 <style>
 
-/* =========================================================
-   GRUNDLAGEN
-========================================================= */
-
 *{
     margin:0;
     padding:0;
@@ -19,16 +15,24 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+
+/* =========================================================
+   GESAMTE SEITE
+========================================================= */
+
+html,
+body{
+    width:100%;
+    height:100%;
+}
+
 body{
     background:
-        radial-gradient(circle at 0% 20%, rgba(0,44,255,.35) 0%, transparent 25%),
-        radial-gradient(circle at 82% 18%, rgba(0,102,255,.28) 0%, transparent 28%),
-        radial-gradient(circle at 50% 100%, rgba(0,55,160,.20) 0%, transparent 35%),
         linear-gradient(
             135deg,
             #01081A 0%,
-            #00174F 45%,
-            #000E38 100%
+            #00174F 50%,
+            #002A7A 100%
         );
 
     color:white;
@@ -48,7 +52,7 @@ header{
         linear-gradient(
             90deg,
             #01081A 0%,
-            #00174F 45%,
+            #00174F 50%,
             #002A7A 100%
         );
 
@@ -56,26 +60,27 @@ header{
     align-items:center;
     justify-content:center;
 
-    /* ATOM deutlich weiter nach rechts */
+    /* ATOM weiter nach rechts */
     padding-left:180px;
 
     border-bottom:1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 8px 30px rgba(0,0,0,.45),
-        0 0 25px rgba(0,80,255,.10);
+        0 8px 30px rgba(0,0,0,.35);
 }
 
 header h1{
     font-size:48px;
+
     letter-spacing:16px;
+
     font-weight:700;
 
     color:#fff;
 
     text-shadow:
         0 0 10px rgba(255,255,255,.95),
-        0 0 22px rgba(80,150,255,.65),
+        0 0 22px rgba(100,170,255,.65),
         0 0 40px rgba(0,90,255,.35);
 }
 
@@ -86,7 +91,16 @@ header h1{
 
 .container{
     display:flex;
+
     height:calc(100vh - 90px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #01081A 0%,
+            #00174F 50%,
+            #002A7A 100%
+        );
 }
 
 
@@ -101,18 +115,18 @@ header h1{
         linear-gradient(
             180deg,
             #01081A 0%,
-            #001233 50%,
-            #001B4D 100%
+            #00174F 50%,
+            #002A7A 100%
         );
 
-    border-right:1px solid rgba(255,255,255,.06);
+    border-right:1px solid rgba(255,255,255,.08);
 
     padding:18px;
 
     overflow-y:auto;
 
     box-shadow:
-        8px 0 30px rgba(0,0,0,.25);
+        8px 0 30px rgba(0,0,0,.20);
 }
 
 
@@ -121,7 +135,7 @@ header h1{
 ========================================================= */
 
 .logo{
-    color:#7FB8FF;
+    color:#9CCBFF;
 
     font-size:13px;
 
@@ -132,32 +146,27 @@ header h1{
     text-transform:uppercase;
 
     text-shadow:
-        0 0 10px rgba(79,161,255,.45);
+        0 0 10px rgba(120,190,255,.40);
 }
 
+
+/* =========================================================
+   MENÜ
+========================================================= */
 
 .menu-item{
     margin-bottom:10px;
 }
 
-
-/* =========================================================
-   MENÜ BUTTON
-========================================================= */
-
 .menu-title{
     width:100%;
 
     background:
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.035),
-            rgba(0,90,220,.10)
-        );
+        rgba(255,255,255,.045);
 
     color:white;
 
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
 
     padding:13px 14px;
 
@@ -178,16 +187,13 @@ header h1{
 
 .menu-title:hover{
     background:
-        linear-gradient(
-            90deg,
-            rgba(0,70,200,.22),
-            rgba(0,120,255,.15)
-        );
+        rgba(255,255,255,.10);
 
-    border-color:rgba(90,160,255,.35);
+    border-color:
+        rgba(140,200,255,.35);
 
     box-shadow:
-        0 0 18px rgba(0,100,255,.20);
+        0 0 18px rgba(0,100,255,.18);
 }
 
 
@@ -214,11 +220,12 @@ header h1{
 
     border-radius:50%;
 
-    border:2px solid #4EA1FF;
+    border:2px solid #62AEFF;
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     font-size:16px;
@@ -226,15 +233,10 @@ header h1{
     color:#fff;
 
     background:
-        radial-gradient(
-            circle,
-            rgba(78,161,255,.18),
-            rgba(78,161,255,.02)
-        );
+        rgba(255,255,255,.04);
 
     box-shadow:
-        0 0 10px rgba(78,161,255,.30),
-        inset 0 0 8px rgba(78,161,255,.08);
+        0 0 10px rgba(78,161,255,.30);
 }
 
 
@@ -245,10 +247,10 @@ header h1{
 .arrow{
     transition:.25s;
 
-    color:#7FB8FF;
+    color:#9CCBFF;
 
     text-shadow:
-        0 0 8px rgba(127,184,255,.55);
+        0 0 8px rgba(140,200,255,.55);
 }
 
 
@@ -284,20 +286,16 @@ header h1{
 
     text-decoration:none;
 
-    color:#D8E9FF;
+    color:#DCEEFF;
 
     padding:9px 14px;
 
     margin-top:6px;
 
-    border-left:2px solid #4EA1FF;
+    border-left:2px solid #62AEFF;
 
     background:
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025),
-            rgba(0,100,255,.08)
-        );
+        rgba(255,255,255,.035);
 
     border-radius:6px;
 
@@ -308,47 +306,31 @@ header h1{
 
 .submenu a:hover{
     background:
-        linear-gradient(
-            90deg,
-            rgba(0,90,255,.20),
-            rgba(0,140,255,.12)
-        );
+        rgba(255,255,255,.09);
 
     color:#fff;
 
-    border-left-color:#79B8FF;
+    border-left-color:#A8D5FF;
 
     box-shadow:
-        0 0 12px rgba(60,150,255,.15);
+        0 0 12px rgba(80,160,255,.15);
 }
 
 
 /* =========================================================
-   HAUPTBEREICH
+   CONTENT
+   EXAKT DIE GLEICHE BLAUE FARBWELT
 ========================================================= */
 
 .content{
     flex:1;
 
     background:
-
-        radial-gradient(
-            circle at 75% 15%,
-            rgba(0,90,255,.13),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 25% 85%,
-            rgba(0,50,180,.12),
-            transparent 30%
-        ),
-
         linear-gradient(
             135deg,
-            #020B18 0%,
-            #001A42 50%,
-            #00102F 100%
+            #01081A 0%,
+            #00174F 50%,
+            #002A7A 100%
         );
 
     position:relative;
@@ -358,7 +340,7 @@ header h1{
 
 
 /* =========================================================
-   LICHTEFFEKT RECHTS OBEN
+   DEZENTER LICHTEFFEKT
 ========================================================= */
 
 .content:before{
@@ -378,16 +360,16 @@ header h1{
         linear-gradient(
             to right,
             transparent,
-            rgba(70,150,255,.08),
+            rgba(120,190,255,.07),
             transparent
         );
 
-    filter:blur(2px);
+    pointer-events:none;
 }
 
 
 /* =========================================================
-   LICHTEFFEKT UNTEN
+   DEZENTER LICHTEFFEKT UNTEN
 ========================================================= */
 
 .content:after{
@@ -407,11 +389,33 @@ header h1{
         linear-gradient(
             to right,
             transparent,
-            rgba(0,100,255,.07),
+            rgba(120,190,255,.05),
             transparent
         );
 
-    filter:blur(2px);
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.sidebar::-webkit-scrollbar{
+    width:6px;
+}
+
+.sidebar::-webkit-scrollbar-track{
+    background:#00174F;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:#174B91;
+    border-radius:10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover{
+    background:#286BC2;
 }
 
 </style>
@@ -426,12 +430,14 @@ header h1{
 ======================================================= -->
 
 <header>
+
     <h1>ATOM</h1>
+
 </header>
 
 
 <!-- =======================================================
-     HAUPT-LAYOUT
+     LAYOUT
 ======================================================= -->
 
 <div class="container">
@@ -443,7 +449,9 @@ header h1{
 
     <aside class="sidebar">
 
-        <div class="logo">Navigation</div>
+        <div class="logo">
+            Navigation
+        </div>
 
 
         <!-- ONLINE KURSE -->
@@ -454,26 +462,38 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">📘</div>
+                    <div class="icon">
+                        📘
+                    </div>
 
                     Online Kurse
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Webentwicklung</a>
+                <a href="#">
+                    Webentwicklung
+                </a>
 
-                <a href="#">Python</a>
+                <a href="#">
+                    Python
+                </a>
 
-                <a href="#">JavaScript</a>
+                <a href="#">
+                    JavaScript
+                </a>
 
-                <a href="#">KI & Automatisierung</a>
+                <a href="#">
+                    KI & Automatisierung
+                </a>
 
             </div>
 
@@ -488,20 +508,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">📊</div>
+                    <div class="icon">
+                        📊
+                    </div>
 
                     Dashboard
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Übersicht</a>
+                <a href="#">
+                    Übersicht
+                </a>
 
             </div>
 
@@ -516,20 +542,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">💼</div>
+                    <div class="icon">
+                        💼
+                    </div>
 
                     Projekte
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Meine Projekte</a>
+                <a href="#">
+                    Meine Projekte
+                </a>
 
             </div>
 
@@ -544,20 +576,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">📂</div>
+                    <div class="icon">
+                        📂
+                    </div>
 
                     Ressourcen
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Dateien</a>
+                <a href="#">
+                    Dateien
+                </a>
 
             </div>
 
@@ -572,20 +610,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">👥</div>
+                    <div class="icon">
+                        👥
+                    </div>
 
                     Community
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Forum</a>
+                <a href="#">
+                    Forum
+                </a>
 
             </div>
 
@@ -600,20 +644,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">⬇</div>
+                    <div class="icon">
+                        ⬇
+                    </div>
 
                     Downloads
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Material</a>
+                <a href="#">
+                    Material
+                </a>
 
             </div>
 
@@ -628,20 +678,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">📅</div>
+                    <div class="icon">
+                        📅
+                    </div>
 
                     Kalender
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Termine</a>
+                <a href="#">
+                    Termine
+                </a>
 
             </div>
 
@@ -656,20 +712,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">🏆</div>
+                    <div class="icon">
+                        🏆
+                    </div>
 
                     Zertifikate
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Meine Zertifikate</a>
+                <a href="#">
+                    Meine Zertifikate
+                </a>
 
             </div>
 
@@ -684,20 +746,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">⚙</div>
+                    <div class="icon">
+                        ⚙
+                    </div>
 
                     Einstellungen
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Profil</a>
+                <a href="#">
+                    Profil
+                </a>
 
             </div>
 
@@ -712,20 +780,26 @@ header h1{
 
                 <div class="left">
 
-                    <div class="icon">❓</div>
+                    <div class="icon">
+                        ❓
+                    </div>
 
                     Hilfe
 
                 </div>
 
-                <span class="arrow">▶</span>
+                <span class="arrow">
+                    ▶
+                </span>
 
             </button>
 
 
             <div class="submenu">
 
-                <a href="#">Support</a>
+                <a href="#">
+                    Support
+                </a>
 
             </div>
 
