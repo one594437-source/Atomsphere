@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,8 +14,13 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+/* ===== BODY ===== */
+
 body{
-    background:linear-gradient(135deg,#010814 0%,#03142B 45%,#07254A 100%);
+    background:
+    radial-gradient(circle at 0% 20%, #0A2CFF 0%, transparent 22%),
+    radial-gradient(circle at 82% 18%, rgba(0,102,255,.55) 0%, transparent 26%),
+    linear-gradient(135deg, #01081A 0%, #001B5E 48%, #000E38 100%);
     color:white;
     height:100vh;
     overflow:hidden;
@@ -24,20 +30,19 @@ body{
 
 header{
     height:90px;
-    background:linear-gradient(90deg,#020B18,#031A35,#07254A);
+    background:linear-gradient(90deg,#01081A,#00174F,#002A7A);
     display:flex;
     align-items:center;
     justify-content:center;
-    border-bottom:1px solid rgba(120,180,255,.15);
-    box-shadow:0 8px 30px rgba(0,0,0,.45);
+    padding-left:40px;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 header h1{
-    color:#fff;
     font-size:48px;
     letter-spacing:12px;
-    font-weight:700;
-    text-shadow:0 0 18px rgba(255,255,255,.85);
+    color:#fff;
+    text-shadow:0 0 18px rgba(255,255,255,.9);
 }
 
 /* ===== LAYOUT ===== */
@@ -51,8 +56,8 @@ header h1{
 
 .sidebar{
     width:270px;
-    background:linear-gradient(180deg,#010B18,#03142B 60%,#041D3C);
-    border-right:1px solid rgba(120,180,255,.12);
+    background:linear-gradient(180deg,#01081A,#001233 55%,#001B4D 100%);
+    border-right:1px solid rgba(255,255,255,.06);
     padding:18px;
     overflow-y:auto;
 }
@@ -208,6 +213,7 @@ header h1{
                 </div>
                 <span class="arrow">▶</span>
             </button>
+
             <div class="submenu">
                 <a href="#">Webentwicklung</a>
                 <a href="#">Python</a>
@@ -218,74 +224,128 @@ header h1{
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">📊</div>Dashboard</div>
+                <div class="left">
+                    <div class="icon">📊</div>
+                    Dashboard
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Übersicht</a></div>
+
+            <div class="submenu">
+                <a href="#">Übersicht</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">💼</div>Projekte</div>
+                <div class="left">
+                    <div class="icon">💼</div>
+                    Projekte
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Meine Projekte</a></div>
+
+            <div class="submenu">
+                <a href="#">Meine Projekte</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">📂</div>Ressourcen</div>
+                <div class="left">
+                    <div class="icon">📂</div>
+                    Ressourcen
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Dateien</a></div>
+
+            <div class="submenu">
+                <a href="#">Dateien</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">👥</div>Community</div>
+                <div class="left">
+                    <div class="icon">👥</div>
+                    Community
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Forum</a></div>
+
+            <div class="submenu">
+                <a href="#">Forum</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">⬇</div>Downloads</div>
+                <div class="left">
+                    <div class="icon">⬇</div>
+                    Downloads
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Material</a></div>
+
+            <div class="submenu">
+                <a href="#">Material</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">📅</div>Kalender</div>
+                <div class="left">
+                    <div class="icon">📅</div>
+                    Kalender
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Termine</a></div>
+
+            <div class="submenu">
+                <a href="#">Termine</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">🏆</div>Zertifikate</div>
+                <div class="left">
+                    <div class="icon">🏆</div>
+                    Zertifikate
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Meine Zertifikate</a></div>
+
+            <div class="submenu">
+                <a href="#">Meine Zertifikate</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">⚙</div>Einstellungen</div>
+                <div class="left">
+                    <div class="icon">⚙</div>
+                    Einstellungen
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Profil</a></div>
+
+            <div class="submenu">
+                <a href="#">Profil</a>
+            </div>
         </div>
 
         <div class="menu-item">
             <button class="menu-title">
-                <div class="left"><div class="icon">❓</div>Hilfe</div>
+                <div class="left">
+                    <div class="icon">❓</div>
+                    Hilfe
+                </div>
                 <span class="arrow">▶</span>
             </button>
-            <div class="submenu"><a href="#">Support</a></div>
+
+            <div class="submenu">
+                <a href="#">Support</a>
+            </div>
         </div>
 
     </aside>
@@ -297,3 +357,4 @@ header h1{
 
 </body>
 </html>
+```
