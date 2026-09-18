@@ -1,895 +1,729 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>ATOM – Lernen. Bauen. Entwickeln.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="description"
-    content="ATOM – Die moderne Plattform für Online-Kurse, Projekte, Ressourcen und digitale Entwicklung."
->
+    <title>ATOM – Lernen. Bauen. Entwickeln.</title>
 
-<style>
+    <meta
+        name="description"
+        content="ATOM – Online-Kurse, Projekte und Ressourcen für moderne digitale Entwicklung."
+    >
 
-:root {
-    --bg: #000B2E;
-    --blue: #4D9BFF;
-    --blue-light: #91C5FF;
-    --white: #FFFFFF;
-    --muted: #8EA3C7;
+    <meta
+        name="keywords"
+        content="ATOM, Online Kurse, Webentwicklung, Python, JavaScript, KI, Programmieren"
+    >
 
-    --card: rgba(255,255,255,0.045);
-    --border: rgba(255,255,255,0.09);
-}
+    <meta name="robots" content="index, follow">
 
-/* RESET */
+    <link rel="canonical" href="https://atom.at/">
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <style>
 
-html {
-    scroll-behavior: smooth;
-}
+        :root {
+            --bg: #000B2E;
 
-body {
-    background: var(--bg);
-    color: var(--white);
+            --surface: rgba(255, 255, 255, 0.045);
+            --surface-hover: rgba(255, 255, 255, 0.075);
 
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-}
+            --border: rgba(255, 255, 255, 0.08);
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+            --blue: #4D9BFF;
+            --blue-light: #91C5FF;
 
-/* =========================================
-   NAVBAR
-========================================= */
+            --text: #FFFFFF;
+            --muted: #8298BC;
 
-.navbar {
-    position: fixed;
+            --green: #49D17D;
+        }
 
-    top: 0;
-    left: 0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    width: 100%;
-    height: 82px;
+        html {
+            scroll-behavior: smooth;
+        }
 
-    display: flex;
-    align-items: center;
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
 
-    padding: 0 6vw;
+            background: var(--bg);
+            color: var(--text);
 
-    background: rgba(0,11,46,0.82);
+            min-height: 100vh;
+        }
 
-    backdrop-filter: blur(18px);
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+        button {
+            font-family: inherit;
+        }
 
-    z-index: 100;
-}
+        /* =========================================
+           HEADER
+        ========================================= */
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+        header {
+            height: 78px;
+            width: 100%;
 
-.logo-mark {
-    width: 38px;
-    height: 38px;
+            background: var(--bg);
 
-    border: 1px solid rgba(77,155,255,0.6);
+            border-bottom: 1px solid var(--border);
 
-    border-radius: 11px;
+            display: flex;
+            align-items: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            padding: 0 24px;
 
-    color: var(--blue);
+            position: sticky;
+            top: 0;
 
-    font-weight: 700;
-}
+            z-index: 100;
+        }
 
-.logo-text {
-    font-size: 23px;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
 
-    letter-spacing: 7px;
+        .brand-mark {
+            width: 38px;
+            height: 38px;
 
-    font-weight: 600;
-}
+            border: 1px solid rgba(77, 155, 255, 0.5);
 
-.nav-links {
-    margin-left: auto;
+            border-radius: 11px;
 
-    display: flex;
-    align-items: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    gap: 34px;
+            color: var(--blue);
 
-    color: var(--muted);
+            font-size: 17px;
+            font-weight: 700;
 
-    font-size: 14px;
-}
+            box-shadow:
+                0 0 20px rgba(77, 155, 255, 0.08);
+        }
 
-.nav-links a {
-    transition: 0.2s ease;
-}
+        header h1 {
+            font-size: 25px;
+            font-weight: 600;
 
-.nav-links a:hover {
-    color: white;
-}
+            letter-spacing: 9px;
+        }
 
-.nav-button {
-    margin-left: 28px;
+        .header-right {
+            margin-left: auto;
 
-    padding: 11px 19px;
+            display: flex;
+            align-items: center;
 
-    border-radius: 9px;
+            gap: 22px;
+        }
 
-    background: var(--blue);
+        .status {
+            display: flex;
+            align-items: center;
 
-    color: #00102f;
+            gap: 8px;
 
-    font-size: 13px;
+            color: var(--muted);
 
-    font-weight: 600;
+            font-size: 13px;
+        }
 
-    transition: 0.2s ease;
-}
+        .status-dot {
+            width: 7px;
+            height: 7px;
 
-.nav-button:hover {
-    transform: translateY(-2px);
+            border-radius: 50%;
 
-    box-shadow:
-        0 10px 30px rgba(77,155,255,0.2);
-}
+            background: var(--green);
 
-/* =========================================
-   HERO
-========================================= */
+            box-shadow:
+                0 0 10px rgba(73, 209, 125, 0.5);
+        }
 
-.hero {
-    min-height: 900px;
+        .profile {
+            width: 38px;
+            height: 38px;
 
-    display: flex;
-    align-items: center;
+            border-radius: 50%;
 
-    padding:
-        150px 7vw
-        100px;
+            background: var(--surface);
 
-    position: relative;
+            border: 1px solid var(--border);
 
-    overflow: hidden;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-.hero-content {
-    max-width: 850px;
+            color: var(--muted);
 
-    position: relative;
+            font-size: 14px;
 
-    z-index: 2;
-}
+            cursor: pointer;
 
-.hero-label {
-    display: inline-flex;
+            transition: 0.2s ease;
+        }
 
-    align-items: center;
+        .profile:hover {
+            background: var(--surface-hover);
+            color: white;
+        }
 
-    padding: 8px 14px;
+        /* =========================================
+           MAIN LAYOUT
+        ========================================= */
 
-    border-radius: 50px;
+        .container {
+            display: flex;
 
-    border: 1px solid rgba(77,155,255,0.25);
+            min-height: calc(100vh - 78px);
 
-    background: rgba(77,155,255,0.07);
+            background: var(--bg);
+        }
 
-    color: var(--blue-light);
+        /* =========================================
+           SIDEBAR
+        ========================================= */
 
-    font-size: 12px;
+        .sidebar {
+            width: 250px;
 
-    letter-spacing: 1px;
+            flex-shrink: 0;
 
-    text-transform: uppercase;
+            background: var(--bg);
 
-    margin-bottom: 28px;
-}
+            border-right: 1px solid var(--border);
 
-.hero h1 {
-    font-size: clamp(55px, 8vw, 105px);
+            padding: 22px 14px;
 
-    line-height: 0.98;
+            position: sticky;
+            top: 78px;
 
-    letter-spacing: -5px;
+            height: calc(100vh - 78px);
 
-    font-weight: 650;
+            overflow-y: auto;
+        }
 
-    max-width: 950px;
-}
+        .sidebar-label {
+            color: #58709A;
 
-.hero h1 span {
-    color: var(--blue);
-}
+            font-size: 10px;
 
-.hero-description {
-    max-width: 620px;
+            font-weight: 600;
 
-    margin-top: 30px;
+            letter-spacing: 1.5px;
 
-    color: var(--muted);
+            text-transform: uppercase;
 
-    font-size: 18px;
+            padding: 0 12px;
 
-    line-height: 1.7;
-}
+            margin: 4px 0 10px;
+        }
 
-.hero-buttons {
-    display: flex;
+        .menu {
+            list-style: none;
+        }
 
-    gap: 13px;
+        .menu-item {
+            margin-bottom: 4px;
+        }
 
-    margin-top: 38px;
-}
+        .menu-title {
+            min-height: 44px;
 
-.primary-button {
-    padding: 14px 22px;
+            display: flex;
+            align-items: center;
 
-    border-radius: 10px;
+            gap: 12px;
 
-    background: var(--blue);
+            padding: 0 12px;
 
-    color: #00102f;
+            color: var(--muted);
 
-    font-size: 14px;
+            border-radius: 10px;
 
-    font-weight: 600;
+            cursor: pointer;
 
-    transition: 0.2s ease;
-}
+            transition: 0.2s ease;
 
-.primary-button:hover {
-    transform: translateY(-3px);
+            font-size: 14px;
+        }
 
-    box-shadow:
-        0 15px 35px rgba(77,155,255,0.2);
-}
+        .menu-title:hover {
+            background: var(--surface-hover);
+            color: var(--text);
+        }
 
-.secondary-button {
-    padding: 14px 22px;
+        .menu-item.active > .menu-title {
+            background: rgba(77, 155, 255, 0.10);
 
-    border-radius: 10px;
+            color: var(--text);
 
-    border: 1px solid var(--border);
+            box-shadow:
+                inset 2px 0 0 var(--blue);
+        }
 
-    background: rgba(255,255,255,0.035);
+        .icon {
+            width: 27px;
+            height: 27px;
 
-    color: white;
+            flex-shrink: 0;
 
-    font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    transition: 0.2s ease;
-}
+            color: var(--muted);
 
-.secondary-button:hover {
-    background: rgba(255,255,255,0.07);
-}
+            font-size: 16px;
+        }
 
-/* HERO DECORATION */
+        .menu-item.active .icon {
+            color: var(--blue);
+        }
 
-.hero-orb {
-    position: absolute;
+        .arrow {
+            margin-left: auto;
 
-    width: 600px;
-    height: 600px;
+            font-size: 12px;
 
-    right: -150px;
-    top: 100px;
+            opacity: 0.5;
 
-    border-radius: 50%;
+            transition: 0.2s ease;
+        }
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(77,155,255,0.18) 0%,
-            rgba(77,155,255,0.05) 35%,
-            transparent 70%
-        );
+        .menu-item:hover .arrow {
+            transform: rotate(90deg);
+        }
 
-    pointer-events: none;
-}
+        /* =========================================
+           SUBMENU
+        ========================================= */
 
-.hero-grid {
-    position: absolute;
+        .submenu {
+            max-height: 0;
 
-    right: 7vw;
-    bottom: 90px;
+            overflow: hidden;
 
-    width: 330px;
-    height: 330px;
+            list-style: none;
 
-    opacity: 0.15;
+            padding-left: 39px;
 
-    background-image:
-        linear-gradient(
-            rgba(77,155,255,0.4) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(77,155,255,0.4) 1px,
-            transparent 1px
-        );
+            transition:
+                max-height 0.25s ease;
+        }
 
-    background-size: 32px 32px;
+        .menu-item:hover .submenu {
+            max-height: 220px;
+        }
 
-    mask-image:
-        radial-gradient(
-            circle,
-            black,
-            transparent 70%
-        );
-}
+        .submenu li {
+            padding: 8px 10px;
 
-/* =========================================
-   SECTION
-========================================= */
+            color: var(--muted);
 
-.section {
-    padding: 130px 7vw;
-}
+            font-size: 13px;
 
-.section-inner {
-    max-width: 1250px;
+            border-radius: 7px;
 
-    margin: auto;
-}
+            cursor: pointer;
 
-.section-label {
-    color: var(--blue);
+            transition: 0.2s ease;
+        }
 
-    font-size: 11px;
+        .submenu li:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
 
-    font-weight: 600;
+        .divider {
+            height: 1px;
 
-    letter-spacing: 2px;
+            background: var(--border);
 
-    text-transform: uppercase;
-}
+            margin: 18px 10px;
+        }
 
-.section-title {
-    font-size: clamp(36px, 5vw, 60px);
+        /* =========================================
+           CONTENT
+        ========================================= */
 
-    letter-spacing: -2px;
+        .content {
+            flex: 1;
 
-    margin-top: 12px;
+            min-width: 0;
 
-    max-width: 700px;
-}
+            background: var(--bg);
 
-.section-description {
-    margin-top: 18px;
+            padding: 70px 7vw 100px;
+        }
 
-    color: var(--muted);
+        /* =========================================
+           HERO
+        ========================================= */
 
-    max-width: 600px;
+        .hero {
+            max-width: 950px;
 
-    line-height: 1.7;
-}
+            margin: 0 auto;
 
-/* =========================================
-   COURSE CARDS
-========================================= */
+            text-align: center;
 
-.course-grid {
-    margin-top: 55px;
+            padding: 70px 20px 100px;
+        }
 
-    display: grid;
+        .hero-label {
+            display: inline-block;
 
-    grid-template-columns:
-        repeat(3, 1fr);
+            padding: 7px 13px;
 
-    gap: 18px;
-}
+            border: 1px solid rgba(77, 155, 255, 0.2);
 
-.course-card {
-    min-height: 300px;
+            border-radius: 999px;
 
-    padding: 30px;
+            background: rgba(77, 155, 255, 0.06);
 
-    border-radius: 20px;
+            color: var(--blue-light);
 
-    background: var(--card);
+            font-size: 12px;
 
-    border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
 
-    transition:
-        transform 0.25s ease,
-        border 0.25s ease,
-        background 0.25s ease;
+        .hero h2 {
+            font-size: clamp(42px, 6vw, 76px);
 
-    display: flex;
+            line-height: 1.05;
 
-    flex-direction: column;
+            letter-spacing: -3px;
 
-    justify-content: space-between;
-}
+            font-weight: 650;
 
-.course-card:hover {
-    transform: translateY(-7px);
+            margin-bottom: 24px;
+        }
 
-    border-color:
-        rgba(77,155,255,0.3);
+        .hero h2 span {
+            color: var(--blue);
+        }
 
-    background:
-        rgba(77,155,255,0.055);
-}
+        .hero p {
+            max-width: 650px;
 
-.course-icon {
-    width: 52px;
-    height: 52px;
+            margin: 0 auto;
 
-    border-radius: 14px;
+            color: var(--muted);
 
-    background:
-        rgba(77,155,255,0.1);
+            font-size: 17px;
 
-    border: 1px solid
-        rgba(77,155,255,0.15);
+            line-height: 1.7;
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .hero-buttons {
+            display: flex;
 
-    color: var(--blue);
+            justify-content: center;
 
-    font-size: 17px;
+            gap: 12px;
 
-    font-weight: 600;
-}
+            margin-top: 35px;
+        }
 
-.course-card h3 {
-    font-size: 23px;
+        .button {
+            padding: 12px 20px;
 
-    margin-top: 40px;
-}
+            border-radius: 10px;
 
-.course-card p {
-    color: var(--muted);
+            font-size: 14px;
 
-    font-size: 14px;
+            font-weight: 500;
 
-    line-height: 1.6;
+            transition: 0.2s ease;
 
-    margin-top: 12px;
-}
+            cursor: pointer;
+        }
 
-.course-link {
-    margin-top: 30px;
+        .button-primary {
+            background: var(--blue);
 
-    color: var(--blue);
+            color: #00102f;
 
-    font-size: 13px;
-}
+            border: 1px solid var(--blue);
+        }
 
-/* =========================================
-   FEATURE
-========================================= */
+        .button-primary:hover {
+            transform: translateY(-2px);
 
-.feature {
-    display: grid;
+            box-shadow:
+                0 10px 30px rgba(77, 155, 255, 0.18);
+        }
 
-    grid-template-columns:
-        1fr 1fr;
+        .button-secondary {
+            background: var(--surface);
 
-    gap: 80px;
+            border: 1px solid var(--border);
 
-    align-items: center;
-}
+            color: var(--text);
+        }
 
-.feature-visual {
-    min-height: 480px;
+        .button-secondary:hover {
+            background: var(--surface-hover);
+        }
 
-    border-radius: 24px;
+        /* =========================================
+           PUBLIC SECTIONS
+        ========================================= */
 
-    border: 1px solid var(--border);
+        .section {
+            max-width: 1100px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(77,155,255,0.10),
-            rgba(255,255,255,0.025)
-        );
+            margin: 0 auto;
 
-    position: relative;
+            padding: 70px 0;
+        }
 
-    overflow: hidden;
-}
+        .section-heading {
+            margin-bottom: 35px;
+        }
 
-.visual-circle {
-    position: absolute;
+        .section-heading span {
+            color: var(--blue);
 
-    width: 280px;
-    height: 280px;
+            font-size: 12px;
 
-    border-radius: 50%;
+            font-weight: 600;
 
-    border: 1px solid
-        rgba(77,155,255,0.25);
+            text-transform: uppercase;
 
-    top: 50%;
-    left: 50%;
+            letter-spacing: 1.5px;
+        }
 
-    transform:
-        translate(-50%, -50%);
-}
+        .section-heading h2 {
+            font-size: 34px;
 
-.visual-circle::before {
-    content: "";
+            margin-top: 8px;
 
-    position: absolute;
+            letter-spacing: -1px;
+        }
 
-    width: 160px;
-    height: 160px;
+        .section-heading p {
+            color: var(--muted);
 
-    border-radius: 50%;
+            margin-top: 10px;
 
-    border: 1px solid
-        rgba(77,155,255,0.35);
+            max-width: 600px;
 
-    top: 50%;
-    left: 50%;
+            line-height: 1.6;
+        }
 
-    transform:
-        translate(-50%, -50%);
-}
+        /* =========================================
+           COURSE CARDS
+        ========================================= */
 
-.visual-core {
-    position: absolute;
+        .cards {
+            display: grid;
 
-    width: 70px;
-    height: 70px;
+            grid-template-columns:
+                repeat(3, 1fr);
 
-    border-radius: 20px;
+            gap: 16px;
+        }
 
-    background: var(--blue);
+        .card {
+            background: var(--surface);
 
-    color: #00102f;
+            border: 1px solid var(--border);
 
-    font-weight: 700;
+            border-radius: 16px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            padding: 25px;
 
-    top: 50%;
-    left: 50%;
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border 0.2s ease;
+        }
 
-    transform:
-        translate(-50%, -50%);
+        .card:hover {
+            transform: translateY(-4px);
 
-    box-shadow:
-        0 0 50px
-        rgba(77,155,255,0.35);
-}
+            background: var(--surface-hover);
 
-.feature-content h2 {
-    font-size: clamp(36px, 5vw, 58px);
+            border-color:
+                rgba(77, 155, 255, 0.22);
+        }
 
-    line-height: 1.05;
+        .card-icon {
+            width: 42px;
+            height: 42px;
 
-    letter-spacing: -2px;
-}
+            border-radius: 11px;
 
-.feature-content h2 span {
-    color: var(--blue);
-}
+            background:
+                rgba(77, 155, 255, 0.10);
 
-.feature-content p {
-    margin-top: 22px;
+            color: var(--blue);
 
-    color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    line-height: 1.8;
+            margin-bottom: 20px;
+        }
 
-    font-size: 16px;
-}
+        .card h3 {
+            font-size: 17px;
 
-.feature-list {
-    list-style: none;
+            margin-bottom: 9px;
+        }
 
-    margin-top: 30px;
-}
+        .card p {
+            color: var(--muted);
 
-.feature-list li {
-    padding: 13px 0;
+            font-size: 13px;
 
-    border-bottom: 1px solid var(--border);
+            line-height: 1.6;
+        }
 
-    color: #C6D4EB;
+        .card-link {
+            display: inline-block;
 
-    font-size: 14px;
-}
+            margin-top: 20px;
 
-.feature-list li::before {
-    content: "→";
+            color: var(--blue);
 
-    color: var(--blue);
+            font-size: 13px;
+        }
 
-    margin-right: 12px;
-}
+        /* =========================================
+           FOOTER
+        ========================================= */
 
-/* =========================================
-   PROJECTS
-========================================= */
+        footer {
+            max-width: 1100px;
 
-.project-grid {
-    margin-top: 55px;
+            margin: 60px auto 0;
 
-    display: grid;
+            padding-top: 30px;
 
-    grid-template-columns:
-        1.5fr 1fr;
+            border-top: 1px solid var(--border);
 
-    gap: 18px;
-}
+            color: var(--muted);
 
-.project {
-    min-height: 380px;
+            font-size: 12px;
+        }
 
-    padding: 32px;
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
 
-    border-radius: 22px;
+        @media (max-width: 1000px) {
 
-    border: 1px solid var(--border);
+            .cards {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.055),
-            rgba(255,255,255,0.02)
-        );
+        }
 
-    position: relative;
+        @media (max-width: 800px) {
 
-    overflow: hidden;
-}
+            .sidebar {
+                width: 210px;
+            }
 
-.project-large {
-    min-height: 480px;
-}
+            .content {
+                padding-left: 35px;
+                padding-right: 35px;
+            }
 
-.project::after {
-    content: "";
+        }
 
-    position: absolute;
+        @media (max-width: 650px) {
 
-    width: 300px;
-    height: 300px;
+            header {
+                padding: 0 16px;
+            }
 
-    right: -120px;
-    bottom: -130px;
+            header h1 {
+                font-size: 21px;
+                letter-spacing: 6px;
+            }
 
-    border-radius: 50%;
+            .status {
+                display: none;
+            }
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(77,155,255,0.18),
-            transparent 70%
-        );
-}
+            .sidebar {
+                width: 70px;
 
-.project-tag {
-    color: var(--blue);
+                padding: 18px 8px;
+            }
 
-    font-size: 11px;
+            .sidebar-label,
+            .menu-title span,
+            .arrow,
+            .submenu {
+                display: none;
+            }
 
-    letter-spacing: 1.5px;
+            .menu-title {
+                justify-content: center;
 
-    text-transform: uppercase;
-}
+                padding: 0;
+            }
 
-.project h3 {
-    font-size: 28px;
+            .icon {
+                width: 32px;
+                height: 32px;
+            }
 
-    margin-top: 20px;
+            .content {
+                padding:
+                    30px 18px 70px;
+            }
 
-    position: relative;
+            .hero {
+                padding:
+                    45px 10px 70px;
+            }
 
-    z-index: 2;
-}
+            .hero h2 {
+                letter-spacing: -2px;
+            }
 
-.project p {
-    color: var(--muted);
+            .hero-buttons {
+                flex-direction: column;
+            }
 
-    max-width: 500px;
+            .cards {
+                grid-template-columns: 1fr;
+            }
 
-    line-height: 1.7;
+        }
 
-    margin-top: 12px;
-
-    position: relative;
-
-    z-index: 2;
-}
-
-/* =========================================
-   CTA
-========================================= */
-
-.cta {
-    margin: 100px auto;
-
-    max-width: 1250px;
-
-    padding: 80px 50px;
-
-    border-radius: 26px;
-
-    border: 1px solid
-        rgba(77,155,255,0.18);
-
-    background:
-        linear-gradient(
-            120deg,
-            rgba(77,155,255,0.09),
-            rgba(255,255,255,0.025)
-        );
-
-    text-align: center;
-}
-
-.cta h2 {
-    font-size: clamp(35px, 5vw, 58px);
-
-    letter-spacing: -2px;
-}
-
-.cta p {
-    color: var(--muted);
-
-    margin:
-        18px auto 30px;
-
-    max-width: 550px;
-
-    line-height: 1.7;
-}
-
-/* =========================================
-   FOOTER
-========================================= */
-
-footer {
-    padding: 50px 7vw;
-
-    border-top: 1px solid var(--border);
-
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-.footer-inner {
-    max-width: 1250px;
-
-    margin: auto;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-}
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 900px) {
-
-    .nav-links {
-        display: none;
-    }
-
-    .nav-button {
-        margin-left: auto;
-    }
-
-    .hero {
-        min-height: 760px;
-    }
-
-    .course-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .feature {
-        grid-template-columns: 1fr;
-
-        gap: 40px;
-    }
-
-    .project-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-@media (max-width: 600px) {
-
-    .navbar {
-        padding: 0 20px;
-    }
-
-    .logo-text {
-        font-size: 20px;
-        letter-spacing: 5px;
-    }
-
-    .nav-button {
-        padding: 10px 14px;
-    }
-
-    .hero {
-        padding:
-            130px 22px 80px;
-    }
-
-    .hero h1 {
-        font-size: 55px;
-
-        letter-spacing: -3px;
-    }
-
-    .hero-description {
-        font-size: 16px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-    }
-
-    .section {
-        padding:
-            90px 22px;
-    }
-
-    .feature-visual {
-        min-height: 350px;
-    }
-
-    .cta {
-        margin:
-            50px 22px;
-
-        padding:
-            60px 25px;
-    }
-
-    .footer-inner {
-        flex-direction: column;
-
-        gap: 15px;
-    }
-
-}
-
-</style>
+    </style>
 </head>
 
 
@@ -897,163 +731,496 @@ footer {
 
 
 <!-- =========================================
-     NAVIGATION
+     HEADER
 ========================================= -->
 
-<nav class="navbar">
+<header>
 
-    <a href="/" class="logo">
+    <a href="/" class="brand">
 
-        <div class="logo-mark">
+        <div class="brand-mark">
             A
         </div>
 
-        <div class="logo-text">
-            ATOM
-        </div>
+        <h1>ATOM</h1>
 
     </a>
 
 
-    <div class="nav-links">
+    <div class="header-right">
 
-        <a href="#kurse">
-            Kurse
-        </a>
+        <div class="status">
 
-        <a href="#projekte">
-            Projekte
-        </a>
+            <div class="status-dot"></div>
 
-        <a href="#about">
-            Über ATOM
-        </a>
+            System Online
 
-        <a href="#kontakt">
-            Kontakt
+        </div>
+
+
+        <a href="/login" class="profile">
+            A
         </a>
 
     </div>
 
+</header>
 
-    <a href="/login" class="nav-button">
-        Starten
-    </a>
 
-</nav>
+
+<div class="container">
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar">
+
+
+    <div class="sidebar-label">
+        Workspace
+    </div>
+
+
+    <ul class="menu">
+
+
+        <!-- DASHBOARD -->
+
+        <li class="menu-item active">
+
+            <a href="/dashboard" class="menu-title">
+
+                <div class="icon">
+                    ⌂
+                </div>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- COURSES -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    ▣
+                </div>
+
+                <span>
+                    Online Kurse
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/kurse">
+                        Alle Kurse
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/webentwicklung">
+                        Webentwicklung
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/python">
+                        Python
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/javascript">
+                        JavaScript
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/ki-automatisierung">
+                        KI & Automatisierung
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- PROJECTS -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    ◇
+                </div>
+
+                <span>
+                    Projekte
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/projekte">
+                        Alle Projekte
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/projekte/meine-projekte">
+                        Meine Projekte
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/projekte/neu">
+                        Neues Projekt
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- RESOURCES -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    □
+                </div>
+
+                <span>
+                    Ressourcen
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/ressourcen">
+                        Alle Ressourcen
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/ressourcen/dateien">
+                        Dateien
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/ressourcen/vorlagen">
+                        Vorlagen
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- COMMUNITY -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    ○
+                </div>
+
+                <span>
+                    Community
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/community">
+                        Community
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/community/forum">
+                        Forum
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/community/gruppen">
+                        Gruppen
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- DOWNLOADS -->
+
+        <li class="menu-item">
+
+            <a href="/downloads" class="menu-title">
+
+                <div class="icon">
+                    ↓
+                </div>
+
+                <span>
+                    Downloads
+                </span>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- CALENDAR -->
+
+        <li class="menu-item">
+
+            <a href="/kalender" class="menu-title">
+
+                <div class="icon">
+                    ◷
+                </div>
+
+                <span>
+                    Kalender
+                </span>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- CERTIFICATES -->
+
+        <li class="menu-item">
+
+            <a href="/zertifikate" class="menu-title">
+
+                <div class="icon">
+                    ◇
+                </div>
+
+                <span>
+                    Zertifikate
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+
+    <div class="divider"></div>
+
+
+
+    <div class="sidebar-label">
+        System
+    </div>
+
+
+    <ul class="menu">
+
+
+        <li class="menu-item">
+
+            <a href="/einstellungen" class="menu-title">
+
+                <div class="icon">
+                    ⚙
+                </div>
+
+                <span>
+                    Einstellungen
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li class="menu-item">
+
+            <a href="/hilfe" class="menu-title">
+
+                <div class="icon">
+                    ?
+                </div>
+
+                <span>
+                    Hilfe
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+</aside>
 
 
 
 <!-- =========================================
-     HERO
+     MAIN CONTENT
 ========================================= -->
 
-<section class="hero">
+<main class="content">
 
-    <div class="hero-content">
+
+    <!-- HERO -->
+
+    <section class="hero">
 
         <div class="hero-label">
-            Die digitale Plattform
+            THE DIGITAL WORKSPACE
         </div>
 
 
-        <h1>
-            Lerne.
-            <span>Baue.</span>
-            Entwickle.
-        </h1>
+        <h2>
+            Lernen.
+            <span>Bauen.</span>
+            Entwickeln.
+        </h2>
 
 
-        <p class="hero-description">
-            ATOM verbindet moderne Online-Kurse,
-            praktische Projekte und digitale
-            Ressourcen in einem einzigen Workspace.
+        <p>
+            ATOM ist dein digitaler Workspace für
+            Online-Kurse, Projekte, Ressourcen und
+            moderne Technologie.
         </p>
 
 
         <div class="hero-buttons">
 
             <a
-                href="#kurse"
-                class="primary-button"
+                href="/kurse"
+                class="button button-primary"
             >
                 Kurse entdecken
             </a>
 
+
             <a
-                href="#about"
-                class="secondary-button"
+                href="/ueber-uns"
+                class="button button-secondary"
             >
-                Mehr erfahren
+                Mehr über ATOM
             </a>
 
         </div>
 
-    </div>
-
-
-    <div class="hero-orb"></div>
-
-    <div class="hero-grid"></div>
-
-</section>
+    </section>
 
 
 
-<!-- =========================================
-     COURSES
-========================================= -->
+    <!-- COURSES -->
 
-<section
-    class="section"
-    id="kurse"
->
+    <section
+        class="section"
+        id="kurse"
+    >
 
-    <div class="section-inner">
+        <div class="section-heading">
 
-        <div class="section-label">
-            Lernen
+            <span>
+                Lernen
+            </span>
+
+            <h2>
+                Online Kurse
+            </h2>
+
+            <p>
+                Lerne moderne Technologien mit
+                strukturierten Kursen und praktischen
+                Projekten.
+            </p>
+
         </div>
 
 
-        <h2 class="section-title">
-            Wissen, das du
-            direkt anwenden kannst.
-        </h2>
+
+        <div class="cards">
 
 
-        <p class="section-description">
-            Moderne Technologien lernen,
-            eigene Projekte entwickeln und
-            Schritt für Schritt besser werden.
-        </p>
+            <article class="card">
 
-
-        <div class="course-grid">
-
-
-            <article class="course-card">
-
-                <div>
-
-                    <div class="course-icon">
-                        &lt;/&gt;
-                    </div>
-
-                    <h3>
-                        Webentwicklung
-                    </h3>
-
-                    <p>
-                        HTML, CSS, JavaScript und
-                        moderne Webtechnologien.
-                    </p>
-
+                <div class="card-icon">
+                    &lt;/&gt;
                 </div>
+
+                <h3>
+                    Webentwicklung
+                </h3>
+
+                <p>
+                    HTML, CSS, JavaScript und moderne
+                    Webentwicklung von Grund auf.
+                </p>
 
                 <a
                     href="/kurse/webentwicklung"
-                    class="course-link"
+                    class="card-link"
                 >
                     Kurs ansehen →
                 </a>
@@ -1062,28 +1229,24 @@ footer {
 
 
 
-            <article class="course-card">
+            <article class="card">
 
-                <div>
-
-                    <div class="course-icon">
-                        Py
-                    </div>
-
-                    <h3>
-                        Python
-                    </h3>
-
-                    <p>
-                        Programmieren lernen und
-                        eigene Anwendungen entwickeln.
-                    </p>
-
+                <div class="card-icon">
+                    Py
                 </div>
+
+                <h3>
+                    Python
+                </h3>
+
+                <p>
+                    Programmieren lernen und eigene
+                    Anwendungen mit Python entwickeln.
+                </p>
 
                 <a
                     href="/kurse/python"
-                    class="course-link"
+                    class="card-link"
                 >
                     Kurs ansehen →
                 </a>
@@ -1092,28 +1255,24 @@ footer {
 
 
 
-            <article class="course-card">
+            <article class="card">
 
-                <div>
-
-                    <div class="course-icon">
-                        AI
-                    </div>
-
-                    <h3>
-                        KI & Automatisierung
-                    </h3>
-
-                    <p>
-                        Moderne KI-Technologien
-                        verstehen und einsetzen.
-                    </p>
-
+                <div class="card-icon">
+                    JS
                 </div>
+
+                <h3>
+                    JavaScript
+                </h3>
+
+                <p>
+                    Interaktive Webseiten und moderne
+                    Anwendungen mit JavaScript bauen.
+                </p>
 
                 <a
-                    href="/kurse/ki-automatisierung"
-                    class="course-link"
+                    href="/kurse/javascript"
+                    class="card-link"
                 >
                     Kurs ansehen →
                 </a>
@@ -1123,212 +1282,133 @@ footer {
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
 
-<!-- =========================================
-     ABOUT / ATOM
-========================================= -->
+    <!-- PROJECTS -->
 
-<section
-    class="section"
-    id="about"
->
+    <section
+        class="section"
+        id="projekte"
+    >
 
-    <div class="section-inner feature">
+        <div class="section-heading">
 
-
-        <div class="feature-visual">
-
-            <div class="visual-circle"></div>
-
-            <div class="visual-core">
-                A
-            </div>
-
-        </div>
-
-
-
-        <div class="feature-content">
-
-            <div class="section-label">
-                ATOM
-            </div>
-
+            <span>
+                Bauen
+            </span>
 
             <h2>
-                Mehr als nur
-                <span>Kurse.</span>
+                Projekte
             </h2>
 
-
             <p>
-                ATOM soll ein zentraler Ort für
-                digitales Lernen und Entwickeln sein.
-                Du lernst nicht nur Theorie –
-                du baust Dinge.
+                Theorie wird bei ATOM zu echten
+                Projekten.
             </p>
 
-
-            <ul class="feature-list">
-
-                <li>
-                    Strukturierte Online-Kurse
-                </li>
-
-                <li>
-                    Praktische Projekte
-                </li>
-
-                <li>
-                    Digitale Ressourcen
-                </li>
-
-                <li>
-                    Community & Austausch
-                </li>
-
-            </ul>
-
         </div>
 
 
-    </div>
+        <div class="cards">
 
-</section>
+            <article class="card">
 
-
-
-<!-- =========================================
-     PROJECTS
-========================================= -->
-
-<section
-    class="section"
-    id="projekte"
->
-
-    <div class="section-inner">
-
-        <div class="section-label">
-            Bauen
-        </div>
-
-
-        <h2 class="section-title">
-            Ideen werden zu
-            echten Projekten.
-        </h2>
-
-
-        <p class="section-description">
-            Lerne durch praktische Anwendung
-            und entwickle deine eigenen digitalen
-            Projekte.
-        </p>
-
-
-        <div class="project-grid">
-
-
-            <article class="project project-large">
-
-                <div class="project-tag">
-                    Projekte
+                <div class="card-icon">
+                    +
                 </div>
 
                 <h3>
-                    Dein nächstes Projekt.
+                    Eigenes Projekt starten
                 </h3>
 
                 <p>
-                    Von der ersten Idee bis zur
-                    fertigen Anwendung.
+                    Starte ein neues Projekt und setze
+                    deine Ideen praktisch um.
                 </p>
+
+                <a
+                    href="/projekte/neu"
+                    class="card-link"
+                >
+                    Projekt starten →
+                </a>
 
             </article>
 
 
+            <article class="card">
 
-            <article class="project">
-
-                <div class="project-tag">
-                    Community
+                <div class="card-icon">
+                    ◇
                 </div>
 
                 <h3>
-                    Gemeinsam entwickeln.
+                    Projekte entdecken
                 </h3>
 
                 <p>
-                    Entdecke Projekte und tausche
-                    dich mit anderen Entwicklern aus.
+                    Entdecke Projekte aus der ATOM
+                    Community.
                 </p>
+
+                <a
+                    href="/projekte"
+                    class="card-link"
+                >
+                    Projekte ansehen →
+                </a>
 
             </article>
 
-
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
 
-<!-- =========================================
-     CTA
-========================================= -->
+    <!-- ABOUT -->
 
-<section
-    class="cta"
-    id="kontakt"
->
-
-    <h2>
-        Bereit für ATOM?
-    </h2>
-
-    <p>
-        Starte deine nächste Lern- oder
-        Projektphase mit einer modernen
-        digitalen Umgebung.
-    </p>
-
-    <a
-        href="/login"
-        class="primary-button"
+    <section
+        class="section"
+        id="ueber-uns"
     >
-        ATOM starten
-    </a>
 
-</section>
+        <div class="section-heading">
 
+            <span>
+                ATOM
+            </span>
 
+            <h2>
+                Ein Workspace für digitale Entwicklung.
+            </h2>
 
-<!-- =========================================
-     FOOTER
-========================================= -->
+            <p>
+                ATOM verbindet Lernen, Projekte,
+                Ressourcen und Community in einer
+                modernen digitalen Umgebung.
+            </p>
 
-<footer>
-
-    <div class="footer-inner">
-
-        <div>
-            © 2026 ATOM
         </div>
 
-        <div>
-            Lernen · Bauen · Entwickeln
-        </div>
+    </section>
 
-    </div>
 
-</footer>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 ATOM · Alle Rechte vorbehalten.
+
+    </footer>
+
+
+</main>
+
+</div>
 
 
 </body>
