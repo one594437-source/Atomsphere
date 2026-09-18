@@ -1,477 +1,1415 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATOM</title>
+    <meta charset="UTF-8">
 
-<style>
-    :root {
-        --bg: #000B2E;
-        --surface: rgba(255, 255, 255, 0.045);
-        --surface-hover: rgba(255, 255, 255, 0.075);
-        --border: rgba(255, 255, 255, 0.08);
-        --blue: #4D9BFF;
-        --text: #FFFFFF;
-        --muted: #8298BC;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    <title>ATOM – Lernen. Bauen. Entwickeln.</title>
 
-    body {
-        font-family: Inter, Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-    }
+    <meta
+        name="description"
+        content="ATOM – Online-Kurse, Projekte und Ressourcen für moderne digitale Entwicklung."
+    >
 
-    /* HEADER */
-    header {
-        height: 78px;
-        width: 100%;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
+    <meta
+        name="keywords"
+        content="ATOM, Online Kurse, Webentwicklung, Python, JavaScript, KI, Programmieren"
+    >
 
-        display: flex;
-        align-items: center;
-        padding: 0 24px;
+    <meta name="robots" content="index, follow">
 
-        position: relative;
-        z-index: 10;
-    }
+    <link rel="canonical" href="https://atom.at/">
 
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: 13px;
-    }
+    <style>
 
-    .brand-mark {
-        width: 38px;
-        height: 38px;
+        :root {
+            --bg: #000B2E;
 
-        border: 1px solid rgba(77, 155, 255, 0.5);
-        border-radius: 11px;
+            --surface: rgba(255, 255, 255, 0.045);
+            --surface-hover: rgba(255, 255, 255, 0.075);
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+            --border: rgba(255, 255, 255, 0.08);
 
-        color: var(--blue);
-        font-size: 17px;
-        font-weight: 700;
+            --blue: #4D9BFF;
+            --blue-light: #91C5FF;
 
-        box-shadow: 0 0 20px rgba(77, 155, 255, 0.08);
-    }
+            --text: #FFFFFF;
+            --muted: #8298BC;
 
-    header h1 {
-        font-size: 25px;
-        font-weight: 600;
-        letter-spacing: 9px;
-    }
-
-    .header-right {
-        margin-left: auto;
-
-        display: flex;
-        align-items: center;
-        gap: 22px;
-    }
-
-    .status {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-
-        color: var(--muted);
-        font-size: 13px;
-    }
-
-    .status-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #49D17D;
-        box-shadow: 0 0 10px rgba(73, 209, 125, 0.5);
-    }
-
-    .profile {
-        width: 38px;
-        height: 38px;
-
-        border-radius: 50%;
-        background: var(--surface);
-
-        border: 1px solid var(--border);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        color: var(--muted);
-        font-size: 14px;
-    }
-
-    /* LAYOUT */
-    .container {
-        display: flex;
-        min-height: calc(100vh - 78px);
-        background: var(--bg);
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-        width: 250px;
-        flex-shrink: 0;
-
-        background: var(--bg);
-        border-right: 1px solid var(--border);
-
-        padding: 22px 14px;
-    }
-
-    .sidebar-label {
-        color: #58709A;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-
-        padding: 0 12px;
-        margin: 4px 0 10px;
-    }
-
-    .menu {
-        list-style: none;
-    }
-
-    .menu-item {
-        margin-bottom: 4px;
-    }
-
-    .menu-title {
-        height: 44px;
-
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        padding: 0 12px;
-
-        color: var(--muted);
-        border-radius: 10px;
-
-        cursor: pointer;
-        transition: 0.2s ease;
-
-        font-size: 14px;
-    }
-
-    .menu-title:hover {
-        background: var(--surface-hover);
-        color: var(--text);
-    }
-
-    .menu-item.active .menu-title {
-        background: rgba(77, 155, 255, 0.10);
-        color: var(--text);
-
-        box-shadow: inset 2px 0 0 var(--blue);
-    }
-
-    .icon {
-        width: 27px;
-        height: 27px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        color: var(--muted);
-        font-size: 16px;
-    }
-
-    .menu-item.active .icon {
-        color: var(--blue);
-    }
-
-    .arrow {
-        margin-left: auto;
-        font-size: 12px;
-        opacity: 0.5;
-        transition: 0.2s ease;
-    }
-
-    .menu-item:hover .arrow {
-        transform: rotate(90deg);
-    }
-
-    /* SUBMENU */
-    .submenu {
-        max-height: 0;
-        overflow: hidden;
-
-        list-style: none;
-
-        padding-left: 39px;
-
-        transition: max-height 0.25s ease;
-    }
-
-    .menu-item:hover .submenu {
-        max-height: 180px;
-    }
-
-    .submenu li {
-        padding: 8px 10px;
-
-        color: var(--muted);
-        font-size: 13px;
-
-        border-radius: 7px;
-
-        cursor: pointer;
-        transition: 0.2s ease;
-    }
-
-    .submenu li:hover {
-        background: var(--surface);
-        color: var(--text);
-    }
-
-    .divider {
-        height: 1px;
-        background: var(--border);
-        margin: 18px 10px;
-    }
-
-    /* MAIN AREA */
-    .content {
-        flex: 1;
-        min-width: 0;
-
-        background: var(--bg);
-
-        /* Intentionally empty */
-    }
-
-    /* MOBILE */
-    @media (max-width: 900px) {
-        .sidebar {
-            width: 210px;
+            --green: #49D17D;
         }
 
-        .status {
-            display: none;
-        }
-    }
-
-    @media (max-width: 650px) {
-        .sidebar {
-            width: 70px;
-            padding: 18px 8px;
-        }
-
-        .sidebar-label,
-        .menu-title span,
-        .arrow,
-        .submenu {
-            display: none;
-        }
-
-        .menu-title {
-            justify-content: center;
+        * {
+            margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        .icon {
-            width: 32px;
-            height: 32px;
+        html {
+            scroll-behavior: smooth;
         }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: var(--bg);
+            color: var(--text);
+
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
 
         header {
-            padding: 0 16px;
+            height: 78px;
+            width: 100%;
+
+            background: var(--bg);
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 24px;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid rgba(77, 155, 255, 0.5);
+
+            border-radius: 11px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--blue);
+
+            font-size: 17px;
+            font-weight: 700;
+
+            box-shadow:
+                0 0 20px rgba(77, 155, 255, 0.08);
         }
 
         header h1 {
-            font-size: 21px;
-            letter-spacing: 6px;
+            font-size: 25px;
+            font-weight: 600;
+
+            letter-spacing: 9px;
         }
-    }
-</style>
+
+        .header-right {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+
+            gap: 22px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 10px rgba(73, 209, 125, 0.5);
+        }
+
+        .profile {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .profile:hover {
+            background: var(--surface-hover);
+            color: white;
+        }
+
+        /* =========================================
+           MAIN LAYOUT
+        ========================================= */
+
+        .container {
+            display: flex;
+
+            min-height: calc(100vh - 78px);
+
+            background: var(--bg);
+        }
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+            width: 250px;
+
+            flex-shrink: 0;
+
+            background: var(--bg);
+
+            border-right: 1px solid var(--border);
+
+            padding: 22px 14px;
+
+            position: sticky;
+            top: 78px;
+
+            height: calc(100vh - 78px);
+
+            overflow-y: auto;
+        }
+
+        .sidebar-label {
+            color: #58709A;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            padding: 0 12px;
+
+            margin: 4px 0 10px;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu-item {
+            margin-bottom: 4px;
+        }
+
+        .menu-title {
+            min-height: 44px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 0 12px;
+
+            color: var(--muted);
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+
+            font-size: 14px;
+        }
+
+        .menu-title:hover {
+            background: var(--surface-hover);
+            color: var(--text);
+        }
+
+        .menu-item.active > .menu-title {
+            background: rgba(77, 155, 255, 0.10);
+
+            color: var(--text);
+
+            box-shadow:
+                inset 2px 0 0 var(--blue);
+        }
+
+        .icon {
+            width: 27px;
+            height: 27px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--muted);
+
+            font-size: 16px;
+        }
+
+        .menu-item.active .icon {
+            color: var(--blue);
+        }
+
+        .arrow {
+            margin-left: auto;
+
+            font-size: 12px;
+
+            opacity: 0.5;
+
+            transition: 0.2s ease;
+        }
+
+        .menu-item:hover .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* =========================================
+           SUBMENU
+        ========================================= */
+
+        .submenu {
+            max-height: 0;
+
+            overflow: hidden;
+
+            list-style: none;
+
+            padding-left: 39px;
+
+            transition:
+                max-height 0.25s ease;
+        }
+
+        .menu-item:hover .submenu {
+            max-height: 220px;
+        }
+
+        .submenu li {
+            padding: 8px 10px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .submenu li:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .divider {
+            height: 1px;
+
+            background: var(--border);
+
+            margin: 18px 10px;
+        }
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .content {
+            flex: 1;
+
+            min-width: 0;
+
+            background: var(--bg);
+
+            padding: 70px 7vw 100px;
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            max-width: 950px;
+
+            margin: 0 auto;
+
+            text-align: center;
+
+            padding: 70px 20px 100px;
+        }
+
+        .hero-label {
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border: 1px solid rgba(77, 155, 255, 0.2);
+
+            border-radius: 999px;
+
+            background: rgba(77, 155, 255, 0.06);
+
+            color: var(--blue-light);
+
+            font-size: 12px;
+
+            margin-bottom: 24px;
+        }
+
+        .hero h2 {
+            font-size: clamp(42px, 6vw, 76px);
+
+            line-height: 1.05;
+
+            letter-spacing: -3px;
+
+            font-weight: 650;
+
+            margin-bottom: 24px;
+        }
+
+        .hero h2 span {
+            color: var(--blue);
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            color: var(--muted);
+
+            font-size: 17px;
+
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-top: 35px;
+        }
+
+        .button {
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            transition: 0.2s ease;
+
+            cursor: pointer;
+        }
+
+        .button-primary {
+            background: var(--blue);
+
+            color: #00102f;
+
+            border: 1px solid var(--blue);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(77, 155, 255, 0.18);
+        }
+
+        .button-secondary {
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            color: var(--text);
+        }
+
+        .button-secondary:hover {
+            background: var(--surface-hover);
+        }
+
+        /* =========================================
+           PUBLIC SECTIONS
+        ========================================= */
+
+        .section {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 70px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+        .section-heading span {
+            color: var(--blue);
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading h2 {
+            font-size: 34px;
+
+            margin-top: 8px;
+
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+
+            margin-top: 10px;
+
+            max-width: 600px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           COURSE CARDS
+        ========================================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            background: var(--surface-hover);
+
+            border-color:
+                rgba(77, 155, 255, 0.22);
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(77, 155, 255, 0.10);
+
+            color: var(--blue);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+
+            margin-bottom: 9px;
+        }
+
+        .card p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .card-link {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: var(--blue);
+
+            font-size: 13px;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            max-width: 1100px;
+
+            margin: 60px auto 0;
+
+            padding-top: 30px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1000px) {
+
+            .cards {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .content {
+                padding-left: 35px;
+                padding-right: 35px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 0 16px;
+            }
+
+            header h1 {
+                font-size: 21px;
+                letter-spacing: 6px;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .sidebar {
+                width: 70px;
+
+                padding: 18px 8px;
+            }
+
+            .sidebar-label,
+            .menu-title span,
+            .arrow,
+            .submenu {
+                display: none;
+            }
+
+            .menu-title {
+                justify-content: center;
+
+                padding: 0;
+            }
+
+            .icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .content {
+                padding:
+                    30px 18px 70px;
+            }
+
+            .hero {
+                padding:
+                    45px 10px 70px;
+            }
+
+            .hero h2 {
+                letter-spacing: -2px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 </head>
+
 
 <body>
 
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <header>
 
-    <div class="brand">
-        <div class="brand-mark">A</div>
+    <a href="/" class="brand">
+
+        <div class="brand-mark">
+            A
+        </div>
+
         <h1>ATOM</h1>
-    </div>
+
+    </a>
+
 
     <div class="header-right">
 
         <div class="status">
+
             <div class="status-dot"></div>
+
             System Online
+
         </div>
 
-        <div class="profile">
+
+        <a href="/login" class="profile">
             A
-        </div>
+        </a>
 
     </div>
 
 </header>
 
 
+
 <div class="container">
 
-    <aside class="sidebar">
 
-        <div class="sidebar-label">
-            Workspace
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar">
+
+
+    <div class="sidebar-label">
+        Workspace
+    </div>
+
+
+    <ul class="menu">
+
+
+        <!-- DASHBOARD -->
+
+        <li class="menu-item active">
+
+            <a href="/dashboard" class="menu-title">
+
+                <div class="icon">
+                    ⌂
+                </div>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- COURSES -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    ▣
+                </div>
+
+                <span>
+                    Online Kurse
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/kurse">
+                        Alle Kurse
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/webentwicklung">
+                        Webentwicklung
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/python">
+                        Python
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/javascript">
+                        JavaScript
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/kurse/ki-automatisierung">
+                        KI & Automatisierung
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- PROJECTS -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    ◇
+                </div>
+
+                <span>
+                    Projekte
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/projekte">
+                        Alle Projekte
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/projekte/meine-projekte">
+                        Meine Projekte
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/projekte/neu">
+                        Neues Projekt
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- RESOURCES -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    □
+                </div>
+
+                <span>
+                    Ressourcen
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/ressourcen">
+                        Alle Ressourcen
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/ressourcen/dateien">
+                        Dateien
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/ressourcen/vorlagen">
+                        Vorlagen
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- COMMUNITY -->
+
+        <li class="menu-item">
+
+            <div class="menu-title">
+
+                <div class="icon">
+                    ○
+                </div>
+
+                <span>
+                    Community
+                </span>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </div>
+
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="/community">
+                        Community
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/community/forum">
+                        Forum
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/community/gruppen">
+                        Gruppen
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+
+
+        <!-- DOWNLOADS -->
+
+        <li class="menu-item">
+
+            <a href="/downloads" class="menu-title">
+
+                <div class="icon">
+                    ↓
+                </div>
+
+                <span>
+                    Downloads
+                </span>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- CALENDAR -->
+
+        <li class="menu-item">
+
+            <a href="/kalender" class="menu-title">
+
+                <div class="icon">
+                    ◷
+                </div>
+
+                <span>
+                    Kalender
+                </span>
+
+            </a>
+
+        </li>
+
+
+
+        <!-- CERTIFICATES -->
+
+        <li class="menu-item">
+
+            <a href="/zertifikate" class="menu-title">
+
+                <div class="icon">
+                    ◇
+                </div>
+
+                <span>
+                    Zertifikate
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+
+    <div class="divider"></div>
+
+
+
+    <div class="sidebar-label">
+        System
+    </div>
+
+
+    <ul class="menu">
+
+
+        <li class="menu-item">
+
+            <a href="/einstellungen" class="menu-title">
+
+                <div class="icon">
+                    ⚙
+                </div>
+
+                <span>
+                    Einstellungen
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li class="menu-item">
+
+            <a href="/hilfe" class="menu-title">
+
+                <div class="icon">
+                    ?
+                </div>
+
+                <span>
+                    Hilfe
+                </span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+
+</aside>
+
+
+
+<!-- =========================================
+     MAIN CONTENT
+========================================= -->
+
+<main class="content">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-label">
+            THE DIGITAL WORKSPACE
         </div>
 
-        <ul class="menu">
 
-            <li class="menu-item active">
-                <div class="menu-title">
-                    <div class="icon">⌂</div>
-                    <span>Dashboard</span>
-                </div>
-            </li>
+        <h2>
+            Lernen.
+            <span>Bauen.</span>
+            Entwickeln.
+        </h2>
 
 
-            <li class="menu-item">
-
-                <div class="menu-title">
-                    <div class="icon">▣</div>
-                    <span>Online Kurse</span>
-                    <div class="arrow">›</div>
-                </div>
-
-                <ul class="submenu">
-                    <li>Webentwicklung</li>
-                    <li>Python</li>
-                    <li>JavaScript</li>
-                    <li>KI & Automatisierung</li>
-                </ul>
-
-            </li>
+        <p>
+            ATOM ist dein digitaler Workspace für
+            Online-Kurse, Projekte, Ressourcen und
+            moderne Technologie.
+        </p>
 
 
-            <li class="menu-item">
+        <div class="hero-buttons">
 
-                <div class="menu-title">
-                    <div class="icon">◇</div>
-                    <span>Projekte</span>
-                    <div class="arrow">›</div>
-                </div>
-
-                <ul class="submenu">
-                    <li>Meine Projekte</li>
-                    <li>Neue Projekte</li>
-                </ul>
-
-            </li>
+            <a
+                href="/kurse"
+                class="button button-primary"
+            >
+                Kurse entdecken
+            </a>
 
 
-            <li class="menu-item">
+            <a
+                href="/ueber-uns"
+                class="button button-secondary"
+            >
+                Mehr über ATOM
+            </a>
 
-                <div class="menu-title">
-                    <div class="icon">□</div>
-                    <span>Ressourcen</span>
-                    <div class="arrow">›</div>
-                </div>
-
-                <ul class="submenu">
-                    <li>Dateien</li>
-                    <li>Vorlagen</li>
-                </ul>
-
-            </li>
-
-
-            <li class="menu-item">
-
-                <div class="menu-title">
-                    <div class="icon">○</div>
-                    <span>Community</span>
-                    <div class="arrow">›</div>
-                </div>
-
-                <ul class="submenu">
-                    <li>Forum</li>
-                    <li>Gruppen</li>
-                </ul>
-
-            </li>
-
-
-            <li class="menu-item">
-                <div class="menu-title">
-                    <div class="icon">↓</div>
-                    <span>Downloads</span>
-                </div>
-            </li>
-
-
-            <li class="menu-item">
-                <div class="menu-title">
-                    <div class="icon">◷</div>
-                    <span>Kalender</span>
-                </div>
-            </li>
-
-
-            <li class="menu-item">
-                <div class="menu-title">
-                    <div class="icon">◇</div>
-                    <span>Zertifikate</span>
-                </div>
-            </li>
-
-        </ul>
-
-
-        <div class="divider"></div>
-
-
-        <div class="sidebar-label">
-            System
         </div>
 
-        <ul class="menu">
+    </section>
 
-            <li class="menu-item">
-                <div class="menu-title">
-                    <div class="icon">⚙</div>
-                    <span>Einstellungen</span>
+
+
+    <!-- COURSES -->
+
+    <section
+        class="section"
+        id="kurse"
+    >
+
+        <div class="section-heading">
+
+            <span>
+                Lernen
+            </span>
+
+            <h2>
+                Online Kurse
+            </h2>
+
+            <p>
+                Lerne moderne Technologien mit
+                strukturierten Kursen und praktischen
+                Projekten.
+            </p>
+
+        </div>
+
+
+
+        <div class="cards">
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    &lt;/&gt;
                 </div>
-            </li>
 
-            <li class="menu-item">
-                <div class="menu-title">
-                    <div class="icon">?</div>
-                    <span>Hilfe</span>
+                <h3>
+                    Webentwicklung
+                </h3>
+
+                <p>
+                    HTML, CSS, JavaScript und moderne
+                    Webentwicklung von Grund auf.
+                </p>
+
+                <a
+                    href="/kurse/webentwicklung"
+                    class="card-link"
+                >
+                    Kurs ansehen →
+                </a>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    Py
                 </div>
-            </li>
 
-        </ul>
+                <h3>
+                    Python
+                </h3>
 
-    </aside>
+                <p>
+                    Programmieren lernen und eigene
+                    Anwendungen mit Python entwickeln.
+                </p>
+
+                <a
+                    href="/kurse/python"
+                    class="card-link"
+                >
+                    Kurs ansehen →
+                </a>
+
+            </article>
 
 
-    <!-- EMPTY MAIN WORKSPACE -->
-    <main class="content"></main>
+
+            <article class="card">
+
+                <div class="card-icon">
+                    JS
+                </div>
+
+                <h3>
+                    JavaScript
+                </h3>
+
+                <p>
+                    Interaktive Webseiten und moderne
+                    Anwendungen mit JavaScript bauen.
+                </p>
+
+                <a
+                    href="/kurse/javascript"
+                    class="card-link"
+                >
+                    Kurs ansehen →
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PROJECTS -->
+
+    <section
+        class="section"
+        id="projekte"
+    >
+
+        <div class="section-heading">
+
+            <span>
+                Bauen
+            </span>
+
+            <h2>
+                Projekte
+            </h2>
+
+            <p>
+                Theorie wird bei ATOM zu echten
+                Projekten.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <article class="card">
+
+                <div class="card-icon">
+                    +
+                </div>
+
+                <h3>
+                    Eigenes Projekt starten
+                </h3>
+
+                <p>
+                    Starte ein neues Projekt und setze
+                    deine Ideen praktisch um.
+                </p>
+
+                <a
+                    href="/projekte/neu"
+                    class="card-link"
+                >
+                    Projekt starten →
+                </a>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    ◇
+                </div>
+
+                <h3>
+                    Projekte entdecken
+                </h3>
+
+                <p>
+                    Entdecke Projekte aus der ATOM
+                    Community.
+                </p>
+
+                <a
+                    href="/projekte"
+                    class="card-link"
+                >
+                    Projekte ansehen →
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ABOUT -->
+
+    <section
+        class="section"
+        id="ueber-uns"
+    >
+
+        <div class="section-heading">
+
+            <span>
+                ATOM
+            </span>
+
+            <h2>
+                Ein Workspace für digitale Entwicklung.
+            </h2>
+
+            <p>
+                ATOM verbindet Lernen, Projekte,
+                Ressourcen und Community in einer
+                modernen digitalen Umgebung.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 ATOM · Alle Rechte vorbehalten.
+
+    </footer>
+
+
+</main>
 
 </div>
+
 
 </body>
 </html>
