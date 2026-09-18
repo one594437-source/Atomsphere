@@ -1,984 +1,213 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Netzwerk & Verbindungen</title>
-
-    <style>
-        /* =========================================================
-           RESET
-        ========================================================= */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            background: #e7edf4;
-            color: #17243a;
-            min-height: 100vh;
-        }
-
-        /* =========================================================
-           COLORS
-        ========================================================= */
-
-        :root {
-            --navy: #102a56;
-            --navy-dark: #0b2044;
-            --blue: #1676b9;
-            --blue-light: #3b9bd1;
-            --blue-soft: #eaf4fb;
-
-            --text: #182438;
-            --text-light: #687487;
-            --line: #dbe3ec;
-
-            --white: #ffffff;
-        }
-
-        /* =========================================================
-           PAGE
-        ========================================================= */
-
-        .page {
-            position: relative;
-            width: min(1500px, 100%);
-            min-height: 100vh;
-            margin: 0 auto;
-            background: var(--white);
-            overflow: hidden;
-
-            box-shadow:
-                0 20px 70px rgba(16, 42, 86, 0.12);
-        }
-
-        /* =========================================================
-           LEFT BLUE PANEL
-        ========================================================= */
-
-        .sidebar {
-            position: absolute;
-            left: 0;
-            top: 0;
-
-            width: 31%;
-            min-height: 100%;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    var(--navy-dark) 0%,
-                    var(--navy) 58%,
-                    #123c70 100%
-                );
-
-            overflow: hidden;
-        }
-
-        .sidebar::before {
-            content: "";
-            position: absolute;
-
-            width: 125%;
-            height: 300px;
-
-            right: -45%;
-            bottom: 115px;
-
-            background: var(--blue);
-
-            transform: rotate(-18deg);
-
-            opacity: 0.95;
-        }
-
-        .sidebar::after {
-            content: "";
-            position: absolute;
-
-            width: 125%;
-            height: 125px;
-
-            right: -38%;
-            bottom: 45px;
-
-            background: var(--blue-light);
-
-            transform: rotate(-18deg);
-
-            opacity: 0.85;
-        }
-
-        .sidebar-decoration {
-            position: absolute;
-
-            width: 120%;
-            height: 2px;
-
-            right: -35%;
-            bottom: 275px;
-
-            background: rgba(255,255,255,0.18);
-
-            transform: rotate(-18deg);
-        }
-
-        /* =========================================================
-           SIDEBAR CONTENT
-        ========================================================= */
-
-        .sidebar-content {
-            position: relative;
-            z-index: 5;
-
-            padding: 72px 48px 70px;
-
-            color: var(--white);
-        }
-
-        .eyebrow-side {
-            font-size: 11px;
-            font-weight: 700;
-
-            letter-spacing: 3px;
-
-            color: rgba(255,255,255,0.72);
-
-            margin-bottom: 48px;
-        }
-
-        /* =========================================================
-           NETWORK ICON
-        ========================================================= */
-
-        .network-mark {
-            position: relative;
-
-            width: 74px;
-            height: 74px;
-
-            margin-bottom: 38px;
-
-            border:
-                1px solid rgba(255,255,255,0.55);
-
-            border-radius: 50%;
-        }
-
-        .network-mark::before,
-        .network-mark::after {
-            content: "";
-
-            position: absolute;
-
-            background: rgba(255,255,255,0.85);
-        }
-
-        .network-mark::before {
-            width: 38px;
-            height: 2px;
-
-            left: 17px;
-            top: 35px;
-        }
-
-        .network-mark::after {
-            width: 2px;
-            height: 38px;
-
-            left: 35px;
-            top: 17px;
-        }
-
-        .network-dot {
-            position: absolute;
-
-            width: 8px;
-            height: 8px;
-
-            background: white;
-
-            border-radius: 50%;
-        }
-
-        .dot-one {
-            left: 12px;
-            top: 31px;
-        }
-
-        .dot-two {
-            right: 12px;
-            top: 31px;
-        }
-
-        .dot-three {
-            left: 31px;
-            top: 12px;
-        }
-
-        .dot-four {
-            left: 31px;
-            bottom: 12px;
-        }
-
-        /* =========================================================
-           SIDEBAR TITLE
-        ========================================================= */
-
-        .sidebar h2 {
-            font-size: clamp(27px, 2.5vw, 38px);
-
-            line-height: 1.12;
-
-            letter-spacing: -0.8px;
-
-            font-weight: 700;
-
-            margin-bottom: 28px;
-        }
-
-        .sidebar-text {
-            max-width: 270px;
-
-            font-size: 14px;
-
-            line-height: 1.8;
-
-            color:
-                rgba(255,255,255,0.75);
-        }
-
-        /* =========================================================
-           SIDEBAR BOTTOM
-        ========================================================= */
-
-        .side-bottom {
-            position: absolute;
-
-            left: 48px;
-            bottom: 45px;
-
-            z-index: 10;
-
-            font-size: 10px;
-
-            letter-spacing: 1.8px;
-
-            color:
-                rgba(255,255,255,0.62);
-
-            text-transform: uppercase;
-        }
-
-        /* =========================================================
-           MAIN CONTENT
-        ========================================================= */
-
-        .content {
-            position: relative;
-            z-index: 10;
-
-            margin-left: 31%;
-
-            width: 69%;
-
-            min-height: 100vh;
-
-            padding:
-                72px
-                75px
-                65px;
-        }
-
-        /* =========================================================
-           DECORATIVE TOP RIGHT
-        ========================================================= */
-
-        .corner {
-            position: absolute;
-
-            top: -135px;
-            right: -135px;
-
-            width: 300px;
-            height: 300px;
-
-            background: var(--blue);
-
-            transform: rotate(45deg);
-
-            opacity: 0.055;
-        }
-
-        .top-line {
-            position: absolute;
-
-            right: 70px;
-            top: 85px;
-
-            width: 70px;
-            height: 4px;
-
-            background: var(--blue);
-        }
-
-        /* =========================================================
-           HEADER
-        ========================================================= */
-
-        .eyebrow {
-            display: inline-block;
-
-            font-size: 11px;
-
-            font-weight: 700;
-
-            letter-spacing: 3px;
-
-            color: var(--blue);
-
-            margin-bottom: 22px;
-        }
-
-        .eyebrow::after {
-            content: "";
-
-            display: block;
-
-            width: 42px;
-            height: 2px;
-
-            margin-top: 10px;
-
-            background: var(--blue);
-        }
-
-        /* =========================================================
-           MAIN TITLE
-        ========================================================= */
-
-        h1 {
-            max-width: 850px;
-
-            font-size:
-                clamp(
-                    42px,
-                    5vw,
-                    68px
-                );
-
-            line-height: 1.02;
-
-            letter-spacing: -2.4px;
-
-            color: var(--navy);
-
-            font-weight: 700;
-
-            margin-bottom: 30px;
-        }
-
-        h1 span {
-            color: var(--blue);
-        }
-
-        /* =========================================================
-           INTRO
-        ========================================================= */
-
-        .intro {
-            max-width: 700px;
-
-            font-size: 18px;
-
-            line-height: 1.75;
-
-            color: var(--text-light);
-
-            margin-bottom: 48px;
-        }
-
-        /* =========================================================
-           SECTION
-        ========================================================= */
-
-        .section {
-            position: relative;
-
-            max-width: 800px;
-
-            padding:
-                27px
-                0
-                0
-                32px;
-
-            margin-top: 28px;
-
-            border-top:
-                1px solid var(--line);
-        }
-
-        .section::before {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            top: 27px;
-
-            width: 4px;
-            height: 34px;
-
-            background: var(--blue);
-        }
-
-        .section-number {
-            font-size: 10px;
-
-            font-weight: 700;
-
-            letter-spacing: 2px;
-
-            color: var(--blue);
-
-            margin-bottom: 11px;
-        }
-
-        .section h3 {
-            font-size: 22px;
-
-            line-height: 1.3;
-
-            color: var(--navy);
-
-            margin-bottom: 10px;
-
-            font-weight: 700;
-        }
-
-        .section h4 {
-            font-size: 22px;
-
-            line-height: 1.3;
-
-            color: var(--navy);
-
-            margin-bottom: 10px;
-
-            font-weight: 700;
-        }
-
-        .section p {
-            max-width: 700px;
-
-            font-size: 15px;
-
-            line-height: 1.75;
-
-            color: var(--text-light);
-        }
-
-        /* =========================================================
-           CTA
-        ========================================================= */
-
-        .cta {
-            position: relative;
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 22px;
-
-            margin-top: 48px;
-
-            padding:
-                17px
-                24px;
-
-            background: var(--navy);
-
-            color: white;
-
-            text-decoration: none;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            letter-spacing: 1px;
-
-            overflow: hidden;
-
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .cta::before {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            top: 0;
-
-            width: 4px;
-            height: 100%;
-
-            background: var(--blue-light);
-        }
-
-        .cta:hover {
-            background: var(--blue);
-
-            transform:
-                translateY(-2px);
-        }
-
-        .arrow {
-            font-size: 19px;
-
-            line-height: 1;
-
-            transition:
-                transform 0.25s ease;
-        }
-
-        .cta:hover .arrow {
-            transform:
-                translateX(5px);
-        }
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
-        .footer {
-            max-width: 800px;
-
-            margin-top: 58px;
-
-            padding-top: 20px;
-
-            border-top:
-                1px solid var(--line);
-
-            font-size: 10px;
-
-            letter-spacing: 1.5px;
-
-            color: #909baa;
-
-            text-transform: uppercase;
-        }
-
-        /* =========================================================
-           BLUE BOTTOM DECORATION
-        ========================================================= */
-
-        .content-decoration {
-            position: absolute;
-
-            right: -80px;
-            bottom: -120px;
-
-            width: 350px;
-            height: 250px;
-
-            background:
-                var(--blue);
-
-            transform:
-                rotate(-18deg);
-
-            opacity: 0.035;
-        }
-
-        /* =========================================================
-           RESPONSIVE TABLET
-        ========================================================= */
-
-        @media (max-width: 1000px) {
-
-            .sidebar-content {
-                padding-left: 35px;
-                padding-right: 35px;
-            }
-
-            .content {
-                padding-left: 55px;
-                padding-right: 55px;
-            }
-
-            h1 {
-                font-size: 48px;
-            }
-        }
-
-        /* =========================================================
-           RESPONSIVE MOBILE
-        ========================================================= */
-
-        @media (max-width: 760px) {
-
-            body {
-                background: white;
-            }
-
-            .page {
-                width: 100%;
-                box-shadow: none;
-            }
-
-            .sidebar {
-                position: relative;
-
-                width: 100%;
-
-                min-height: 380px;
-            }
-
-            .sidebar-content {
-                padding:
-                    48px
-                    30px
-                    80px;
-            }
-
-            .side-bottom {
-                left: 30px;
-                bottom: 28px;
-            }
-
-            .content {
-                margin-left: 0;
-
-                width: 100%;
-
-                min-height: auto;
-
-                padding:
-                    50px
-                    30px
-                    55px;
-            }
-
-            .top-line {
-                right: 30px;
-                top: 55px;
-            }
-
-            h1 {
-                font-size: 43px;
-
-                letter-spacing:
-                    -1.5px;
-            }
-
-            .intro {
-                font-size: 17px;
-            }
-        }
-
-        /* =========================================================
-           SMALL MOBILE
-        ========================================================= */
-
-        @media (max-width: 480px) {
-
-            .sidebar {
-                min-height: 340px;
-            }
-
-            .sidebar h2 {
-                font-size: 29px;
-            }
-
-            .network-mark {
-                width: 64px;
-                height: 64px;
-            }
-
-            .network-mark::before {
-                width: 32px;
-                left: 15px;
-                top: 30px;
-            }
-
-            .network-mark::after {
-                height: 32px;
-                left: 30px;
-                top: 15px;
-            }
-
-            .content {
-                padding:
-                    42px
-                    24px
-                    50px;
-            }
-
-            h1 {
-                font-size: 37px;
-
-                letter-spacing:
-                    -1.2px;
-            }
-
-            .intro {
-                font-size: 16px;
-            }
-
-            .section {
-                padding-left: 24px;
-            }
-
-            .section h3 {
-                font-size: 20px;
-            }
-
-            .section h4 {
-                font-size: 20px;
-            }
-
-            .cta {
-                width: 100%;
-
-                justify-content:
-                    space-between;
-            }
-
-            .footer {
-                line-height: 1.7;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATOM</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#061a40,#0b2a63,#123b87);
+    color:white;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* Kopf */
+header{
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    font-weight:bold;
+    letter-spacing:8px;
+    color:white;
+    text-shadow:0 0 12px rgba(255,255,255,.9);
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+/* Layout */
+.container{
+    display:flex;
+    height:calc(100vh - 80px);
+}
+
+/* Sidebar */
+.sidebar{
+    width:260px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);
+    border-right:1px solid rgba(255,255,255,.15);
+    padding:18px;
+    overflow:auto;
+}
+
+.menu-item{
+    margin-bottom:10px;
+}
+
+.menu-title{
+    width:100%;
+    background:rgba(255,255,255,.08);
+    color:white;
+    border:none;
+    padding:14px;
+    text-align:left;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+    box-shadow:0 0 8px rgba(255,255,255,.12);
+}
+
+.menu-title:hover{
+    background:rgba(255,255,255,.18);
+    box-shadow:0 0 15px rgba(255,255,255,.35);
+}
+
+.submenu{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    margin-left:10px;
+}
+
+.menu-item:hover .submenu{
+    max-height:220px;
+}
+
+.submenu a{
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 12px;
+    margin-top:6px;
+    border-radius:8px;
+    background:rgba(255,255,255,.05);
+    transition:.3s;
+    font-size:14px;
+}
+
+.submenu a:hover{
+    background:rgba(255,255,255,.18);
+}
+
+/* Inhalt */
+.content{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.content h1{
+    font-size:50px;
+    text-shadow:0 0 15px white;
+}
+
+.content p{
+    margin-top:15px;
+    color:#dfe9ff;
+    font-size:18px;
+}
+</style>
 </head>
-
 
 <body>
 
-<div class="page">
+<header>ATOM</header>
 
-    <!-- =====================================================
-         LINKER BLAUER BEREICH
-    ====================================================== -->
+<div class="container">
 
     <aside class="sidebar">
 
-        <div class="sidebar-decoration"></div>
-
-        <div class="sidebar-content">
-
-            <div class="eyebrow-side">
-                NETWORK · BUSINESS · CONNECTIONS
+        <div class="menu-item">
+            <button class="menu-title">📘 Online Kurse</button>
+            <div class="submenu">
+                <a href="#">Webentwicklung</a>
+                <a href="#">Python</a>
+                <a href="#">JavaScript</a>
+                <a href="#">UI Design</a>
             </div>
-
-
-            <!-- Netzwerk-Symbol -->
-
-            <div class="network-mark">
-
-                <span class="network-dot dot-one"></span>
-                <span class="network-dot dot-two"></span>
-                <span class="network-dot dot-three"></span>
-                <span class="network-dot dot-four"></span>
-
-            </div>
-
-
-            <h2>
-                Menschen.<br>
-                Unternehmen.<br>
-                Verbindungen.
-            </h2>
-
-
-            <p class="sidebar-text">
-                Offene Gespräche · Neue Kontakte ·
-                Gemeinsame Möglichkeiten
-            </p>
-
         </div>
 
+        <div class="menu-item">
+            <button class="menu-title">📊 Dashboard</button>
+            <div class="submenu">
+                <a href="#">Übersicht</a>
+            </div>
+        </div>
 
-        <div class="side-bottom">
-            Netzwerk &amp; Verbindungen
+        <div class="menu-item">
+            <button class="menu-title">💼 Projekte</button>
+            <div class="submenu">
+                <a href="#">Meine Projekte</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <button class="menu-title">📂 Ressourcen</button>
+            <div class="submenu">
+                <a href="#">Dateien</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <button class="menu-title">👥 Community</button>
+            <div class="submenu">
+                <a href="#">Forum</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <button class="menu-title">⬇ Downloads</button>
+            <div class="submenu">
+                <a href="#">Material</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <button class="menu-title">📅 Kalender</button>
+            <div class="submenu">
+                <a href="#">Termine</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <button class="menu-title">🏆 Zertifikate</button>
+            <div class="submenu">
+                <a href="#">Meine Zertifikate</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <button class="menu-title">⚙ Einstellungen</button>
+            <div class="submenu">
+                <a href="#">Profil</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <button class="menu-title">❓ Hilfe</button>
+            <div class="submenu">
+                <a href="#">Support</a>
+            </div>
         </div>
 
     </aside>
 
-
-    <!-- =====================================================
-         HAUPTBEREICH
-    ====================================================== -->
-
     <main class="content">
-
-        <div class="corner"></div>
-
-        <div class="top-line"></div>
-
-
-        <!-- HEADER -->
-
-        <div class="eyebrow">
-            NETWORK &amp; VERBINDUNGEN
-        </div>
-
-
-        <h1>
-            Menschen verbinden.<br>
-            <span>Möglichkeiten schaffen.</span>
-        </h1>
-
-
-        <p class="intro">
-            Ich bin junger Unternehmer und glaube daran,
-            dass Menschen den größten Wert darstellen.
-        </p>
-
-
-        <!-- =================================================
-             SECTION 01
-        ================================================== -->
-
-        <section class="section">
-
-            <div class="section-number">
-                01 — KONTAKT
-            </div>
-
-            <h3>
-                Neue Menschen kennenlernen
-            </h3>
-
-            <p>
-                Deshalb möchte ich Sie einfach kennenlernen
-                und den Personenkreis, den ich kenne,
-                ausbauen.
-            </p>
-
-        </section>
-
-
-        <!-- =================================================
-             SECTION 02
-        ================================================== -->
-
-        <section class="section">
-
-            <div class="section-number">
-                02 — NETWORKING
-            </div>
-
-            <h3>
-                Interessante Unternehmer
-            </h3>
-
-            <p>
-                Ich möchte interessante Unternehmer
-                kennenlernen, voneinander lernen und
-                neue Perspektiven entdecken.
-            </p>
-
-        </section>
-
-
-        <!-- =================================================
-             SECTION 03
-        ================================================== -->
-
-        <section class="section">
-
-            <div class="section-number">
-                03 — MÖGLICHKEITEN
-            </div>
-
-            <h3>
-                Wertvolle Verbindungen schaffen
-            </h3>
-
-            <p>
-                Dort, wo es passt, möchte ich wertvolle
-                Verbindungen zwischen Menschen und
-                Unternehmen herstellen.
-            </p>
-
-        </section>
-
-
-        <!-- =================================================
-             SECTION 04
-        ================================================== -->
-
-        <section class="section">
-
-            <div class="section-number">
-                04 — VERTRIEB
-            </div>
-
-            <h4>
-                Wir verkaufen deine Dienstleistung für 20% des Auftragwertes
-            </h4>
-
-            <p>
-                Wir haben den Kunden, den du suchst.
-            </p>
-
-            <p>
-                Vernetz dich mit uns
-            </p>
-
-        </section>
-
-
-        <!-- =================================================
-             BUTTON
-        ================================================== -->
-
-        <a
-            href="mailto:deine@email.at"
-            class="cta"
-        >
-            Vernetzen
-
-            <span class="arrow">
-                →
-            </span>
-
-        </a>
-
-
-        <!-- =================================================
-             FOOTER
-        ================================================== -->
-
-        <div class="footer">
-            Offene Gespräche · Neue Kontakte · Gemeinsame Möglichkeiten
-        </div>
-
-
-        <div class="content-decoration"></div>
-
+        <h1>Willkommen bei ATOM</h1>
+        <p>Dunkelblaues Design mit ausklappbarem Seitenmenü.</p>
     </main>
 
 </div>
