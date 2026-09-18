@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATOM</title>
+<title>ATOM — Dashboard</title>
 
 <style>
 
@@ -11,7 +11,18 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Inter, Arial, Helvetica, sans-serif;
+}
+
+:root{
+    --bg:#000B2E;
+    --surface:rgba(255,255,255,.045);
+    --surface-hover:rgba(255,255,255,.075);
+    --border:rgba(255,255,255,.08);
+    --blue:#4D9BFF;
+    --blue-light:#91C5FF;
+    --text:#FFFFFF;
+    --muted:#8298BC;
 }
 
 html,
@@ -21,75 +32,155 @@ body{
 }
 
 body{
-    background:#000B2E;
-    color:white;
-    height:100vh;
+    background:var(--bg);
+    color:var(--text);
     overflow:hidden;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 header{
-    height:90px;
-    background:#000B2E;
+    height:78px;
+    background:var(--bg);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 32px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.brand-mark{
+    width:38px;
+    height:38px;
+
+    border:1px solid rgba(77,155,255,.5);
+    border-radius:11px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    padding-left:0;
+    color:var(--blue);
+    font-size:18px;
+    font-weight:bold;
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    box-shadow:
+        0 0 20px rgba(77,155,255,.12);
 }
 
 header h1{
-    font-size:48px;
-    letter-spacing:16px;
+    font-size:25px;
+    letter-spacing:9px;
     font-weight:700;
-    color:#fff;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,.95),
-        0 0 22px rgba(80,150,255,.65),
-        0 0 40px rgba(0,70,255,.35);
 }
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    color:var(--muted);
+    font-size:12px;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#4DFF9A;
+
+    box-shadow:0 0 10px rgba(77,255,154,.7);
+}
+
+.profile{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #173A78,
+        #0A1C4A
+    );
+
+    border:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:14px;
+}
+
+/* =========================
+   LAYOUT
+========================= */
 
 .container{
     display:flex;
-    height:calc(100vh - 90px);
-    background:#000B2E;
+    height:calc(100vh - 78px);
 }
 
+/* =========================
+   SIDEBAR
+========================= */
+
 .sidebar{
-    width:270px;
-    background:#000B2E;
+    width:250px;
 
-    border-right:1px solid rgba(255,255,255,.08);
+    background:var(--bg);
 
-    padding:18px;
+    border-right:1px solid var(--border);
+
+    padding:25px 16px;
 
     overflow-y:auto;
 }
 
-.logo{
-    color:#8BBFFF;
-    font-size:13px;
-    letter-spacing:3px;
-    margin-bottom:18px;
+.sidebar-label{
+    color:#50688F;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
     text-transform:uppercase;
+
+    padding:0 12px;
+    margin-bottom:12px;
 }
 
 .menu-item{
-    margin-bottom:10px;
+    margin-bottom:4px;
 }
 
 .menu-title{
     width:100%;
-    background:rgba(255,255,255,.035);
-    color:white;
 
-    border:1px solid rgba(255,255,255,.07);
+    background:transparent;
+    color:#9AAED0;
 
-    padding:13px 14px;
-    border-radius:12px;
+    border:none;
+
+    padding:11px 12px;
+
+    border-radius:9px;
 
     cursor:pointer;
 
@@ -97,13 +188,22 @@ header h1{
     align-items:center;
     justify-content:space-between;
 
-    transition:.25s;
-    font-size:15px;
+    transition:.2s;
+
+    font-size:14px;
 }
 
 .menu-title:hover{
-    background:rgba(255,255,255,.08);
-    border-color:rgba(120,180,255,.30);
+    background:var(--surface);
+    color:white;
+}
+
+.menu-item.active .menu-title{
+    background:rgba(77,155,255,.10);
+    color:white;
+
+    box-shadow:
+        inset 2px 0 0 var(--blue);
 }
 
 .left{
@@ -113,91 +213,335 @@ header h1{
 }
 
 .icon{
-    width:34px;
-    height:34px;
-
-    border-radius:50%;
-    border:2px solid #4D9BFF;
+    width:27px;
+    height:27px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:16px;
-    color:#fff;
+    color:#7595C4;
 
-    background:rgba(255,255,255,.025);
+    font-size:15px;
+}
+
+.menu-item.active .icon{
+    color:var(--blue);
 }
 
 .arrow{
-    transition:.25s;
-    color:#8BBFFF;
-}
+    font-size:10px;
+    color:#50688F;
 
-.submenu{
-    max-height:0;
-    overflow:hidden;
-
-    transition:max-height .3s ease;
-
-    margin-left:18px;
-}
-
-.menu-item:hover .submenu{
-    max-height:220px;
+    transition:.2s;
 }
 
 .menu-item:hover .arrow{
     transform:rotate(90deg);
 }
 
+.submenu{
+    max-height:0;
+    overflow:hidden;
+
+    transition:max-height .25s ease;
+
+    padding-left:40px;
+}
+
+.menu-item:hover .submenu{
+    max-height:180px;
+}
+
 .submenu a{
     display:block;
 
     text-decoration:none;
-    color:#D5E7FF;
 
-    padding:9px 14px;
-    margin-top:6px;
+    color:#647B9F;
 
-    border-left:2px solid #4D9BFF;
+    padding:7px 10px;
 
-    background:rgba(255,255,255,.025);
-
-    border-radius:6px;
+    font-size:12px;
 
     transition:.2s;
-    font-size:14px;
 }
 
 .submenu a:hover{
-    background:rgba(255,255,255,.07);
-    color:#fff;
-    border-left-color:#91C5FF;
+    color:var(--blue-light);
 }
+
+/* =========================
+   CONTENT
+========================= */
 
 .content{
     flex:1;
-    background:#000B2E;
-    position:relative;
+
+    padding:42px 48px;
+
+    overflow:auto;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+
+    margin-bottom:35px;
+}
+
+.welcome h2{
+    font-size:31px;
+    font-weight:600;
+
+    margin-bottom:8px;
+}
+
+.welcome p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.date{
+    color:#526B94;
+    font-size:12px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:16px;
+
+    margin-bottom:28px;
+}
+
+.card{
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:22px;
+
+    transition:.25s;
+}
+
+.card:hover{
+    background:var(--surface-hover);
+
+    border-color:rgba(77,155,255,.20);
+
+    transform:translateY(-2px);
+}
+
+.stat-label{
+    color:#647B9F;
+    font-size:12px;
+
+    margin-bottom:12px;
+}
+
+.stat-value{
+    font-size:28px;
+    font-weight:600;
+}
+
+.stat-change{
+    margin-top:8px;
+
+    color:#5DFFB0;
+    font-size:11px;
+}
+
+/* =========================
+   MAIN GRID
+========================= */
+
+.dashboard-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.6fr 1fr;
+
+    gap:18px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:18px;
+}
+
+.section-title h3{
+    font-size:16px;
+    font-weight:500;
+}
+
+.section-title span{
+    color:#526B94;
+    font-size:11px;
+}
+
+/* =========================
+   COURSES
+========================= */
+
+.course{
+    padding:16px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.055);
+}
+
+.course:last-child{
+    border-bottom:none;
+}
+
+.course-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:9px;
+}
+
+.course-name{
+    font-size:13px;
+}
+
+.course-percent{
+    color:#7189AE;
+    font-size:11px;
+}
+
+.progress{
+    width:100%;
+    height:5px;
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:10px;
+
     overflow:hidden;
 }
 
-.sidebar::-webkit-scrollbar{
-    width:6px;
+.progress-bar{
+    height:100%;
+
+    background:var(--blue);
+
+    border-radius:10px;
+
+    box-shadow:
+        0 0 12px rgba(77,155,255,.45);
 }
 
-.sidebar::-webkit-scrollbar-track{
-    background:#000B2E;
+/* =========================
+   ACTIVITY
+========================= */
+
+.activity{
+    display:flex;
+    gap:13px;
+
+    padding:13px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.055);
 }
 
-.sidebar::-webkit-scrollbar-thumb{
-    background:#123875;
+.activity:last-child{
+    border-bottom:none;
+}
+
+.activity-icon{
+    width:32px;
+    height:32px;
+
+    border-radius:9px;
+
+    background:rgba(77,155,255,.08);
+
+    color:var(--blue);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.activity-text{
+    flex:1;
+}
+
+.activity-text strong{
+    display:block;
+
+    font-size:12px;
+    font-weight:500;
+
+    margin-bottom:4px;
+}
+
+.activity-text span{
+    color:#526B94;
+    font-size:10px;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+.sidebar::-webkit-scrollbar,
+.content::-webkit-scrollbar{
+    width:5px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.content::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.content::-webkit-scrollbar-thumb{
+    background:#12295A;
     border-radius:10px;
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover{
-    background:#1C529F;
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:210px;
+    }
+
+    .content{
+        padding:30px;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
 }
 
 </style>
@@ -206,161 +550,576 @@ header h1{
 <body>
 
 <header>
-    <h1>ATOM</h1>
+
+    <div class="brand">
+
+        <div class="brand-mark">
+            A
+        </div>
+
+        <h1>ATOM</h1>
+
+    </div>
+
+    <div class="header-right">
+
+        <div class="status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
+        </div>
+
+        <div class="profile">
+            A
+        </div>
+
+    </div>
+
 </header>
+
 
 <div class="container">
 
     <aside class="sidebar">
 
-        <div class="logo">Navigation</div>
+        <div class="sidebar-label">
+            Workspace
+        </div>
+
+
+        <div class="menu-item active">
+
+            <button class="menu-title">
+
+                <div class="left">
+
+                    <div class="icon">⌂</div>
+
+                    Dashboard
+
+                </div>
+
+            </button>
+
+        </div>
+
 
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">📘</div>
+
+                    <div class="icon">▣</div>
+
                     Online Kurse
+
                 </div>
-                <span class="arrow">▶</span>
+
+                <span class="arrow">›</span>
+
             </button>
 
             <div class="submenu">
+
                 <a href="#">Webentwicklung</a>
                 <a href="#">Python</a>
                 <a href="#">JavaScript</a>
                 <a href="#">KI & Automatisierung</a>
+
             </div>
+
         </div>
 
-        <div class="menu-item">
-            <button class="menu-title">
-                <div class="left">
-                    <div class="icon">📊</div>
-                    Dashboard
-                </div>
-                <span class="arrow">▶</span>
-            </button>
-
-            <div class="submenu">
-                <a href="#">Übersicht</a>
-            </div>
-        </div>
 
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">💼</div>
+
+                    <div class="icon">◇</div>
+
                     Projekte
+
                 </div>
-                <span class="arrow">▶</span>
+
+                <span class="arrow">›</span>
+
             </button>
 
             <div class="submenu">
+
                 <a href="#">Meine Projekte</a>
+                <a href="#">Neue Projekte</a>
+
             </div>
+
         </div>
 
+
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">📂</div>
+
+                    <div class="icon">□</div>
+
                     Ressourcen
+
                 </div>
-                <span class="arrow">▶</span>
+
+                <span class="arrow">›</span>
+
             </button>
 
             <div class="submenu">
+
                 <a href="#">Dateien</a>
+                <a href="#">Vorlagen</a>
+
             </div>
+
         </div>
 
+
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">👥</div>
+
+                    <div class="icon">○</div>
+
                     Community
+
                 </div>
-                <span class="arrow">▶</span>
+
+                <span class="arrow">›</span>
+
             </button>
 
             <div class="submenu">
+
                 <a href="#">Forum</a>
+                <a href="#">Gruppen</a>
+
             </div>
+
         </div>
 
+
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">⬇</div>
+
+                    <div class="icon">↓</div>
+
                     Downloads
+
                 </div>
-                <span class="arrow">▶</span>
+
             </button>
 
-            <div class="submenu">
-                <a href="#">Material</a>
-            </div>
         </div>
 
+
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">📅</div>
+
+                    <div class="icon">◷</div>
+
                     Kalender
+
                 </div>
-                <span class="arrow">▶</span>
+
             </button>
 
-            <div class="submenu">
-                <a href="#">Termine</a>
-            </div>
         </div>
 
+
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">🏆</div>
+
+                    <div class="icon">◇</div>
+
                     Zertifikate
+
                 </div>
-                <span class="arrow">▶</span>
+
             </button>
 
-            <div class="submenu">
-                <a href="#">Meine Zertifikate</a>
-            </div>
         </div>
 
+
+        <div class="sidebar-label" style="margin-top:28px;">
+            System
+        </div>
+
+
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
+
                     <div class="icon">⚙</div>
+
                     Einstellungen
+
                 </div>
-                <span class="arrow">▶</span>
+
             </button>
 
-            <div class="submenu">
-                <a href="#">Profil</a>
-            </div>
         </div>
 
+
         <div class="menu-item">
+
             <button class="menu-title">
+
                 <div class="left">
-                    <div class="icon">❓</div>
+
+                    <div class="icon">?</div>
+
                     Hilfe
+
                 </div>
-                <span class="arrow">▶</span>
+
             </button>
 
-            <div class="submenu">
-                <a href="#">Support</a>
-            </div>
         </div>
 
     </aside>
 
+
     <main class="content">
+
+        <div class="welcome">
+
+            <div>
+
+                <h2>Good morning, Alex.</h2>
+
+                <p>
+                    Continue where you left off.
+                </p>
+
+            </div>
+
+            <div class="date">
+                MONDAY · 19 SEPTEMBER 2026
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="card">
+
+                <div class="stat-label">
+                    COURSE PROGRESS
+                </div>
+
+                <div class="stat-value">
+                    72%
+                </div>
+
+                <div class="stat-change">
+                    +8% this week
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="stat-label">
+                    ACTIVE PROJECTS
+                </div>
+
+                <div class="stat-value">
+                    4
+                </div>
+
+                <div class="stat-change">
+                    2 updated today
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="stat-label">
+                    LEARNING HOURS
+                </div>
+
+                <div class="stat-value">
+                    24.5
+                </div>
+
+                <div class="stat-change">
+                    +3.2h this week
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="stat-label">
+                    CERTIFICATES
+                </div>
+
+                <div class="stat-value">
+                    7
+                </div>
+
+                <div class="stat-change">
+                    1 new
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+
+            <div class="card">
+
+                <div class="section-title">
+
+                    <h3>
+                        Continue Learning
+                    </h3>
+
+                    <span>
+                        VIEW ALL →
+                    </span>
+
+                </div>
+
+
+                <div class="course">
+
+                    <div class="course-top">
+
+                        <span class="course-name">
+                            Web Development
+                        </span>
+
+                        <span class="course-percent">
+                            72%
+                        </span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:72%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="course">
+
+                    <div class="course-top">
+
+                        <span class="course-name">
+                            Python
+                        </span>
+
+                        <span class="course-percent">
+                            48%
+                        </span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:48%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="course">
+
+                    <div class="course-top">
+
+                        <span class="course-name">
+                            AI & Automation
+                        </span>
+
+                        <span class="course-percent">
+                            31%
+                        </span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:31%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="course">
+
+                    <div class="course-top">
+
+                        <span class="course-name">
+                            JavaScript
+                        </span>
+
+                        <span class="course-percent">
+                            19%
+                        </span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:19%">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="section-title">
+
+                    <h3>
+                        Recent Activity
+                    </h3>
+
+                    <span>
+                        HISTORY
+                    </span>
+
+                </div>
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        ✓
+                    </div>
+
+                    <div class="activity-text">
+
+                        <strong>
+                            Completed Python Basics
+                        </strong>
+
+                        <span>
+                            2 hours ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        +
+                    </div>
+
+                    <div class="activity-text">
+
+                        <strong>
+                            Started AI Automation
+                        </strong>
+
+                        <span>
+                            Yesterday
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        ◇
+                    </div>
+
+                    <div class="activity-text">
+
+                        <strong>
+                            Certificate unlocked
+                        </strong>
+
+                        <span>
+                            2 days ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        →
+                    </div>
+
+                    <div class="activity-text">
+
+                        <strong>
+                            Project updated
+                        </strong>
+
+                        <span>
+                            3 days ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </main>
 
 </div>
