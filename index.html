@@ -10,194 +10,249 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#061a40,#0b2a63,#123b87);
-    color:white;
+    background:linear-gradient(135deg,#02142D 0%,#062A57 45%,#0A4A8A 100%);
+    color:#fff;
     height:100vh;
     overflow:hidden;
 }
 
-/* Kopf */
+/* HEADER */
+
 header{
     height:80px;
+    background:linear-gradient(90deg,#03152E,#0A3D7A,#062A57);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:42px;
-    font-weight:bold;
-    letter-spacing:8px;
-    color:white;
-    text-shadow:0 0 12px rgba(255,255,255,.9);
-    border-bottom:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(120,180,255,.25);
+    box-shadow:0 3px 25px rgba(0,0,0,.35);
 }
 
-/* Layout */
+header h1{
+    font-size:42px;
+    letter-spacing:10px;
+    color:#fff;
+    text-shadow:0 0 15px rgba(255,255,255,.8);
+}
+
+/* LAYOUT */
+
 .container{
     display:flex;
     height:calc(100vh - 80px);
 }
 
-/* Sidebar */
+/* SIDEBAR */
+
 .sidebar{
-    width:260px;
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-    border-right:1px solid rgba(255,255,255,.15);
+    width:270px;
+    background:linear-gradient(180deg,#03152E,#06244D 70%,#041C3A);
+    border-right:1px solid rgba(120,180,255,.18);
     padding:18px;
-    overflow:auto;
+    overflow-y:auto;
+}
+
+.sidebar h2{
+    font-size:13px;
+    color:#8EC7FF;
+    margin-bottom:18px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
 .menu-item{
     margin-bottom:10px;
 }
 
-.menu-title{
+.menu-btn{
     width:100%;
-    background:rgba(255,255,255,.08);
-    color:white;
-    border:none;
-    padding:14px;
-    text-align:left;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    color:#fff;
+    padding:14px 16px;
     border-radius:12px;
     cursor:pointer;
-    font-size:16px;
-    transition:.3s;
-    box-shadow:0 0 8px rgba(255,255,255,.12);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:.25s;
+    font-size:15px;
 }
 
-.menu-title:hover{
-    background:rgba(255,255,255,.18);
-    box-shadow:0 0 15px rgba(255,255,255,.35);
+.menu-btn:hover{
+    background:rgba(74,149,255,.18);
+    border-color:rgba(130,190,255,.35);
+    box-shadow:0 0 15px rgba(80,160,255,.25);
+}
+
+.arrow{
+    transition:.25s;
 }
 
 .submenu{
     max-height:0;
     overflow:hidden;
-    transition:max-height .35s ease;
-    margin-left:10px;
+    transition:max-height .3s ease;
+    padding-left:8px;
 }
 
 .menu-item:hover .submenu{
     max-height:220px;
 }
 
+.menu-item:hover .arrow{
+    transform:rotate(90deg);
+}
+
 .submenu a{
     display:block;
-    color:#fff;
     text-decoration:none;
-    padding:10px 12px;
+    color:#DCEEFF;
+    padding:10px 14px;
     margin-top:6px;
-    border-radius:8px;
-    background:rgba(255,255,255,.05);
-    transition:.3s;
+    border-left:2px solid #4DA3FF;
+    background:rgba(255,255,255,.03);
+    border-radius:6px;
+    transition:.2s;
     font-size:14px;
 }
 
 .submenu a:hover{
-    background:rgba(255,255,255,.18);
+    background:rgba(77,163,255,.16);
+    color:#fff;
 }
 
-/* Inhalt */
+/* CONTENT */
+
 .content{
     flex:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
+    position:relative;
+    background:linear-gradient(180deg,
+        rgba(255,255,255,.02),
+        rgba(255,255,255,.01));
 }
 
-.content h1{
-    font-size:50px;
-    text-shadow:0 0 15px white;
+/* dezente Lichtstreifen */
+
+.content::before{
+    content:"";
+    position:absolute;
+    right:-120px;
+    top:-80px;
+    width:320px;
+    height:320px;
+    transform:rotate(35deg);
+    background:linear-gradient(to right,
+        transparent,
+        rgba(140,200,255,.10),
+        transparent);
 }
 
-.content p{
-    margin-top:15px;
-    color:#dfe9ff;
-    font-size:18px;
+.content::after{
+    content:"";
+    position:absolute;
+    left:35%;
+    bottom:-120px;
+    width:260px;
+    height:260px;
+    transform:rotate(35deg);
+    background:linear-gradient(to right,
+        transparent,
+        rgba(120,180,255,.06),
+        transparent);
 }
 </style>
 </head>
 
 <body>
 
-<header>ATOM</header>
+<header>
+    <h1>ATOM</h1>
+</header>
 
 <div class="container">
 
     <aside class="sidebar">
 
+        <h2>Navigation</h2>
+
         <div class="menu-item">
-            <button class="menu-title">📘 Online Kurse</button>
+            <button class="menu-btn">
+                Online Kurse
+                <span class="arrow">▶</span>
+            </button>
             <div class="submenu">
                 <a href="#">Webentwicklung</a>
                 <a href="#">Python</a>
                 <a href="#">JavaScript</a>
-                <a href="#">UI Design</a>
+                <a href="#">KI & Automatisierung</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">📊 Dashboard</button>
+            <button class="menu-btn">Dashboard <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Übersicht</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">💼 Projekte</button>
+            <button class="menu-btn">Projekte <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Meine Projekte</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">📂 Ressourcen</button>
+            <button class="menu-btn">Dokumente <span class="arrow">▶</span></button>
             <div class="submenu">
-                <a href="#">Dateien</a>
+                <a href="#">PDFs</a>
+                <a href="#">Vorlagen</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">👥 Community</button>
+            <button class="menu-btn">Community <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Forum</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">⬇ Downloads</button>
+            <button class="menu-btn">Downloads <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Material</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">📅 Kalender</button>
+            <button class="menu-btn">Kalender <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Termine</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">🏆 Zertifikate</button>
+            <button class="menu-btn">Zertifikate <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Meine Zertifikate</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">⚙ Einstellungen</button>
+            <button class="menu-btn">Einstellungen <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Profil</a>
+                <a href="#">Sicherheit</a>
             </div>
         </div>
 
         <div class="menu-item">
-            <button class="menu-title">❓ Hilfe</button>
+            <button class="menu-btn">Hilfe <span class="arrow">▶</span></button>
             <div class="submenu">
                 <a href="#">Support</a>
             </div>
@@ -206,8 +261,7 @@ header{
     </aside>
 
     <main class="content">
-        <h1>Willkommen bei ATOM</h1>
-        <p>Dunkelblaues Design mit ausklappbarem Seitenmenü.</p>
+        <!-- Hauptbereich bleibt bewusst leer -->
     </main>
 
 </div>
