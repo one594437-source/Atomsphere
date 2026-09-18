@@ -1,549 +1,307 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATOM — Dashboard</title>
+<title>ATOM</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter, Arial, Helvetica, sans-serif;
-}
-
-:root{
-    --bg:#000B2E;
-    --surface:rgba(255,255,255,.045);
-    --surface-hover:rgba(255,255,255,.075);
-    --border:rgba(255,255,255,.08);
-    --blue:#4D9BFF;
-    --blue-light:#91C5FF;
-    --text:#FFFFFF;
-    --muted:#8298BC;
-}
-
-html,
-body{
-    width:100%;
-    height:100%;
-}
-
-body{
-    background:var(--bg);
-    color:var(--text);
-    overflow:hidden;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-    height:78px;
-    background:var(--bg);
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 32px;
-
-    border-bottom:1px solid var(--border);
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.brand-mark{
-    width:38px;
-    height:38px;
-
-    border:1px solid rgba(77,155,255,.5);
-    border-radius:11px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--blue);
-    font-size:18px;
-    font-weight:bold;
-
-    box-shadow:
-        0 0 20px rgba(77,155,255,.12);
-}
-
-header h1{
-    font-size:25px;
-    letter-spacing:9px;
-    font-weight:700;
-}
-
-.header-right{
-    display:flex;
-    align-items:center;
-    gap:22px;
-}
-
-.status{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    color:var(--muted);
-    font-size:12px;
-}
-
-.status-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#4DFF9A;
-
-    box-shadow:0 0 10px rgba(77,255,154,.7);
-}
-
-.profile{
-    width:38px;
-    height:38px;
-
-    border-radius:50%;
-
-    background:linear-gradient(
-        135deg,
-        #173A78,
-        #0A1C4A
-    );
-
-    border:1px solid var(--border);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:14px;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.container{
-    display:flex;
-    height:calc(100vh - 78px);
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar{
-    width:250px;
-
-    background:var(--bg);
-
-    border-right:1px solid var(--border);
-
-    padding:25px 16px;
-
-    overflow-y:auto;
-}
-
-.sidebar-label{
-    color:#50688F;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:2px;
-    text-transform:uppercase;
-
-    padding:0 12px;
-    margin-bottom:12px;
-}
-
-.menu-item{
-    margin-bottom:4px;
-}
-
-.menu-title{
-    width:100%;
-
-    background:transparent;
-    color:#9AAED0;
-
-    border:none;
-
-    padding:11px 12px;
-
-    border-radius:9px;
-
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    transition:.2s;
-
-    font-size:14px;
-}
-
-.menu-title:hover{
-    background:var(--surface);
-    color:white;
-}
-
-.menu-item.active .menu-title{
-    background:rgba(77,155,255,.10);
-    color:white;
-
-    box-shadow:
-        inset 2px 0 0 var(--blue);
-}
-
-.left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.icon{
-    width:27px;
-    height:27px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:#7595C4;
-
-    font-size:15px;
-}
-
-.menu-item.active .icon{
-    color:var(--blue);
-}
-
-.arrow{
-    font-size:10px;
-    color:#50688F;
-
-    transition:.2s;
-}
-
-.menu-item:hover .arrow{
-    transform:rotate(90deg);
-}
-
-.submenu{
-    max-height:0;
-    overflow:hidden;
-
-    transition:max-height .25s ease;
-
-    padding-left:40px;
-}
-
-.menu-item:hover .submenu{
-    max-height:180px;
-}
-
-.submenu a{
-    display:block;
-
-    text-decoration:none;
-
-    color:#647B9F;
-
-    padding:7px 10px;
-
-    font-size:12px;
-
-    transition:.2s;
-}
-
-.submenu a:hover{
-    color:var(--blue-light);
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.content{
-    flex:1;
-
-    padding:42px 48px;
-
-    overflow:auto;
-}
-
-/* =========================
-   WELCOME
-========================= */
-
-.welcome{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-
-    margin-bottom:35px;
-}
-
-.welcome h2{
-    font-size:31px;
-    font-weight:600;
-
-    margin-bottom:8px;
-}
-
-.welcome p{
-    color:var(--muted);
-    font-size:14px;
-}
-
-.date{
-    color:#526B94;
-    font-size:12px;
-}
-
-/* =========================
-   STATS
-========================= */
-
-.stats{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:16px;
-
-    margin-bottom:28px;
-}
-
-.card{
-    background:var(--surface);
-
-    border:1px solid var(--border);
-
-    border-radius:14px;
-
-    padding:22px;
-
-    transition:.25s;
-}
-
-.card:hover{
-    background:var(--surface-hover);
-
-    border-color:rgba(77,155,255,.20);
-
-    transform:translateY(-2px);
-}
-
-.stat-label{
-    color:#647B9F;
-    font-size:12px;
-
-    margin-bottom:12px;
-}
-
-.stat-value{
-    font-size:28px;
-    font-weight:600;
-}
-
-.stat-change{
-    margin-top:8px;
-
-    color:#5DFFB0;
-    font-size:11px;
-}
-
-/* =========================
-   MAIN GRID
-========================= */
-
-.dashboard-grid{
-    display:grid;
-
-    grid-template-columns:
-        1.6fr 1fr;
-
-    gap:18px;
-}
-
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:18px;
-}
-
-.section-title h3{
-    font-size:16px;
-    font-weight:500;
-}
-
-.section-title span{
-    color:#526B94;
-    font-size:11px;
-}
-
-/* =========================
-   COURSES
-========================= */
-
-.course{
-    padding:16px 0;
-
-    border-bottom:1px solid rgba(255,255,255,.055);
-}
-
-.course:last-child{
-    border-bottom:none;
-}
-
-.course-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:9px;
-}
-
-.course-name{
-    font-size:13px;
-}
-
-.course-percent{
-    color:#7189AE;
-    font-size:11px;
-}
-
-.progress{
-    width:100%;
-    height:5px;
-
-    background:rgba(255,255,255,.06);
-
-    border-radius:10px;
-
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-
-    background:var(--blue);
-
-    border-radius:10px;
-
-    box-shadow:
-        0 0 12px rgba(77,155,255,.45);
-}
-
-/* =========================
-   ACTIVITY
-========================= */
-
-.activity{
-    display:flex;
-    gap:13px;
-
-    padding:13px 0;
-
-    border-bottom:1px solid rgba(255,255,255,.055);
-}
-
-.activity:last-child{
-    border-bottom:none;
-}
-
-.activity-icon{
-    width:32px;
-    height:32px;
-
-    border-radius:9px;
-
-    background:rgba(77,155,255,.08);
-
-    color:var(--blue);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.activity-text{
-    flex:1;
-}
-
-.activity-text strong{
-    display:block;
-
-    font-size:12px;
-    font-weight:500;
-
-    margin-bottom:4px;
-}
-
-.activity-text span{
-    color:#526B94;
-    font-size:10px;
-}
-
-/* =========================
-   SCROLLBAR
-========================= */
-
-.sidebar::-webkit-scrollbar,
-.content::-webkit-scrollbar{
-    width:5px;
-}
-
-.sidebar::-webkit-scrollbar-track,
-.content::-webkit-scrollbar-track{
-    background:transparent;
-}
-
-.sidebar::-webkit-scrollbar-thumb,
-.content::-webkit-scrollbar-thumb{
-    background:#12295A;
-    border-radius:10px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:900px){
-
-    .sidebar{
-        width:210px;
+    :root {
+        --bg: #000B2E;
+        --surface: rgba(255, 255, 255, 0.045);
+        --surface-hover: rgba(255, 255, 255, 0.075);
+        --border: rgba(255, 255, 255, 0.08);
+        --blue: #4D9BFF;
+        --text: #FFFFFF;
+        --muted: #8298BC;
     }
 
-    .content{
-        padding:30px;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
+    body {
+        font-family: Inter, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
     }
 
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
-}
+    /* HEADER */
+    header {
+        height: 78px;
+        width: 100%;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
 
+        display: flex;
+        align-items: center;
+        padding: 0 24px;
+
+        position: relative;
+        z-index: 10;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+    }
+
+    .brand-mark {
+        width: 38px;
+        height: 38px;
+
+        border: 1px solid rgba(77, 155, 255, 0.5);
+        border-radius: 11px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--blue);
+        font-size: 17px;
+        font-weight: 700;
+
+        box-shadow: 0 0 20px rgba(77, 155, 255, 0.08);
+    }
+
+    header h1 {
+        font-size: 25px;
+        font-weight: 600;
+        letter-spacing: 9px;
+    }
+
+    .header-right {
+        margin-left: auto;
+
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }
+
+    .status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #49D17D;
+        box-shadow: 0 0 10px rgba(73, 209, 125, 0.5);
+    }
+
+    .profile {
+        width: 38px;
+        height: 38px;
+
+        border-radius: 50%;
+        background: var(--surface);
+
+        border: 1px solid var(--border);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--muted);
+        font-size: 14px;
+    }
+
+    /* LAYOUT */
+    .container {
+        display: flex;
+        min-height: calc(100vh - 78px);
+        background: var(--bg);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        width: 250px;
+        flex-shrink: 0;
+
+        background: var(--bg);
+        border-right: 1px solid var(--border);
+
+        padding: 22px 14px;
+    }
+
+    .sidebar-label {
+        color: #58709A;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+
+        padding: 0 12px;
+        margin: 4px 0 10px;
+    }
+
+    .menu {
+        list-style: none;
+    }
+
+    .menu-item {
+        margin-bottom: 4px;
+    }
+
+    .menu-title {
+        height: 44px;
+
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        padding: 0 12px;
+
+        color: var(--muted);
+        border-radius: 10px;
+
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        font-size: 14px;
+    }
+
+    .menu-title:hover {
+        background: var(--surface-hover);
+        color: var(--text);
+    }
+
+    .menu-item.active .menu-title {
+        background: rgba(77, 155, 255, 0.10);
+        color: var(--text);
+
+        box-shadow: inset 2px 0 0 var(--blue);
+    }
+
+    .icon {
+        width: 27px;
+        height: 27px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--muted);
+        font-size: 16px;
+    }
+
+    .menu-item.active .icon {
+        color: var(--blue);
+    }
+
+    .arrow {
+        margin-left: auto;
+        font-size: 12px;
+        opacity: 0.5;
+        transition: 0.2s ease;
+    }
+
+    .menu-item:hover .arrow {
+        transform: rotate(90deg);
+    }
+
+    /* SUBMENU */
+    .submenu {
+        max-height: 0;
+        overflow: hidden;
+
+        list-style: none;
+
+        padding-left: 39px;
+
+        transition: max-height 0.25s ease;
+    }
+
+    .menu-item:hover .submenu {
+        max-height: 180px;
+    }
+
+    .submenu li {
+        padding: 8px 10px;
+
+        color: var(--muted);
+        font-size: 13px;
+
+        border-radius: 7px;
+
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .submenu li:hover {
+        background: var(--surface);
+        color: var(--text);
+    }
+
+    .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 18px 10px;
+    }
+
+    /* MAIN AREA */
+    .content {
+        flex: 1;
+        min-width: 0;
+
+        background: var(--bg);
+
+        /* Intentionally empty */
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+        .sidebar {
+            width: 210px;
+        }
+
+        .status {
+            display: none;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .sidebar {
+            width: 70px;
+            padding: 18px 8px;
+        }
+
+        .sidebar-label,
+        .menu-title span,
+        .arrow,
+        .submenu {
+            display: none;
+        }
+
+        .menu-title {
+            justify-content: center;
+            padding: 0;
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        header {
+            padding: 0 16px;
+        }
+
+        header h1 {
+            font-size: 21px;
+            letter-spacing: 6px;
+        }
+    }
 </style>
 </head>
 
@@ -552,20 +310,15 @@ header h1{
 <header>
 
     <div class="brand">
-
-        <div class="brand-mark">
-            A
-        </div>
-
+        <div class="brand-mark">A</div>
         <h1>ATOM</h1>
-
     </div>
 
     <div class="header-right">
 
         <div class="status">
-            <span class="status-dot"></span>
-            SYSTEM ONLINE
+            <div class="status-dot"></div>
+            System Online
         </div>
 
         <div class="profile">
@@ -585,542 +338,138 @@ header h1{
             Workspace
         </div>
 
+        <ul class="menu">
 
-        <div class="menu-item active">
-
-            <button class="menu-title">
-
-                <div class="left">
-
+            <li class="menu-item active">
+                <div class="menu-title">
                     <div class="icon">⌂</div>
-
-                    Dashboard
-
+                    <span>Dashboard</span>
                 </div>
-
-            </button>
-
-        </div>
+            </li>
 
 
-        <div class="menu-item">
+            <li class="menu-item">
 
-            <button class="menu-title">
-
-                <div class="left">
-
+                <div class="menu-title">
                     <div class="icon">▣</div>
-
-                    Online Kurse
-
+                    <span>Online Kurse</span>
+                    <div class="arrow">›</div>
                 </div>
 
-                <span class="arrow">›</span>
+                <ul class="submenu">
+                    <li>Webentwicklung</li>
+                    <li>Python</li>
+                    <li>JavaScript</li>
+                    <li>KI & Automatisierung</li>
+                </ul>
 
-            </button>
-
-            <div class="submenu">
-
-                <a href="#">Webentwicklung</a>
-                <a href="#">Python</a>
-                <a href="#">JavaScript</a>
-                <a href="#">KI & Automatisierung</a>
-
-            </div>
-
-        </div>
+            </li>
 
 
-        <div class="menu-item">
+            <li class="menu-item">
 
-            <button class="menu-title">
-
-                <div class="left">
-
+                <div class="menu-title">
                     <div class="icon">◇</div>
-
-                    Projekte
-
+                    <span>Projekte</span>
+                    <div class="arrow">›</div>
                 </div>
 
-                <span class="arrow">›</span>
+                <ul class="submenu">
+                    <li>Meine Projekte</li>
+                    <li>Neue Projekte</li>
+                </ul>
 
-            </button>
-
-            <div class="submenu">
-
-                <a href="#">Meine Projekte</a>
-                <a href="#">Neue Projekte</a>
-
-            </div>
-
-        </div>
+            </li>
 
 
-        <div class="menu-item">
+            <li class="menu-item">
 
-            <button class="menu-title">
-
-                <div class="left">
-
+                <div class="menu-title">
                     <div class="icon">□</div>
-
-                    Ressourcen
-
+                    <span>Ressourcen</span>
+                    <div class="arrow">›</div>
                 </div>
 
-                <span class="arrow">›</span>
+                <ul class="submenu">
+                    <li>Dateien</li>
+                    <li>Vorlagen</li>
+                </ul>
 
-            </button>
-
-            <div class="submenu">
-
-                <a href="#">Dateien</a>
-                <a href="#">Vorlagen</a>
-
-            </div>
-
-        </div>
+            </li>
 
 
-        <div class="menu-item">
+            <li class="menu-item">
 
-            <button class="menu-title">
-
-                <div class="left">
-
+                <div class="menu-title">
                     <div class="icon">○</div>
-
-                    Community
-
+                    <span>Community</span>
+                    <div class="arrow">›</div>
                 </div>
 
-                <span class="arrow">›</span>
+                <ul class="submenu">
+                    <li>Forum</li>
+                    <li>Gruppen</li>
+                </ul>
 
-            </button>
-
-            <div class="submenu">
-
-                <a href="#">Forum</a>
-                <a href="#">Gruppen</a>
-
-            </div>
-
-        </div>
+            </li>
 
 
-        <div class="menu-item">
-
-            <button class="menu-title">
-
-                <div class="left">
-
+            <li class="menu-item">
+                <div class="menu-title">
                     <div class="icon">↓</div>
-
-                    Downloads
-
+                    <span>Downloads</span>
                 </div>
-
-            </button>
-
-        </div>
+            </li>
 
 
-        <div class="menu-item">
-
-            <button class="menu-title">
-
-                <div class="left">
-
+            <li class="menu-item">
+                <div class="menu-title">
                     <div class="icon">◷</div>
-
-                    Kalender
-
+                    <span>Kalender</span>
                 </div>
-
-            </button>
-
-        </div>
+            </li>
 
 
-        <div class="menu-item">
-
-            <button class="menu-title">
-
-                <div class="left">
-
+            <li class="menu-item">
+                <div class="menu-title">
                     <div class="icon">◇</div>
-
-                    Zertifikate
-
+                    <span>Zertifikate</span>
                 </div>
+            </li>
 
-            </button>
-
-        </div>
+        </ul>
 
 
-        <div class="sidebar-label" style="margin-top:28px;">
+        <div class="divider"></div>
+
+
+        <div class="sidebar-label">
             System
         </div>
 
+        <ul class="menu">
 
-        <div class="menu-item">
-
-            <button class="menu-title">
-
-                <div class="left">
-
+            <li class="menu-item">
+                <div class="menu-title">
                     <div class="icon">⚙</div>
-
-                    Einstellungen
-
+                    <span>Einstellungen</span>
                 </div>
+            </li>
 
-            </button>
-
-        </div>
-
-
-        <div class="menu-item">
-
-            <button class="menu-title">
-
-                <div class="left">
-
+            <li class="menu-item">
+                <div class="menu-title">
                     <div class="icon">?</div>
-
-                    Hilfe
-
+                    <span>Hilfe</span>
                 </div>
+            </li>
 
-            </button>
-
-        </div>
+        </ul>
 
     </aside>
 
 
-    <main class="content">
-
-        <div class="welcome">
-
-            <div>
-
-                <h2>Good morning, Alex.</h2>
-
-                <p>
-                    Continue where you left off.
-                </p>
-
-            </div>
-
-            <div class="date">
-                MONDAY · 19 SEPTEMBER 2026
-            </div>
-
-        </div>
-
-
-        <div class="stats">
-
-            <div class="card">
-
-                <div class="stat-label">
-                    COURSE PROGRESS
-                </div>
-
-                <div class="stat-value">
-                    72%
-                </div>
-
-                <div class="stat-change">
-                    +8% this week
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="stat-label">
-                    ACTIVE PROJECTS
-                </div>
-
-                <div class="stat-value">
-                    4
-                </div>
-
-                <div class="stat-change">
-                    2 updated today
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="stat-label">
-                    LEARNING HOURS
-                </div>
-
-                <div class="stat-value">
-                    24.5
-                </div>
-
-                <div class="stat-change">
-                    +3.2h this week
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="stat-label">
-                    CERTIFICATES
-                </div>
-
-                <div class="stat-value">
-                    7
-                </div>
-
-                <div class="stat-change">
-                    1 new
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="dashboard-grid">
-
-
-            <div class="card">
-
-                <div class="section-title">
-
-                    <h3>
-                        Continue Learning
-                    </h3>
-
-                    <span>
-                        VIEW ALL →
-                    </span>
-
-                </div>
-
-
-                <div class="course">
-
-                    <div class="course-top">
-
-                        <span class="course-name">
-                            Web Development
-                        </span>
-
-                        <span class="course-percent">
-                            72%
-                        </span>
-
-                    </div>
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-                            style="width:72%">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="course">
-
-                    <div class="course-top">
-
-                        <span class="course-name">
-                            Python
-                        </span>
-
-                        <span class="course-percent">
-                            48%
-                        </span>
-
-                    </div>
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-                            style="width:48%">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="course">
-
-                    <div class="course-top">
-
-                        <span class="course-name">
-                            AI & Automation
-                        </span>
-
-                        <span class="course-percent">
-                            31%
-                        </span>
-
-                    </div>
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-                            style="width:31%">
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="course">
-
-                    <div class="course-top">
-
-                        <span class="course-name">
-                            JavaScript
-                        </span>
-
-                        <span class="course-percent">
-                            19%
-                        </span>
-
-                    </div>
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-                            style="width:19%">
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="section-title">
-
-                    <h3>
-                        Recent Activity
-                    </h3>
-
-                    <span>
-                        HISTORY
-                    </span>
-
-                </div>
-
-
-                <div class="activity">
-
-                    <div class="activity-icon">
-                        ✓
-                    </div>
-
-                    <div class="activity-text">
-
-                        <strong>
-                            Completed Python Basics
-                        </strong>
-
-                        <span>
-                            2 hours ago
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="activity">
-
-                    <div class="activity-icon">
-                        +
-                    </div>
-
-                    <div class="activity-text">
-
-                        <strong>
-                            Started AI Automation
-                        </strong>
-
-                        <span>
-                            Yesterday
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="activity">
-
-                    <div class="activity-icon">
-                        ◇
-                    </div>
-
-                    <div class="activity-text">
-
-                        <strong>
-                            Certificate unlocked
-                        </strong>
-
-                        <span>
-                            2 days ago
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="activity">
-
-                    <div class="activity-icon">
-                        →
-                    </div>
-
-                    <div class="activity-text">
-
-                        <strong>
-                            Project updated
-                        </strong>
-
-                        <span>
-                            3 days ago
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </main>
+    <!-- EMPTY MAIN WORKSPACE -->
+    <main class="content"></main>
 
 </div>
 
