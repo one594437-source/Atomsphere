@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -39,6 +40,7 @@
 
         video {
             width: 100%;
+            height: auto;
             display: block;
             border-radius: 12px;
             background: #000;
@@ -52,8 +54,8 @@
     <h1>ATOM</h1>
 
     <div class="video-container">
-        <video controls>
-            <source src="video.mp4" type="video/mp4">
+        <video controls playsinline preload="metadata">
+            <source src="./video.mp4" type="video/mp4">
             Dein Browser unterstützt dieses Video nicht.
         </video>
     </div>
