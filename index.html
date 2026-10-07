@@ -1,10 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ATOM</title>
 
     <style>
@@ -34,8 +32,7 @@
 
         .video-container {
             width: min(90%, 1100px);
-            margin-top: 70px;
-            margin-bottom: 70px;
+            margin: 70px auto;
         }
 
         video {
@@ -54,12 +51,11 @@
     <h1>ATOM</h1>
 
     <div class="video-container">
-        <video controls playsinline preload="metadata">
-            <source src="./video.mp4" type="video/mp4">
+        <video controls playsinline preload="auto">
+            <source src="video.mp4" type="video/mp4">
             Dein Browser unterstützt dieses Video nicht.
         </video>
     </div>
 
 </body>
 </html>
-```
