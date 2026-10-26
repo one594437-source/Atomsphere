@@ -1,142 +1,279 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paprika | ATOM WORLD</title>
+  <meta name="description" content="Getrocknete rote Paprikaschoten, 100 g. Jetzt bei ATOM WORLD bestellen.">
 
-<section class="product-card">
-  <h1>Wilton Cookie Press</h1>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <div class="product-images">
-    <img
-      src="https://tortenwelt.at/cdn/shop/files/d0d4f9c7b95d4030aa3a992f168426a9de8ff321_366d137f-833c-4de4-a38b-5e1ad86266e9.jpg?v=1774786312&width=600"
-      alt="Wilton Preferred Press Cookie Press beim Formen von Keksen"
-    />
-
-    <img
-      src="https://tortenwelt.at/cdn/shop/files/8e4dc96f95b803e71d381a7099b464c17668c9f0_722c9d6b-09e1-4d2b-b50f-75462c60c197.jpg?v=1774786312&width=600"
-      alt="Wilton Cookie Press mit verschiedenen Gebäckscheiben"
-    />
-
-    <img
-      src="https://tortenwelt.at/cdn/shop/files/2a91d31db4b507155bc2c44181ac51ae52832f11_d1bb305e-95ae-43e0-99be-ab004b882e9d.jpg?v=1774786312&width=600"
-      alt="Wilton Preferred Press Cookie Press"
-    />
-  </div>
-
-  <p class="product-description">
-    Stellen Sie mit der Wilton Preferred Press® Cookie Press
-    wunderschöne Kekse her! Die Cookie Press wurde aus robustem
-    Metall gefertigt und eignet sich für eine langlebige Nutzung.
-    Der durchsichtige Behälter ermöglicht es Ihnen, jederzeit
-    zu sehen, wie viel Teig noch vorhanden ist.
-
-    <br /><br />
-
-    Der ergonomische Soft Grip sorgt für angenehmen Komfort
-    beim Arbeiten. Mit den 12 verschiedenen Gebäckscheiben
-    können Sie klassische Kekse, saisonale Motive und moderne
-    Formen ganz einfach selbst herstellen.
-  </p>
-
-  <div class="product-details">
-    <h3>Produktdetails</h3>
-    <ul>
-      <li>Robuste Metallausführung</li>
-      <li>Transparenter Teigbehälter</li>
-      <li>Ergonomischer Soft Grip</li>
-      <li>12 verschiedene Gebäckscheiben aus Metall</li>
-    </ul>
-    <p><strong>Lieferumfang:</strong> Cookie Press und 12 Metallplättchen</p>
-  </div>
-
-  <div class="product-price">45,00 €</div>
-
-  <!-- Hier deinen Stripe-Zahlungslink einfügen -->
-  <a
-    href="https://buy.stripe.com/dRm9AUgf8frG5Gm8MX2wU0a"
-    class="buy-button"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Jetzt kaufen
-  </a>
-</section>
-
-<style>
-  .product-card {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 24px;
-    font-family: Arial, sans-serif;
-    color: #333;
-  }
-
-  .product-card h1 {
-    font-size: 30px;
-    margin-bottom: 20px;
-  }
-
-  .product-images {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .product-images img {
-    width: 100%;
-    height: 240px;
-    object-fit: contain;
-    border-radius: 8px;
-    background: #f8f8f8;
-  }
-
-  .product-description {
-    font-size: 16px;
-    line-height: 1.7;
-  }
-
-  .product-details {
-    margin-top: 24px;
-  }
-
-  .product-details h3 {
-    font-size: 20px;
-  }
-
-  .product-details li {
-    margin-bottom: 8px;
-  }
-
-  .product-price {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 24px 0 18px;
-  }
-
-  .buy-button {
-    display: inline-block;
-    padding: 14px 28px;
-    background: #6b3e91;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background 0.2s ease;
-  }
-
-  .buy-button:hover {
-    background: #512d70;
-  }
-
-  @media (max-width: 600px) {
-    .product-images {
-      grid-template-columns: 1fr;
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #faf8f6;
+      color: #222;
     }
 
-    .product-images img {
-      height: auto;
-      max-height: 350px;
+    header {
+      background: #fff;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
     }
 
-    .product-card h1 {
-      font-size: 25px;
+    .logo {
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 2px;
     }
-  }
-</style>
+
+    .logo span { color: #c71920; }
+
+    header a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px 35px;
+    }
+
+    .hero p {
+      color: #c71920;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(36px, 6vw, 58px);
+      margin-top: 14px;
+    }
+
+    .hero .subtitle {
+      color: #777;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 16px;
+      font-weight: normal;
+      margin-top: 14px;
+    }
+
+    .shop {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 20px 25px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .product-image {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-height: 650px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .product-info .category {
+      color: #c71920;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .product-info h2 {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      margin: 15px 0 8px;
+    }
+
+    .weight {
+      font-weight: bold;
+      margin-bottom: 22px;
+    }
+
+    .description {
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .features li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e8e2df;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 25px 0 18px;
+    }
+
+    .buy-button {
+      display: block;
+      background: #c71920;
+      color: white;
+      text-align: center;
+      padding: 18px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .buy-button:hover { background: #981219; }
+
+    .shipping {
+      text-align: center;
+      color: #888;
+      font-size: 12px;
+      margin-top: 13px;
+    }
+
+    .about {
+      background: white;
+      padding: 45px 20px;
+      text-align: center;
+      border-top: 1px solid #eee;
+    }
+
+    .about h3 {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .about p {
+      color: #777;
+      line-height: 1.7;
+      max-width: 550px;
+      margin: auto;
+    }
+
+    footer {
+      background: #202020;
+      color: #ccc;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    @media (max-width: 700px) {
+      header { padding: 18px 5%; }
+      .shop {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 15px 20px 50px;
+      }
+      .product-info h2 { font-size: 36px; }
+      .hero { padding-top: 40px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">ATOM <span>WORLD</span></div>
+    <a href="#produkt">Shop</a>
+  </header>
+
+  <section class="hero">
+    <p>ATOM WORLD SHOP</p>
+    <h1>Natürlicher Geschmack.</h1>
+    <p class="subtitle">Entdecke unsere getrocknete Paprika.</p>
+  </section>
+
+  <main>
+    <section class="shop" id="produkt">
+
+      <div class="product-image">
+        <!-- Upload your product photo to GitHub as paprika.png -->
+        <img src="paprika.png" alt="ATOM WORLD Paprika, 100 g">
+      </div>
+
+      <div class="product-info">
+        <div class="category">Unsere Auswahl</div>
+        <h2>Paprika</h2>
+        <p class="weight">Getrocknete rote Paprikaschoten · 100 g</p>
+
+        <p class="description">
+          Getrocknete, ganze rote Paprikaschoten mit intensivem Geschmack
+          und natürlichem Aroma. Ideal zum Kochen, Würzen und Verfeinern
+          deiner Lieblingsgerichte.
+        </p>
+
+        <ul class="features">
+          <li><strong>Inhalt:</strong> 100 g</li>
+          <li><strong>Ursprung:</strong> Europa</li>
+          <li><strong>Verwendung:</strong> Suppen, Eintöpfe, Saucen,
+            Fleischgerichte und Gemüse</li>
+        </ul>
+
+        <!-- Change the price below to your real selling price -->
+        <div class="price">€ 4,90</div>
+
+        <!-- PASTE YOUR STRIPE PAYMENT LINK IN THE href BELOW -->
+        <a class="buy-button"
+           href="YOUR_STRIPE_PAYMENT_LINK"
+           id="buyButton">
+          Jetzt kaufen →
+        </a>
+
+        <p class="shipping">Sicherer Checkout · ATOM WORLD</p>
+      </div>
+
+    </section>
+
+    <section class="about">
+      <h3>Willkommen bei ATOM WORLD</h3>
+      <p>
+        Entdecke unsere Produkte und bestelle bequem online.
+        Wir freuen uns auf deine Bestellung!
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 ATOM WORLD · Alle Rechte vorbehalten
+  </footer>
+
+  <script>
+    document.getElementById("buyButton").addEventListener("click", function(event) {
+      if (this.getAttribute("href") === "YOUR_STRIPE_PAYMENT_LINK") {
+        event.preventDefault();
+        alert("Bitte füge zuerst deinen Stripe Payment Link in index.html ein.");
+      }
+    });
+  </script>
+
+</body>
+</html>
+```
