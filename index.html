@@ -1,278 +1,478 @@
+```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paprika | ATOM WORLD</title>
-  <meta name="description" content="Getrocknete rote Paprikaschoten, 100 g. Jetzt bei ATOM WORLD bestellen.">
+  <meta name="theme-color" content="#a51e16">
+
+  <title>ATOM WORLD – Getrocknete Paprika</title>
+  <meta name="description" content="Entdecke ATOM WORLD getrocknete, ganze rote Paprikaschoten. Ideal zum Kochen, Würzen und Verfeinern.">
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #b51f18;
+      --red-dark: #851610;
+      --cream: #faf8f5;
+      --text: #252321;
+      --muted: #706b66;
+      --border: #e9e1da;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
+      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #faf8f6;
-      color: #222;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .announcement {
+      background: var(--red-dark);
+      color: white;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 13px;
+      letter-spacing: 0.4px;
     }
 
     header {
-      background: #fff;
-      padding: 22px 7%;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 20px 24px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #eee;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .logo {
-      font-size: 23px;
+      color: var(--red);
       font-weight: 900;
+      font-size: 25px;
       letter-spacing: 2px;
+      text-decoration: none;
     }
 
-    .logo span { color: #c71920; }
-
-    header a {
-      color: #333;
+    .nav-link {
       text-decoration: none;
       font-size: 14px;
+      font-weight: 700;
     }
 
     .hero {
-      text-align: center;
-      padding: 55px 20px 35px;
-    }
-
-    .hero p {
-      color: #c71920;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .hero h1 {
-      font-family: Georgia, serif;
-      font-size: clamp(36px, 6vw, 58px);
-      margin-top: 14px;
-    }
-
-    .hero .subtitle {
-      color: #777;
-      text-transform: none;
-      letter-spacing: 0;
-      font-size: 16px;
-      font-weight: normal;
-      margin-top: 14px;
-    }
-
-    .shop {
-      max-width: 1050px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 20px 25px 80px;
+      padding: 58px 24px 72px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 55px;
       align-items: center;
+      gap: 55px;
     }
 
     .product-image {
-      background: #fff;
-      border-radius: 14px;
-      padding: 20px;
-      text-align: center;
-      border: 1px solid #eee;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      overflow: hidden;
     }
 
     .product-image img {
-      width: 100%;
-      max-height: 650px;
-      object-fit: contain;
       display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 9px;
     }
 
-    .product-info .category {
-      color: #c71920;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 2px;
+    .eyebrow {
+      color: var(--red);
       text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 800;
     }
 
-    .product-info h2 {
-      font-family: Georgia, serif;
-      font-size: 42px;
-      margin: 15px 0 8px;
+    h1 {
+      margin: 12px 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1.08;
+      letter-spacing: -1.5px;
     }
 
-    .weight {
-      font-weight: bold;
-      margin-bottom: 22px;
+    .intro {
+      max-width: 490px;
+      color: var(--muted);
+      font-size: 17px;
     }
 
-    .description {
-      color: #666;
-      line-height: 1.8;
-      margin-bottom: 25px;
-    }
-
-    .features {
-      list-style: none;
-      margin-bottom: 25px;
-    }
-
-    .features li {
-      padding: 12px 0;
-      border-bottom: 1px solid #e8e2df;
-      line-height: 1.5;
+    .price-line {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 25px 0 5px;
     }
 
     .price {
-      font-size: 30px;
-      font-weight: bold;
-      margin: 25px 0 18px;
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .weight {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tax-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 22px;
     }
 
     .buy-button {
-      display: block;
-      background: #c71920;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 390px;
+      min-height: 54px;
+      padding: 14px 22px;
+      border-radius: 8px;
+      background: var(--red);
       color: white;
-      text-align: center;
-      padding: 18px;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: bold;
       text-decoration: none;
-      transition: background .2s;
+      font-size: 16px;
+      font-weight: 800;
+      transition: background 0.2s, transform 0.2s;
     }
 
-    .buy-button:hover { background: #981219; }
+    .buy-button:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+    }
 
-    .shipping {
+    .secure-note {
+      max-width: 390px;
       text-align: center;
-      color: #888;
+      color: var(--muted);
       font-size: 12px;
-      margin-top: 13px;
+      margin-top: 12px;
     }
 
-    .about {
+    .features {
       background: white;
-      padding: 45px 20px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .features-inner {
+      max-width: 1180px;
+      margin: auto;
+      padding: 30px 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature {
       text-align: center;
-      border-top: 1px solid #eee;
+      padding: 8px;
     }
 
-    .about h3 {
-      font-family: Georgia, serif;
-      font-size: 28px;
-      margin-bottom: 12px;
+    .feature-icon {
+      font-size: 25px;
     }
 
-    .about p {
-      color: #777;
-      line-height: 1.7;
-      max-width: 550px;
+    .feature strong {
+      display: block;
+      margin: 7px 0 3px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .details {
+      max-width: 850px;
+      margin: auto;
+      padding: 65px 24px 75px;
+    }
+
+    .details h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      text-align: center;
+      margin: 0 0 18px;
+    }
+
+    .details > p {
+      text-align: center;
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto 30px;
+    }
+
+    .details-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 30px;
+    }
+
+    .detail-row {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-row strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .detail-row span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .bottom-cta {
+      text-align: center;
+      background: #f1e8e1;
+      padding: 45px 24px;
+    }
+
+    .bottom-cta h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      margin: 0 0 12px;
+    }
+
+    .bottom-cta p {
+      color: var(--muted);
+      margin: 0 auto 22px;
+    }
+
+    .bottom-cta .buy-button {
       margin: auto;
     }
 
     footer {
-      background: #202020;
-      color: #ccc;
+      background: #252321;
+      color: white;
+      padding: 30px 24px;
       text-align: center;
-      padding: 25px 15px;
       font-size: 13px;
-      line-height: 2;
     }
 
-    @media (max-width: 700px) {
-      header { padding: 18px 5%; }
-      .shop {
+    footer p {
+      margin: 6px 0;
+      color: #ded8d2;
+    }
+
+    footer a {
+      color: white;
+      margin: 0 8px;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        padding: 16px 18px;
+      }
+
+      .hero {
         grid-template-columns: 1fr;
         gap: 30px;
-        padding: 15px 20px 50px;
+        padding: 28px 18px 45px;
       }
-      .product-info h2 { font-size: 36px; }
-      .hero { padding-top: 40px; }
+
+      .product-image {
+        max-width: 560px;
+        margin: auto;
+      }
+
+      h1 {
+        font-size: 43px;
+      }
+
+      .features-inner {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .details-list {
+        grid-template-columns: 1fr;
+      }
+
+      .buy-button,
+      .secure-note {
+        max-width: none;
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="announcement">
+    ATOM WORLD · Geschmack für deine Küche
+  </div>
 
   <header>
-    <div class="logo">ATOM <span>WORLD</span></div>
-    <a href="#produkt">Shop</a>
+    <nav class="nav">
+      <a class="logo" href="#" aria-label="ATOM WORLD Startseite">
+        ATOM WORLD
+      </a>
+      <a class="nav-link" href="#produkt">Unser Produkt</a>
+    </nav>
   </header>
 
-  <section class="hero">
-    <p>ATOM WORLD SHOP</p>
-    <h1>Natürlicher Geschmack.</h1>
-    <p class="subtitle">Entdecke unsere getrocknete Paprika.</p>
-  </section>
-
   <main>
-    <section class="shop" id="produkt">
-
+    <section class="hero" id="produkt">
       <div class="product-image">
-        <!-- Upload your product photo to GitHub as paprika.png -->
-        <img src="paprika.png" alt="ATOM WORLD Paprika, 100 g">
+        <!-- paprika.png muss im selben Ordner wie index.html liegen -->
+        <img
+          src="paprika.png"
+          alt="ATOM WORLD Paprika – vier Ansichten der Produktverpackung"
+        >
       </div>
 
       <div class="product-info">
-        <div class="category">Unsere Auswahl</div>
-        <h2>Paprika</h2>
-        <p class="weight">Getrocknete rote Paprikaschoten · 100 g</p>
+        <div class="eyebrow">ATOM WORLD · Gewürze</div>
 
-        <p class="description">
-          Getrocknete, ganze rote Paprikaschoten mit intensivem Geschmack
-          und natürlichem Aroma. Ideal zum Kochen, Würzen und Verfeinern
-          deiner Lieblingsgerichte.
+        <h1>Getrocknete rote Paprika</h1>
+
+        <p class="intro">
+          Ganze, getrocknete rote Paprikaschoten für alle, die ihren
+          Gerichten ein intensives Aroma verleihen möchten. Ideal zum
+          Kochen, Würzen und Verfeinern deiner Lieblingsrezepte.
         </p>
 
-        <ul class="features">
-          <li><strong>Inhalt:</strong> 100 g</li>
-          <li><strong>Ursprung:</strong> Europa</li>
-          <li><strong>Verwendung:</strong> Suppen, Eintöpfe, Saucen,
-            Fleischgerichte und Gemüse</li>
-        </ul>
+        <div class="price-line">
+          <span class="price">4,90 €</span>
+          <span class="weight">pro 100 g</span>
+        </div>
 
-        <!-- Change the price below to your real selling price -->
-        <div class="price">€ 4,90</div>
+        <div class="tax-note">
+          Preisangaben und Versandkosten bitte vor Veröffentlichung prüfen.
+        </div>
 
-        <!-- PASTE YOUR STRIPE PAYMENT LINK IN THE href BELOW -->
-        <a class="buy-button"
-           href="YOUR_STRIPE_PAYMENT_LINK"
-           id="buyButton">
+        <!-- ERSETZE DIE URL UNTEN DURCH DEINEN STRIPE-ZAHLUNGSLINK -->
+        <a
+          class="buy-button"
+          href="YOUR_STRIPE_PAYMENT_LINK"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Jetzt kaufen →
         </a>
 
-        <p class="shipping">Sicherer Checkout · ATOM WORLD</p>
+        <div class="secure-note">
+          Die Zahlung wird über deinen Stripe-Zahlungslink abgewickelt.
+        </div>
       </div>
-
     </section>
 
-    <section class="about">
-      <h3>Willkommen bei ATOM WORLD</h3>
+    <section class="features">
+      <div class="features-inner">
+        <div class="feature">
+          <div class="feature-icon">🌶️</div>
+          <strong>Intensives Aroma</strong>
+          <p>Getrocknete rote Paprikaschoten mit charaktervollem Geschmack.</p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🍲</div>
+          <strong>Vielseitig verwendbar</strong>
+          <p>Für Suppen, Eintöpfe, Saucen und viele weitere Gerichte.</p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">⚖️</div>
+          <strong>100 g Packung</strong>
+          <p>Ganze Paprikaschoten zum Mitkochen oder Zerkleinern.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="details">
+      <h2>Einfach würzig</h2>
+
       <p>
-        Entdecke unsere Produkte und bestelle bequem online.
-        Wir freuen uns auf deine Bestellung!
+        Verwende die getrockneten Paprikaschoten ganz oder zerkleinert,
+        je nach Rezept und gewünschtem Geschmack.
       </p>
+
+      <div class="details-list">
+        <div class="detail-row">
+          <strong>Produkt</strong>
+          <span>Getrocknete rote Paprika</span>
+        </div>
+
+        <div class="detail-row">
+          <strong>Füllmenge</strong>
+          <span>100 g</span>
+        </div>
+
+        <div class="detail-row">
+          <strong>Ursprung</strong>
+          <span>Europa – Herkunft vor Veröffentlichung bestätigen</span>
+        </div>
+
+        <div class="detail-row">
+          <strong>Verwendung</strong>
+          <span>Zum Kochen, Würzen und Verfeinern</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-cta">
+      <h2>Bereit für mehr Geschmack?</h2>
+      <p>Entdecke getrocknete rote Paprika von ATOM WORLD.</p>
+
+      <a
+        class="buy-button"
+        href="YOUR_STRIPE_PAYMENT_LINK"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Jetzt bestellen – 4,90 €
+      </a>
     </section>
   </main>
 
   <footer>
-    © 2026 ATOM WORLD · Alle Rechte vorbehalten
+    <strong>ATOM WORLD</strong>
+    <p>Getrocknete rote Paprika · 100 g</p>
+    <p>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="kontakt.html">Kontakt</a>
+    </p>
+    <p>© <span id="year"></span> ATOM WORLD. Alle Rechte vorbehalten.</p>
   </footer>
 
   <script>
-    document.getElementById("buyButton").addEventListener("click", function(event) {
-      if (this.getAttribute("href") === "YOUR_STRIPE_PAYMENT_LINK") {
-        event.preventDefault();
-        alert("Bitte füge zuerst deinen Stripe Payment Link in index.html ein.");
-      }
-    });
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
   </script>
-
 </body>
 </html>
 ```
