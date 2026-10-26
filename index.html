@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#a51e16">
 
-  <title>ATOM WORLD – Getrocknete Paprika</title>
-  <meta name="description" content="Entdecke ATOM WORLD getrocknete, ganze rote Paprikaschoten. Ideal zum Kochen, Würzen und Verfeinern.">
+  <title>ATOM WORLD – Getrocknete rote Paprika</title>
+  <meta name="description" content="Entdecke getrocknete rote Paprika von ATOM WORLD. Online bestellen oder in Wien bei VEGAN WOLF finden.">
 
   <style>
     :root {
@@ -80,7 +80,7 @@
     .hero {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 58px 24px 72px;
+      padding: 55px 24px 70px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
@@ -144,7 +144,29 @@
     .tax-note {
       color: var(--muted);
       font-size: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
+    }
+
+    .store-note {
+      margin: 22px 0;
+      padding: 17px;
+      background: #fff1ed;
+      border-left: 4px solid var(--red);
+      border-radius: 7px;
+    }
+
+    .store-note h2 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+
+    .store-note p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .store-note .address {
+      font-weight: 700;
     }
 
     .buy-button {
@@ -346,10 +368,10 @@
   <main>
     <section class="hero" id="produkt">
       <div class="product-image">
-        <!-- paprika.png muss im selben Ordner wie index.html liegen -->
+        <!-- paprika.png muss neben index.html liegen -->
         <img
-          src="paprika.png"
-          alt="ATOM WORLD Paprika – vier Ansichten der Produktverpackung"
+          src="./paprika.png"
+          alt="ATOM WORLD getrocknete rote Paprika – Produktansichten"
         >
       </div>
 
@@ -370,13 +392,21 @@
         </div>
 
         <div class="tax-note">
-          Preisangaben und Versandkosten bitte vor Veröffentlichung prüfen.
+          Versandkosten werden im Bestellprozess angegeben.
         </div>
 
-        <https://buy.stripe.com/dRm9AUaUOfrG7Ou2oz2wU0b>
+        <div class="store-note">
+          <h2>📍 Auch in Wien erhältlich!</h2>
+          <p>Gibt’s bei <strong>VEGAN WOLF</strong>:</p>
+          <p class="address">
+            Taborstraße 5 / Siebensterngasse 7
+          </p>
+        </div>
+
+        <!-- HIER DEINEN ECHTEN STRIPE-LINK EINTRAGEN -->
         <a
           class="buy-button"
-          href="https://buy.stripe.com/dRm9AUaUOfrG7Ou2oz2wU0b"
+          href="YOUR_STRIPE_PAYMENT_LINK"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -384,7 +414,7 @@
         </a>
 
         <div class="secure-note">
-          Die Zahlung wird über deinen Stripe-Zahlungslink abgewickelt.
+          Die Zahlung wird über Stripe abgewickelt.
         </div>
       </div>
     </section>
@@ -431,13 +461,13 @@
         </div>
 
         <div class="detail-row">
-          <strong>Ursprung</strong>
-          <span>Europa – Herkunft vor Veröffentlichung bestätigen</span>
+          <strong>Verwendung</strong>
+          <span>Zum Kochen, Würzen und Verfeinern</span>
         </div>
 
         <div class="detail-row">
-          <strong>Verwendung</strong>
-          <span>Zum Kochen, Würzen und Verfeinern</span>
+          <strong>Marke</strong>
+          <span>ATOM WORLD</span>
         </div>
       </div>
     </section>
@@ -446,9 +476,10 @@
       <h2>Bereit für mehr Geschmack?</h2>
       <p>Entdecke getrocknete rote Paprika von ATOM WORLD.</p>
 
+      <!-- DENSELBEN STRIPE-LINK WIE OBEN VERWENDEN -->
       <a
         class="buy-button"
-        href="https://buy.stripe.com/dRm9AUaUOfrG7Ou2oz2wU0b"
+        href="YOUR_STRIPE_PAYMENT_LINK"
         target="_blank"
         rel="noopener noreferrer"
       >
