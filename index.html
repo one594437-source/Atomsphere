@@ -1,648 +1,210 @@
+
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#a51e16">
-
-  <title>ATOM WORLD – Getrocknete rote Paprika</title>
-
-  <meta name="description"
-        content="Getrocknete rote Paprika von ATOM WORLD. Online bestellen und mögliche Verkaufsstellen in Wien entdecken.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Atom World - Get in touch with us.">
+  <title>ATOM WORLD | Business</title>
 
   <style>
-    :root {
-      --red: #b51f18;
-      --dark: #851610;
-      --cream: #faf8f5;
-      --text: #252321;
-      --muted: #706b66;
-      --border: #e9e1da;
-      --white: #fff;
-    }
-
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .announcement {
-      background: var(--dark);
+      font-family: Arial, sans-serif;
+      background: #080d18;
       color: white;
-      text-align: center;
-      padding: 10px;
-      font-size: 13px;
-      letter-spacing: 1px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
-      background: white;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav {
-      max-width: 1150px;
-      margin: auto;
-      padding: 20px 24px;
+      padding: 28px 8%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      align-items: center;
+      border-bottom: 1px solid #202a3b;
     }
 
     .logo {
-      color: var(--red);
       font-size: 25px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-decoration: none;
-    }
-
-    .nav a:last-child {
-      text-decoration: none;
       font-weight: bold;
+      letter-spacing: 3px;
+      color: #55d6ff;
     }
 
     .hero {
-      max-width: 1150px;
-      margin: auto;
-      padding: 55px 24px 70px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 50px;
-    }
-
-    .product-image {
-      padding: 12px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    .product-image img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .eyebrow {
-      color: var(--red);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-family: Georgia, serif;
-      font-size: clamp(38px, 5vw, 60px);
-      line-height: 1.1;
-      margin: 12px 0 18px;
-    }
-
-    .intro {
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    .price {
-      margin: 22px 0 0;
-      font-size: 32px;
-      font-weight: 800;
-    }
-
-    .weight, .tax-note {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .store-note {
-      margin: 22px 0;
-      padding: 16px;
-      background: #fff1ed;
-      border-left: 4px solid var(--red);
-      border-radius: 6px;
-      font-weight: bold;
-    }
-
-    .buy-button {
+      flex: 1;
+      min-height: 75vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      max-width: 400px;
-      min-height: 54px;
-      padding: 14px 20px;
-      background: var(--red);
-      color: white;
-      border-radius: 8px;
+      text-align: center;
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at center, #142b49 0%, #080d18 65%);
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 8vw, 80px);
+      letter-spacing: 5px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #55d6ff;
+    }
+
+    .hero p {
+      color: #aab8cb;
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 35px;
+    }
+
+    .contact-button {
+      display: inline-block;
+      padding: 16px 38px;
+      background: #55d6ff;
+      color: #080d18;
       text-decoration: none;
       font-weight: bold;
-      transition: background .2s;
+      border-radius: 5px;
+      transition: 0.3s;
     }
 
-    .buy-button:hover {
-      background: var(--dark);
-    }
-
-    .secure-note {
-      max-width: 400px;
-      margin-top: 10px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .features {
+    .contact-button:hover {
       background: white;
-      border-block: 1px solid var(--border);
-    }
-
-    .features-inner {
-      max-width: 1150px;
-      margin: auto;
-      padding: 30px 24px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .feature {
-      text-align: center;
-    }
-
-    .feature-icon {
-      font-size: 27px;
-    }
-
-    .feature strong {
-      display: block;
-      margin: 8px 0 4px;
-    }
-
-    .feature p {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .section {
-      max-width: 1150px;
-      margin: auto;
-      padding: 60px 24px;
-    }
-
-    .section h2 {
-      font-family: Georgia, serif;
-      font-size: 34px;
-      text-align: center;
-      margin: 0 0 14px;
-    }
-
-    .section-intro {
-      max-width: 750px;
-      margin: 0 auto 30px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .stores {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .store {
-      padding: 18px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .store h3 {
-      margin: 0 0 6px;
-      font-size: 16px;
-    }
-
-    .store p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .store-status {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 4px 8px;
-      background: #f4eee7;
-      border-radius: 4px;
-      color: #66584c;
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    .notice {
-      margin-top: 24px;
-      padding: 16px;
-      background: #fff1ed;
-      border-radius: 8px;
-      color: #5d332f;
-      font-size: 13px;
-    }
-
-    .details {
-      background: white;
-      border-block: 1px solid var(--border);
-    }
-
-    .details-list {
-      max-width: 750px;
-      margin: 25px auto 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 25px;
-    }
-
-    .detail {
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .detail strong, .detail span {
-      display: block;
-    }
-
-    .detail span {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .bottom-cta {
-      padding: 45px 24px;
-      background: #f1e8e1;
-      text-align: center;
-    }
-
-    .bottom-cta h2 {
-      font-family: Georgia, serif;
-      font-size: 30px;
-      margin: 0 0 10px;
-    }
-
-    .bottom-cta p {
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    .bottom-cta .buy-button {
-      margin: auto;
+      transform: translateY(-3px);
     }
 
     footer {
-      padding: 30px 20px;
-      background: #252321;
-      color: white;
+      background: #050912;
+      padding: 25px 8%;
       text-align: center;
-      font-size: 13px;
-    }
-
-    footer p {
-      color: #ded8d2;
+      border-top: 1px solid #202a3b;
+      color: #8995a8;
+      font-size: 14px;
     }
 
     footer a {
-      color: white;
-      margin: 0 8px;
+      color: #55d6ff;
+      text-decoration: none;
+      margin-left: 15px;
     }
 
-    @media (max-width: 760px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 28px;
-        padding: 28px 18px 45px;
-      }
+    footer a:hover {
+      text-decoration: underline;
+    }
 
-      .nav {
-        padding: 16px 18px;
-      }
+    /* Impressum page */
 
-      h1 {
-        font-size: 43px;
-      }
+    #impressum {
+      display: none;
+      flex: 1;
+      padding: 100px 20px;
+      text-align: center;
+    }
 
-      .features-inner, .stores, .details-list {
-        grid-template-columns: 1fr;
-      }
+    #impressum h1 {
+      font-size: 42px;
+      color: #55d6ff;
+      margin-bottom: 35px;
+    }
 
-      .section {
-        padding: 45px 18px;
-      }
+    #impressum p {
+      color: #c0cad8;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
 
-      .buy-button, .secure-note {
-        max-width: none;
-      }
+    #impressum a {
+      color: #55d6ff;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      color: #55d6ff;
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
-  <div class="announcement">
-    ATOM WORLD · GESCHMACK FÜR DEINE KÜCHE
-  </div>
 
   <header>
-    <nav class="nav">
-      <a class="logo" href="#">ATOM WORLD</a>
-      <a href="#verkaufsstellen">Verkaufsstellen</a>
-    </nav>
+    <div class="logo">ATOM WORLD</div>
   </header>
 
-  <main>
-    <section class="hero" id="produkt">
-      <div class="product-image">
-        <img
-          src="./paprika.png"
-          alt="ATOM WORLD getrocknete rote Paprika – Produktansichten"
-        >
-      </div>
+  <main class="hero" id="home">
+    <h1>ATOM <span>WORLD</span></h1>
 
-      <div>
-        <div class="eyebrow">ATOM WORLD · Gewürze</div>
+    <p>
+      Welcome to Atom World.<br>
+      Interested in working together or have a question?
+      Feel free to get in touch.
+    </p>
 
-        <h1>Getrocknete rote Paprika</h1>
-
-        <p class="intro">
-          Ganze, getrocknete rote Paprikaschoten für alle, die ihren
-          Gerichten ein intensives Aroma verleihen möchten. Ideal zum
-          Kochen, Würzen und Verfeinern deiner Lieblingsrezepte.
-        </p>
-
-        <div class="price">4,90 €</div>
-        <div class="weight">pro 100 g</div>
-
-        <p class="tax-note">
-          Versandkosten und geltende Preisangaben bitte vor Veröffentlichung prüfen.
-        </p>
-
-        <div class="store-note">
-          Gibt’s in Wien beim VEGAN WOLF
-        </div>
-
-        <!-- ERSETZE DURCH DEINEN ECHTEN STRIPE-LINK -->
-        <a
-          class="buy-button"
-          href="YOUR_STRIPE_PAYMENT_LINK"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Jetzt kaufen →
-        </a>
-
-        <div class="secure-note">
-          Die Zahlung wird über Stripe abgewickelt.
-        </div>
-      </div>
-    </section>
-
-    <section class="features">
-      <div class="features-inner">
-        <div class="feature">
-          <div class="feature-icon">🌶️</div>
-          <strong>Intensives Aroma</strong>
-          <p>Getrocknete rote Paprikaschoten mit charaktervollem Geschmack.</p>
-        </div>
-
-        <div class="feature">
-          <div class="feature-icon">🍲</div>
-          <strong>Vielseitig verwendbar</strong>
-          <p>Für Suppen, Eintöpfe, Saucen und viele weitere Gerichte.</p>
-        </div>
-
-        <div class="feature">
-          <div class="feature-icon">⚖️</div>
-          <strong>100 g Packung</strong>
-          <p>Ganze Paprikaschoten zum Mitkochen oder Zerkleinern.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="verkaufsstellen">
-      <h2>Weitere Geschäfte in Wien</h2>
-
-      <p class="section-intro">
-        Du möchtest ATOM WORLD in einem Geschäft anbieten?
-        Hier findest du Wiener Gewürz- und Lebensmittelgeschäfte,
-        die als mögliche Handelspartner infrage kommen.
-      </p>
-
-      <div class="stores">
-
-        <article class="store">
-          <h3>1. Gewürze & Co am Naschmarkt</h3>
-          <p>Naschmarkt, Stand 324–325, 1060 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>2. Babette’s – Spice and Books for Cooks</h3>
-          <p>Am Hof 13, 1010 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>3. SONNENTOR Neubaugasse</h3>
-          <p>Neubaugasse 29, 1070 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>4. SONNENTOR Wollzeile</h3>
-          <p>Wollzeile 14, 1010 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>5. SONNENTOR Landstraße</h3>
-          <p>Landstraßer Hauptstraße 24, 1030 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>6. Julius Meinl am Graben</h3>
-          <p>Graben 19, 1010 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>7. CHILI-WERKSTATT</h3>
-          <p>Pilgramgasse 16, 1050 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>8. BenCondito – Wiener GewürzManufaktur</h3>
-          <p>Floridsdorfer Markt 8, 1210 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>9. PROSI Exotic Supermarket</h3>
-          <p>Neubaugürtel 44, 1070 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>10. Mayan Minimarket</h3>
-          <p>Breitenfurter Straße 291, 1230 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>11. Oriental Land Markt</h3>
-          <p>Landstraßer Hauptstraße 173–175, 1030 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>12. Broth3rs Asia Food Store</h3>
-          <p>Favoritenstraße 178, 1100 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>13. Broth3rs Asia Food Store</h3>
-          <p>Neulerchenfelder Straße 32, 1160 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>14. Broth3rs Asia Food Store</h3>
-          <p>Landstraßer Hauptstraße 87–89, 1030 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>15. Ner International Food Store</h3>
-          <p>Hernalser Hauptstraße 11, 1170 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>16. Everest Imbiss & Exotic Products</h3>
-          <p>Veronikagasse 5, 1160 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>17. Maran Vegan</h3>
-          <p>Stumpergasse 57, 1060 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>18. Superfood Deli</h3>
-          <p>Wipplingerstraße 3, 1010 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>19. Olivenhain greek.deli.Wien</h3>
-          <p>Taborstraße 8b, Tür 2, 1020 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-        <article class="store">
-          <h3>20. Leitenbauer Delikatessen</h3>
-          <p>Neubaugasse 71, 1070 Wien</p>
-          <span class="store-status">Verfügbarkeit anfragen</span>
-        </article>
-
-      </div>
-
-      <div class="notice">
-        <strong>Wichtiger Hinweis:</strong>
-        Diese Geschäfte sind mögliche Handelspartner. Es ist nicht bestätigt,
-        dass sie ATOM WORLD Paprika bereits führen. Bitte nimm zuerst Kontakt
-        mit ihnen auf und ergänze nur bestätigte Verkaufsstellen als
-        „Hier erhältlich“.
-      </div>
-    </section>
-
-    <section class="details">
-      <div class="section">
-        <h2>Produktdetails</h2>
-
-        <div class="details-list">
-          <div class="detail">
-            <strong>Produkt</strong>
-            <span>Getrocknete rote Paprika</span>
-          </div>
-
-          <div class="detail">
-            <strong>Füllmenge</strong>
-            <span>100 g</span>
-          </div>
-
-          <div class="detail">
-            <strong>Marke</strong>
-            <span>ATOM WORLD</span>
-          </div>
-
-          <div class="detail">
-            <strong>Verwendung</strong>
-            <span>Zum Kochen und Würzen</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bottom-cta">
-      <h2>Bereit für mehr Geschmack?</h2>
-      <p>Entdecke getrocknete rote Paprika von ATOM WORLD.</p>
-
-      <a
-        class="buy-button"
-        href="YOUR_STRIPE_PAYMENT_LINK"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Jetzt bestellen – 4,90 €
-      </a>
-    </section>
+    <a class="contact-button"
+       href="mailto:one594437@gmail.com">
+       CONTACT ME
+    </a>
   </main>
 
+  <section id="impressum">
+    <h1>Impressum</h1>
+
+    <p><strong>Contact:</strong></p>
+
+    <p>
+      Email:
+      <a href="mailto:one594437@gmail.com">
+        one594437@gmail.com
+      </a>
+    </p>
+
+    <a href="#" class="back" onclick="showHome(); return false;">
+      ← Back to homepage
+    </a>
+  </section>
+
   <footer>
-    <strong>ATOM WORLD</strong>
-    <p>Getrocknete rote Paprika · 100 g</p>
+    © 2026 ATOM WORLD. All rights reserved.
 
-    <p>
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
-      <a href="kontakt.html">Kontakt</a>
-    </p>
-
-    <p>
-      © <span id="year"></span> ATOM WORLD. Alle Rechte vorbehalten.
-    </p>
+    <a href="#impressum" onclick="showImpressum(); return false;">
+      Impressum
+    </a>
   </footer>
 
   <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    function showImpressum() {
+      document.getElementById("home").style.display = "none";
+      document.getElementById("impressum").style.display = "block";
+      window.location.hash = "impressum";
+      window.scrollTo(0, 0);
+    }
+
+    function showHome() {
+      document.getElementById("impressum").style.display = "none";
+      document.getElementById("home").style.display = "flex";
+      window.location.hash = "";
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("load", function() {
+      if (window.location.hash === "#impressum") {
+        showImpressum();
+      }
+    });
   </script>
+
 </body>
 </html>
-```
-          
