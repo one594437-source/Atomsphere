@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ATOMSPHERE</title>
 
 <style>
@@ -20,7 +20,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* LEFT SIDEBAR */
+/* SIDEBAR */
 
 .sidebar {
     position: fixed;
@@ -33,6 +33,10 @@ body {
     padding: 30px 20px;
     z-index: 1000;
     transition: transform 0.3s ease;
+}
+
+.sidebar.closed {
+    transform: translateX(-100%);
 }
 
 .sidebar-header {
@@ -53,6 +57,10 @@ body {
     color: white;
     font-size: 30px;
     cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #8996ff;
 }
 
 .menu-links {
@@ -91,18 +99,13 @@ body {
     font-size: 11px;
     line-height: 2;
 }
-    .impressum-link {
+
+.impressum-link {
     display: block;
     margin-top: 5px;
     color: white;
     font-size: 11px;
     text-decoration: underline;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.impressum-link:hover {
-    color: #8996d8;
 }
 
 /* MENU BUTTON */
@@ -122,6 +125,10 @@ body {
     display: none;
 }
 
+.open-btn.visible {
+    display: block;
+}
+
 /* MAIN CONTENT */
 
 .main {
@@ -137,6 +144,10 @@ body {
         #020735 75%
     );
     transition: margin-left 0.3s ease;
+}
+
+.main.expanded {
+    margin-left: 0;
 }
 
 .logo {
@@ -157,13 +168,16 @@ body {
 /* MOBILE */
 
 @media (max-width: 768px) {
-
     .sidebar {
         transform: translateX(-100%);
     }
 
     .sidebar.open {
         transform: translateX(0);
+    }
+
+    .sidebar.closed {
+        transform: translateX(-100%);
     }
 
     .open-btn {
@@ -180,79 +194,48 @@ body {
         max-width: 550px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- LEFT MENU -->
+<!-- SIDEBAR -->
 
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-header">
-
         <h2>ATOMSPHERE</h2>
 
         <button class="close-btn"
                 onclick="closeMenu()">
             ×
         </button>
-
     </div>
 
     <ul class="menu-links">
 
         <li>
-            <a href="index.html" class="active">
-                HOME
-            </a>
+            <a href="index.html" class="active">HOME</a>
         </li>
 
         <li>
-            <a href="sample1.html">
-                VEGGIES
-            </a>
-        </li>
-
-        <li>
-            <a href="sample2.html">
-                02 — SAMPLE TWO
-            </a>
-        </li>
-
-        <li>
-            <a href="sample3.html">
-                03 — SAMPLE THREE
-            </a>
-        </li>
-
-        <li>
-            <a href="sample4.html">
-                04 — SAMPLE FOUR
-            </a>
-        </li>
-
-        <li>
-            <a href="sample5.html">
-                05 — SAMPLE FIVE
-            </a>
+            <a href="sample1.html">VEGGIES</a>
         </li>
 
     </ul>
 
-   <div class="sidebar-footer">
-    © 2026 ATOMSPHERE<br>
-    THE POWER OF GOD !
+    <div class="sidebar-footer">
+        © 2026 ATOMSPHERE<br>
+        THE POWER OF GOD !
 
-    <a href="impressum.html" class="impressum-link">
-        IMPRESSUM
-    </a>
-</div>
+        <a href="impressum.html" class="impressum-link">
+            IMPRESSUM
+        </a>
+    </div>
 
 </aside>
 
-<!-- MOBILE MENU BUTTON -->
+<!-- OPEN MENU BUTTON -->
 
 <button class="open-btn"
         id="openBtn"
@@ -263,8 +246,6 @@ body {
 <!-- HOMEPAGE -->
 
 <main class="main" id="main">
-
-    <!-- YOUR ORIGINAL UPLOADED LOGO -->
 
     <img
         src="Atomsphere.png"
@@ -282,26 +263,34 @@ body {
 
 const sidebar = document.getElementById("sidebar");
 const openBtn = document.getElementById("openBtn");
+const main = document.getElementById("main");
 
 function openMenu() {
+    sidebar.classList.remove("closed");
     sidebar.classList.add("open");
-    openBtn.style.display = "none";
+
+    openBtn.classList.remove("visible");
+    main.classList.remove("expanded");
 }
 
 function closeMenu() {
     sidebar.classList.remove("open");
-    openBtn.style.display = "block";
+    sidebar.classList.add("closed");
+
+    openBtn.classList.add("visible");
+    main.classList.add("expanded");
 }
 
-// Close sidebar when clicking outside on mobile
+// Close menu when clicking outside on mobile
 
 document.addEventListener("click", function(event) {
 
-    if (window.innerWidth <= 768 &&
+    if (
+        window.innerWidth <= 768 &&
         sidebar.classList.contains("open") &&
         !sidebar.contains(event.target) &&
-        !openBtn.contains(event.target)) {
-
+        !openBtn.contains(event.target)
+    ) {
         closeMenu();
     }
 
