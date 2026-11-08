@@ -125,10 +125,6 @@ body {
     display: none;
 }
 
-.open-btn.visible {
-    display: block;
-}
-
 /* MAIN CONTENT */
 
 .main {
@@ -137,6 +133,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 60px 25px;
     background: radial-gradient(
         ellipse at center,
@@ -219,7 +216,7 @@ body {
         </li>
 
         <li>
-            <a href="sample1.html">VEGGIES</a>
+            <a href="veggies.html">VEGGIES</a>
         </li>
 
     </ul>
@@ -269,7 +266,7 @@ function openMenu() {
     sidebar.classList.remove("closed");
     sidebar.classList.add("open");
 
-    openBtn.classList.remove("visible");
+    openBtn.style.display = "none";
     main.classList.remove("expanded");
 }
 
@@ -277,11 +274,9 @@ function closeMenu() {
     sidebar.classList.remove("open");
     sidebar.classList.add("closed");
 
-    openBtn.classList.add("visible");
+    openBtn.style.display = "block";
     main.classList.add("expanded");
 }
-
-// Close menu when clicking outside on mobile
 
 document.addEventListener("click", function(event) {
 
