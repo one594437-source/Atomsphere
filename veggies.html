@@ -1,70 +1,796 @@
 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATOMSPHERE - Veggies</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    min-height:100vh;
+    background:#020735;
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+header{
+    background:#071044;
+    padding:25px;
+    text-align:center;
+    border-bottom:2px solid #526aff;
+}
+
+header h1{
+    font-size:30px;
+    letter-spacing:3px;
+}
+
+.back{
+    display:inline-block;
+    margin:25px;
+    padding:12px 20px;
+    color:white;
+    text-decoration:none;
+    background:#152879;
+    border:1px solid #526aff;
+    border-radius:8px;
+}
+
+.page-title{
+    text-align:center;
+    margin:20px 0 15px;
+    font-size:30px;
+    letter-spacing:2px;
+    text-shadow:0 0 15px #526aff;
+}
+
+.intro{
+    text-align:center;
+    color:#c2c9ec;
+    margin:0 15px 20px;
+}
+
+/* PRODUKTE */
+
+.products{
+    max-width:1250px;
+    margin:auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:22px;
+}
+
+.product{
+    background:#071044;
+    border:1px solid #263879;
+    border-radius:12px;
+    overflow:hidden;
+    text-align:center;
+    padding-bottom:15px;
+    transition:.3s;
+}
+
+.product:hover{
+    transform:translateY(-5px);
+    border-color:#657dff;
+    box-shadow:0 0 18px #263caa;
+}
+
+.product img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+}
+
+.product h3{
+    font-size:17px;
+    margin:14px 8px 8px;
+    min-height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.price{
+    font-size:17px;
+    color:#9eafff;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.add{
+    background:#263caa;
+    color:white;
+    border:0;
+    border-radius:8px;
+    padding:11px 14px;
+    width:calc(100% - 28px);
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.add:hover{
+    background:#4058d0;
+}
+
+/* WARENKORB */
+
+.cart{
+    max-width:1210px;
+    margin:20px auto 40px;
+    padding:22px;
+    background:#071044;
+    border:1px solid #263879;
+    border-radius:14px;
+}
+
+.cart h2{
+    margin-bottom:15px;
+}
+
+.empty{
+    color:#c2c9ec;
+    padding:12px 0;
+}
+
+.cart-row{
+    display:grid;
+    grid-template-columns:1fr auto auto auto;
+    gap:14px;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #263879;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.qty button,.remove,.secondary{
+    background:#152879;
+    color:white;
+    border:1px solid #526aff;
+    border-radius:6px;
+    padding:7px 10px;
+    cursor:pointer;
+}
+
+.remove{
+    color:#ffc1c8;
+    border-color:#9b4356;
+    background:transparent;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.checkout{
+    background:#16834f;
+    color:white;
+    border:0;
+    border-radius:8px;
+    padding:14px 20px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.checkout:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+.note{
+    font-size:12px;
+    color:#c2c9ec;
+    line-height:1.5;
+    margin-top:13px;
+}
+
+/* BESTELLFORMULAR */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#000b;
+    z-index:5;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal.open{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.modal-box{
+    background:#071044;
+    border:1px solid #526aff;
+    border-radius:14px;
+    padding:24px;
+    width:min(650px,100%);
+    margin:25px auto;
+}
+
+.modal-box h2{
+    margin-bottom:8px;
+}
+
+.modal-box>p{
+    color:#c2c9ec;
+    margin-bottom:18px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+}
+
+label{
+    display:block;
+    color:#c2c9ec;
+    font-size:13px;
+}
+
+input,textarea{
+    width:100%;
+    margin-top:6px;
+    padding:12px;
+    border-radius:7px;
+    border:1px solid #526aff;
+    background:#020735;
+    color:white;
+    font:inherit;
+}
+
+textarea{
+    min-height:75px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.form-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:18px;
+}
+
+#result{
+    display:none;
+    margin-top:18px;
+    padding:15px;
+    border:1px solid #25865a;
+    border-radius:9px;
+    background:#0b382d;
+    line-height:1.6;
+}
+
+footer{
+    text-align:center;
+    color:#9da9df;
+    padding:24px;
+    font-size:12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .products{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:12px;
+        padding:12px;
+    }
+
+    .product img{
+        height:140px;
+    }
+
+    .product h3{
+        font-size:14px;
+    }
+
+    .cart-row{
+        grid-template-columns:1fr auto;
+        gap:8px;
+    }
+
+    .qty{
+        grid-column:1;
+    }
+
+    .line-price{
+        grid-column:2;
+        grid-row:1;
+    }
+
+    .remove{
+        grid-column:2;
+        grid-row:2;
+        justify-self:end;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+}
+
+@media print{
+    body{background:white;color:black}
+    .no-print,header,.back,.page-title,.intro,
+    .products,.cart,footer{
+        display:none!important;
+    }
+
+    .modal{
+        display:block;
+        position:static;
+        background:white;
+        padding:0;
+    }
+
+    .modal-box{
+        background:white;
+        color:black;
+        border:0;
+        margin:0;
+    }
+
+    .modal-box p,label{
+        color:black!important;
+    }
+
+    #result{
+        display:block;
+        background:white;
+        color:black;
+        border:1px solid #777;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>ATOMSPHERE</h1>
+</header>
+
+<a href="index.html" class="back">← HOME</a>
+
+<h2 class="page-title">VEGETABLES</h2>
+
+<p class="intro">
+    Wähle deine Produkte und füge sie deinem Warenkorb hinzu.
+</p>
+
+<!-- PRODUKTE -->
+
 <div class="products">
 
     <div class="product">
         <img src="1.jpg" alt="Spinatpulver">
         <h3>Spinatpulver</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(0)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="2.jpg" alt="Rote Rüben Pulver">
         <h3>Rote Rüben Pulver</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(1)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="3.jpg" alt="Karottenpulver">
         <h3>Karottenpulver</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(2)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="4.jpg" alt="Zucchinischeiben">
         <h3>Zucchinischeiben</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(3)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="5.jpg" alt="Rote Rüben Flocken">
         <h3>Rote Rüben Flocken</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(4)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="6.jpg" alt="Suppengemüse Würfel">
         <h3>Suppengemüse Würfel</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(5)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="7.jpg" alt="Grüne Bohnen gemahlen">
         <h3>Grüne Bohnen gemahlen</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(6)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="8.jpg" alt="Karottenstücke">
         <h3>Karottenstücke</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(7)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="9.jpg" alt="Kürbisflocken">
         <h3>Kürbisflocken</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(8)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="10.jpg" alt="Weißkrautflocken">
         <h3>Weißkrautflocken</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(9)">In den Warenkorb</button>
     </div>
 
     <div class="product">
         <img src="11.jpg" alt="Buchweizenflocken">
         <h3>Buchweizenflocken</h3>
-        <p>2,50 €</p>
+        <p class="price">2,50 €</p>
+        <button class="add" onclick="addToCart(10)">In den Warenkorb</button>
     </div>
 
 </div>
+
+<!-- WARENKORB -->
+
+<section class="cart" id="warenkorb">
+
+    <h2>🛒 Dein Warenkorb</h2>
+
+    <div id="cartItems" class="empty">
+        Dein Warenkorb ist noch leer.
+    </div>
+
+    <div class="total">
+        <span>Gesamtbetrag</span>
+        <span id="cartTotal">0,00 €</span>
+    </div>
+
+    <button class="checkout" id="checkoutButton"
+        onclick="openCheckout()" disabled>
+        Kostenpflichtig bestellen
+    </button>
+
+    <p class="note">
+        Du kannst Mengen ändern und Produkte entfernen.
+        Die Bestellübersicht kann gedruckt oder als PDF gespeichert werden.
+    </p>
+
+</section>
+
+<!-- BESTELLFORMULAR -->
+
+<div class="modal" id="checkoutModal">
+
+    <div class="modal-box">
+
+        <h2>Bestellung abschließen</h2>
+
+        <p>Bitte gib deine Kontaktdaten und Rechnungsadresse ein.</p>
+
+        <form id="checkoutForm">
+
+            <div class="form-grid">
+
+                <label>
+                    Vor- und Nachname *
+                    <input name="name" autocomplete="name" required>
+                </label>
+
+                <label>
+                    E-Mail-Adresse *
+                    <input name="email" type="email" autocomplete="email" required>
+                </label>
+
+                <label class="full">
+                    Straße und Hausnummer *
+                    <input name="street" autocomplete="street-address" required>
+                </label>
+
+                <label>
+                    PLZ *
+                    <input name="zip" autocomplete="postal-code" required>
+                </label>
+
+                <label>
+                    Ort *
+                    <input name="city" autocomplete="address-level2" required>
+                </label>
+
+                <label class="full">
+                    Nachricht (optional)
+                    <textarea name="message"></textarea>
+                </label>
+
+            </div>
+
+            <div class="form-actions no-print">
+
+                <button class="checkout" type="submit">
+                    Bestellung überprüfen
+                </button>
+
+                <button class="secondary" type="button"
+                    onclick="closeCheckout()">
+                    Abbrechen
+                </button>
+
+            </div>
+
+        </form>
+
+        <div id="result">
+
+            <h3>Bestellübersicht</h3>
+
+            <div id="orderSummary"></div>
+
+            <p style="margin-top:12px">
+                Zahlungsart: Banküberweisung.
+                Die Bankverbindung des Verkäufers wird nach Eintragung
+                deiner Kontodaten ergänzt.
+            </p>
+
+            <div class="form-actions no-print">
+
+                <button class="checkout" onclick="window.print()">
+                    Übersicht drucken / als PDF speichern
+                </button>
+
+                <button class="secondary" onclick="closeCheckout()">
+                    Schließen
+                </button>
+
+            </div>
+
+            <p class="note">
+                Wichtig: Diese Version erstellt nur eine lokale
+                Bestellübersicht. Sie versendet noch keine Bestellung
+                oder E-Mail und ist noch kein automatischer Rechnungsversand.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>© ATOMSPHERE</footer>
+
+<script>
+
+const products = [
+    "Spinatpulver",
+    "Rote Rüben Pulver",
+    "Karottenpulver",
+    "Zucchinischeiben",
+    "Rote Rüben Flocken",
+    "Suppengemüse Würfel",
+    "Grüne Bohnen gemahlen",
+    "Karottenstücke",
+    "Kürbisflocken",
+    "Weißkrautflocken",
+    "Buchweizenflocken"
+];
+
+const unitPrice = 250;
+
+let cart = {};
+
+const money = c =>
+    (c / 100).toLocaleString("de-AT", {
+        style: "currency",
+        currency: "EUR"
+    });
+
+function addToCart(i) {
+    cart[i] = (cart[i] || 0) + 1;
+    renderCart();
+}
+
+function changeQty(i, delta) {
+    cart[i] = (cart[i] || 0) + delta;
+
+    if (cart[i] <= 0) {
+        delete cart[i];
+    }
+
+    renderCart();
+}
+
+function renderCart() {
+
+    const entries = Object.entries(cart);
+
+    const count = entries.reduce(
+        (sum, [, qty]) => sum + qty, 0
+    );
+
+    const total = count * unitPrice;
+
+    document.getElementById("cartTotal").textContent =
+        money(total);
+
+    document.getElementById("checkoutButton").disabled =
+        count === 0;
+
+    const box = document.getElementById("cartItems");
+
+    if (!entries.length) {
+
+        box.className = "empty";
+        box.textContent = "Dein Warenkorb ist noch leer.";
+
+    } else {
+
+        box.className = "";
+
+        box.innerHTML = entries.map(([i, qty]) => `
+            <div class="cart-row">
+
+                <strong>${products[i]}</strong>
+
+                <div class="qty">
+                    <button onclick="changeQty(${i},-1)">−</button>
+                    <span>${qty}</span>
+                    <button onclick="changeQty(${i},1)">+</button>
+                </div>
+
+                <strong class="line-price">
+                    ${money(qty * unitPrice)}
+                </strong>
+
+                <button class="remove"
+                    onclick="changeQty(${i},-${qty})">
+                    Entfernen
+                </button>
+
+            </div>
+        `).join("");
+
+    }
+}
+
+function openCheckout() {
+
+    if (Object.keys(cart).length) {
+
+        document.getElementById("checkoutModal")
+            .classList.add("open");
+
+        document.getElementById("result").style.display = "none";
+
+        document.getElementById("checkoutForm").style.display = "block";
+
+    }
+}
+
+function closeCheckout() {
+
+    document.getElementById("checkoutModal")
+        .classList.remove("open");
+
+}
+
+function esc(s) {
+
+    return String(s).replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    }[c]));
+
+}
+
+document.getElementById("checkoutForm")
+.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const d = new FormData(e.target);
+
+    const rows = Object.entries(cart).map(([i, qty]) => `
+        <tr>
+            <td>${esc(products[i])}</td>
+            <td>${qty}</td>
+            <td>${money(unitPrice)}</td>
+            <td>${money(qty * unitPrice)}</td>
+        </tr>
+    `).join("");
+
+    const total = Object.values(cart).reduce(
+        (sum, qty) => sum + qty, 0
+    ) * unitPrice;
+
+    document.getElementById("orderSummary").innerHTML = `
+
+        <p>
+            <strong>Kunde:</strong> ${esc(d.get("name"))}<br>
+            <strong>E-Mail:</strong> ${esc(d.get("email"))}<br>
+            <strong>Adresse:</strong>
+            ${esc(d.get("street"))},
+            ${esc(d.get("zip"))}
+            ${esc(d.get("city"))}
+        </p>
+
+        <table style="width:100%;text-align:left;margin-top:12px;border-collapse:collapse"
+            border="1" cellpadding="6">
+
+            <thead>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Menge</th>
+                    <th>Einzelpreis</th>
+                    <th>Summe</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                ${rows}
+            </tbody>
+
+        </table>
+
+        <p style="text-align:right;margin-top:12px">
+            <strong>Gesamtbetrag: ${money(total)}</strong>
+        </p>
+
+    `;
+
+    document.getElementById("checkoutForm").style.display = "none";
+
+    document.getElementById("result").style.display = "block";
+
+});
+
+renderCart();
+
+</script>
+
+</body>
+</html>
