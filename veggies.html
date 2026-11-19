@@ -1,150 +1,70 @@
-9
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ATOMSPHERE - Veggies</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    min-height: 100vh;
-    background: #020735;
-    color: white;
-    font-family: Arial, sans-serif;
-}
-
-/* HEADER */
-
-header {
-    background: #071044;
-    padding: 25px;
-    text-align: center;
-    border-bottom: 2px solid #526aff;
-}
-
-header h1 {
-    font-size: 30px;
-    letter-spacing: 3px;
-}
-
-/* BACK BUTTON */
-
-.back {
-    display: inline-block;
-    margin: 25px;
-    padding: 12px 20px;
-    color: white;
-    text-decoration: none;
-    background: #152879;
-    border: 1px solid #526aff;
-    border-radius: 8px;
-}
-
-.back:hover {
-    background: #263caa;
-}
-
-/* TITLE */
-
-.page-title {
-    text-align: center;
-    margin: 20px 0 35px;
-    font-size: 30px;
-    letter-spacing: 2px;
-    text-shadow: 0 0 15px #526aff;
-}
-
-/* IMAGE GRID */
-
-.products {
-    max-width: 1250px;
-    margin: auto;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
-}
-
-/* IMAGE SLOTS */
-
-.product {
-    height: 210px;
-    background: #071044;
-    border: 1px solid #263879;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: 0.3s;
-}
-
-.product:hover {
-    transform: translateY(-5px);
-    border-color: #657dff;
-    box-shadow: 0 0 18px #263caa;
-}
-
-.product img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 900px) {
-    .products {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media(max-width: 600px) {
-    .products {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        padding: 12px;
-    }
-
-    .product {
-        height: 160px;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-    <h1>ATOMSPHERE</h1>
-</header>
-
-<a href="index.html" class="back">← HOME</a>
-
-<h2 class="page-title">VEGETABLES</h2>
 
 <div class="products">
 
-    <div class="product"><img src="1.jpg" alt="Vegetable 1"></div>
-    <div class="product"><img src="2.jpg" alt="Vegetable 2"></div>
-    <div class="product"><img src="3.jpg" alt="Vegetable 3"></div>
-    <div class="product"><img src="4.jpg" alt="Vegetable 4"></div>
-    <div class="product"><img src="5.jpg" alt="Vegetable 5"></div>
-    <div class="product"><img src="6.jpg" alt="Vegetable 6"></div>
-    <div class="product"><img src="7.jpg" alt="Vegetable 7"></div>
-    <div class="product"><img src="8.jpg" alt="Vegetable 8"></div>
-    <div class="product"><img src="9.jpg" alt="Vegetable 9"></div>
-    <div class="product"><img src="10.jpg" alt="Vegetable 10"></div>
-    <div class="product"><img src="11.jpg" alt="Vegetable 11"></div>
-    
-</div>
+    <div class="product">
+        <img src="1.jpg" alt="Spinatpulver">
+        <h3>Spinatpulver</h3>
+        <p>2,50 €</p>
+    </div>
 
-</body>
-</html>
+    <div class="product">
+        <img src="2.jpg" alt="Rote Rüben Pulver">
+        <h3>Rote Rüben Pulver</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="3.jpg" alt="Karottenpulver">
+        <h3>Karottenpulver</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="4.jpg" alt="Zucchinischeiben">
+        <h3>Zucchinischeiben</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="5.jpg" alt="Rote Rüben Flocken">
+        <h3>Rote Rüben Flocken</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="6.jpg" alt="Suppengemüse Würfel">
+        <h3>Suppengemüse Würfel</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="7.jpg" alt="Grüne Bohnen gemahlen">
+        <h3>Grüne Bohnen gemahlen</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="8.jpg" alt="Karottenstücke">
+        <h3>Karottenstücke</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="9.jpg" alt="Kürbisflocken">
+        <h3>Kürbisflocken</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="10.jpg" alt="Weißkrautflocken">
+        <h3>Weißkrautflocken</h3>
+        <p>2,50 €</p>
+    </div>
+
+    <div class="product">
+        <img src="11.jpg" alt="Buchweizenflocken">
+        <h3>Buchweizenflocken</h3>
+        <p>2,50 €</p>
+    </div>
+
+</div>
