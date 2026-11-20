@@ -496,7 +496,7 @@ footer{
 
     <p class="note">
         Du kannst Mengen ändern und Produkte entfernen.
-        Die Bestellübersicht kann gedruckt oder als PDF gespeichert werden.
+        Die Bestellung wird über Google Apps Script übermittelt.
     </p>
 
 </section>
@@ -516,8 +516,13 @@ footer{
             <div class="form-grid">
 
                 <label>
-                    Vor- und Nachname *
-                    <input name="name" autocomplete="name" required>
+                    Vorname *
+                    <input name="firstName" autocomplete="given-name" required>
+                </label>
+
+                <label>
+                    Nachname *
+                    <input name="lastName" autocomplete="family-name" required>
                 </label>
 
                 <label>
@@ -525,14 +530,19 @@ footer{
                     <input name="email" type="email" autocomplete="email" required>
                 </label>
 
+                <label>
+                    Telefon (optional)
+                    <input name="phone" type="tel" autocomplete="tel">
+                </label>
+
                 <label class="full">
                     Straße und Hausnummer *
-                    <input name="street" autocomplete="street-address" required>
+                    <input name="address" autocomplete="street-address" required>
                 </label>
 
                 <label>
                     PLZ *
-                    <input name="zip" autocomplete="postal-code" required>
+                    <input name="postalCode" autocomplete="postal-code" required>
                 </label>
 
                 <label>
@@ -542,15 +552,22 @@ footer{
 
                 <label class="full">
                     Nachricht (optional)
-                    <textarea name="message"></textarea>
+                    <textarea name="notes"></textarea>
                 </label>
 
             </div>
 
+            <!-- SPAM-SCHUTZ -->
+
+            <label style="position:absolute;left:-10000px" aria-hidden="true">
+                Website
+                <input name="website" tabindex="-1" autocomplete="off">
+            </label>
+
             <div class="form-actions no-print">
 
-                <button class="checkout" type="submit">
-                    Bestellung überprüfen
+                <button class="checkout" type="submit" id="sendOrderButton">
+                    Bestellung verbindlich senden
                 </button>
 
                 <button class="secondary" type="button"
@@ -564,33 +581,15 @@ footer{
 
         <div id="result">
 
-            <h3>Bestellübersicht</h3>
+            <h3>Bestellung</h3>
 
-            <div id="orderSummary"></div>
-
-            <p style="margin-top:12px">
-                Zahlungsart: Banküberweisung.
-                Die Bankverbindung des Verkäufers wird nach Eintragung
-                deiner Kontodaten ergänzt.
-            </p>
+            <p id="orderStatus" role="status" aria-live="polite"></p>
 
             <div class="form-actions no-print">
-
-                <button class="checkout" onclick="window.print()">
-                    Übersicht drucken / als PDF speichern
-                </button>
-
-                <button class="secondary" onclick="closeCheckout()">
+                <button class="secondary" type="button" onclick="closeCheckout()">
                     Schließen
                 </button>
-
             </div>
-
-            <p class="note">
-                Wichtig: Diese Version erstellt nur eine lokale
-                Bestellübersicht. Sie versendet noch keine Bestellung
-                oder E-Mail und ist noch kein automatischer Rechnungsversand.
-            </p>
 
         </div>
 
@@ -598,9 +597,20 @@ footer{
 
 </div>
 
+<!-- VERSTECKTER RAHMEN FÜR GOOGLE APPS SCRIPT -->
+
+<iframe name="order-frame" title="Bestellübermittlung" style="display:none"></iframe>
+
 <footer>© ATOMSPHERE</footer>
 
 <script>
+"use strict";
+
+// GOOGLE APPS SCRIPT WEB-APP URL
+const ORDER_ENDPOINT =
+"https://script.google.com/macros/s/AKfycbzsIBgxhFHTsizMgM7abtCIkeYoUtZ3GWgb7wAK8oEC-A49kefY9vlWNzq8UN-_S4sBvQ/exec";
+
+// PRODUKTE
 
 const products = [
     "Spinatpulver",
@@ -616,20 +626,23 @@ const products = [
     "Buchweizenflocken"
 ];
 
-const unitPrice = 250;
-
+const unitPrice = 250; // Cent
 let cart = {};
 
-const money = c =>
-    (c / 100).toLocaleString("de-AT", {
+const money = cents =>
+    (cents / 100).toLocaleString("de-AT", {
         style: "currency",
         currency: "EUR"
     });
+
+// PRODUKT HINZUFÜGEN
 
 function addToCart(i) {
     cart[i] = (cart[i] || 0) + 1;
     renderCart();
 }
+
+// MENGE ÄNDERN
 
 function changeQty(i, delta) {
     cart[i] = (cart[i] || 0) + delta;
@@ -640,6 +653,8 @@ function changeQty(i, delta) {
 
     renderCart();
 }
+
+// WARENKORB ANZEIGEN
 
 function renderCart() {
 
@@ -671,19 +686,23 @@ function renderCart() {
         box.innerHTML = entries.map(([i, qty]) => `
             <div class="cart-row">
 
-                <strong>${products[i]}</strong>
+                <strong>${escapeHtml(products[Number(i)])}</strong>
 
                 <div class="qty">
-                    <button onclick="changeQty(${i},-1)">−</button>
+                    <button type="button"
+                        onclick="changeQty(${i},-1)">−</button>
+
                     <span>${qty}</span>
-                    <button onclick="changeQty(${i},1)">+</button>
+
+                    <button type="button"
+                        onclick="changeQty(${i},1)">+</button>
                 </div>
 
                 <strong class="line-price">
                     ${money(qty * unitPrice)}
                 </strong>
 
-                <button class="remove"
+                <button type="button" class="remove"
                     onclick="changeQty(${i},-${qty})">
                     Entfernen
                 </button>
@@ -694,19 +713,17 @@ function renderCart() {
     }
 }
 
+// BESTELLFORMULAR ÖFFNEN
+
 function openCheckout() {
 
     if (Object.keys(cart).length) {
-
         document.getElementById("checkoutModal")
             .classList.add("open");
-
-        document.getElementById("result").style.display = "none";
-
-        document.getElementById("checkoutForm").style.display = "block";
-
     }
 }
+
+// BESTELLFORMULAR SCHLIESSEN
 
 function closeCheckout() {
 
@@ -715,9 +732,11 @@ function closeCheckout() {
 
 }
 
-function esc(s) {
+// HTML-SONDERZEICHEN SCHÜTZEN
 
-    return String(s).replace(/[&<>"']/g, c => ({
+function escapeHtml(value) {
+
+    return String(value).replace(/[&<>"']/g, c => ({
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
@@ -727,66 +746,112 @@ function esc(s) {
 
 }
 
+// BESTELLUNG AN GOOGLE APPS SCRIPT SENDEN
+
 document.getElementById("checkoutForm")
 .addEventListener("submit", function(e) {
 
     e.preventDefault();
 
-    const d = new FormData(e.target);
+    if (!Object.keys(cart).length) {
+        alert("Dein Warenkorb ist leer. Bitte wähle zuerst Produkte aus.");
+        return;
+    }
 
-    const rows = Object.entries(cart).map(([i, qty]) => `
-        <tr>
-            <td>${esc(products[i])}</td>
-            <td>${qty}</td>
-            <td>${money(unitPrice)}</td>
-            <td>${money(qty * unitPrice)}</td>
-        </tr>
-    `).join("");
+    const form = e.currentTarget;
 
-    const total = Object.values(cart).reduce(
-        (sum, qty) => sum + qty, 0
-    ) * unitPrice;
+    if (!form.reportValidity()) return;
 
-    document.getElementById("orderSummary").innerHTML = `
+    const formData = new FormData(form);
 
-        <p>
-            <strong>Kunde:</strong> ${esc(d.get("name"))}<br>
-            <strong>E-Mail:</strong> ${esc(d.get("email"))}<br>
-            <strong>Adresse:</strong>
-            ${esc(d.get("street"))},
-            ${esc(d.get("zip"))}
-            ${esc(d.get("city"))}
-        </p>
+    // PRODUKTE FÜR GOOGLE SCRIPT VORBEREITEN
 
-        <table style="width:100%;text-align:left;margin-top:12px;border-collapse:collapse"
-            border="1" cellpadding="6">
+    const items = Object.entries(cart).map(([index, quantity]) => ({
+        name: products[Number(index)],
+        unit: "Packung",
+        quantity: quantity,
+        unitPrice: unitPrice / 100,
+        lineTotal: (unitPrice * quantity) / 100
+    }));
 
-            <thead>
-                <tr>
-                    <th>Produkt</th>
-                    <th>Menge</th>
-                    <th>Einzelpreis</th>
-                    <th>Summe</th>
-                </tr>
-            </thead>
+    const totalCents = items.reduce(
+        (sum, item) => sum + Math.round(item.lineTotal * 100), 0
+    );
 
-            <tbody>
-                ${rows}
-            </tbody>
+    // BESTELLDATEN
 
-        </table>
+    const payload = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email: formData.get("email"),
+        phone: formData.get("phone") || "",
+        address: formData.get("address"),
+        postalCode: formData.get("postalCode"),
+        city: formData.get("city"),
+        notes: formData.get("notes") || "",
+        website: formData.get("website") || "",
+        items: JSON.stringify(items),
+        total: (totalCents / 100).toFixed(2)
+    };
 
-        <p style="text-align:right;margin-top:12px">
-            <strong>Gesamtbetrag: ${money(total)}</strong>
-        </p>
+    // VERSTECKTES FORMULAR ERSTELLEN
 
-    `;
+    const postForm = document.createElement("form");
 
-    document.getElementById("checkoutForm").style.display = "none";
+    postForm.method = "POST";
+    postForm.action = ORDER_ENDPOINT;
+    postForm.target = "order-frame";
+    postForm.style.display = "none";
 
-    document.getElementById("result").style.display = "block";
+    Object.entries(payload).forEach(([key, value]) => {
+
+        const input = document.createElement("input");
+
+        input.type = "hidden";
+        input.name = key;
+        input.value = String(value ?? "");
+
+        postForm.appendChild(input);
+
+    });
+
+    document.body.appendChild(postForm);
+
+    // STATUS ANZEIGEN
+
+    const button = document.getElementById("sendOrderButton");
+    const result = document.getElementById("result");
+    const status = document.getElementById("orderStatus");
+
+    button.disabled = true;
+    button.textContent = "Bestellung wird übermittelt ...";
+
+    result.style.display = "block";
+    form.style.display = "none";
+
+    status.textContent =
+        "Die Übermittlung wurde gestartet. Bitte prüfe dein E-Mail-Postfach auf die Bestellbestätigung. Falls keine E-Mail eintrifft, kontaktiere bitte den Shop.";
+
+    // BESTELLUNG ABSENDEN
+
+    postForm.submit();
+
+    // HINWEIS:
+    // Wegen des versteckten iframe kann die tatsächliche
+    // Serverantwort nicht zuverlässig ausgelesen werden.
+
+    window.setTimeout(() => {
+
+        postForm.remove();
+
+        button.disabled = false;
+        button.textContent = "Bestellung verbindlich senden";
+
+    }, 5000);
 
 });
+
+// WARENKORB INITIALISIEREN
 
 renderCart();
 
