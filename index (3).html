@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#020735">
+  <title>ATOMSPHERE</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --background: #020735;
+      --panel: #071044;
+      --blue: #526aff;
+      --blue-dark: #152879;
+      --text-soft: #c2c9ec;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--background);
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 5%;
+      background: var(--panel);
+      border-bottom: 2px solid var(--blue);
+    }
+
+    .brand {
+      color: white;
+      text-decoration: none;
+      font-size: clamp(20px, 3vw, 29px);
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    .menu {
+      position: relative;
+    }
+
+    .menu-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      background: var(--blue-dark);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s;
+    }
+
+    .menu-button:hover,
+    .menu-button[aria-expanded="true"] {
+      background: #263caa;
+      box-shadow: 0 0 15px #263caa;
+    }
+
+    .menu-arrow {
+      display: inline-block;
+      transition: transform .2s;
+    }
+
+    .menu-button[aria-expanded="true"] .menu-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      min-width: 220px;
+      padding: 8px;
+      background: var(--panel);
+      border: 1px solid var(--blue);
+      border-radius: 10px;
+      box-shadow: 0 8px 28px #0009, 0 0 18px #263caa66;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity .18s, transform .18s, visibility .18s;
+    }
+
+    .dropdown.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 13px 14px;
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+      letter-spacing: .5px;
+    }
+
+    .dropdown a:hover,
+    .dropdown a:focus-visible {
+      outline: none;
+      background: #152879;
+      color: #dce2ff;
+    }
+
+    main {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 35px 20px 55px;
+    }
+
+    .hero {
+      width: min(1100px, 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      max-height: calc(100vh - 150px);
+      object-fit: contain;
+      border-radius: 14px;
+      filter: drop-shadow(0 0 24px #263caa66);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 16px 5%; }
+      .brand { letter-spacing: 2px; }
+      main { min-height: calc(100vh - 65px); padding: 20px 12px 35px; }
+      .hero-image { max-height: calc(100vh - 110px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html">ATOMSPHERE</a>
+
+    <nav class="menu" aria-label="Hauptmenü">
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-expanded="false"
+        aria-controls="dropdownMenu"
+      >
+        MENÜ <span class="menu-arrow" aria-hidden="true">⌄</span>
+      </button>
+
+      <div class="dropdown" id="dropdownMenu">
+        <a href="veggies.html">VEGGIES</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Atomsphere">
+      <img class="hero-image" src="Atomsphere.png" alt="Atomsphere">
+    </section>
+  </main>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    function setMenuOpen(open) {
+      dropdownMenu.classList.toggle("open", open);
+      menuButton.setAttribute("aria-expanded", String(open));
+    }
+
+    menuButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".menu")) setMenuOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButton.focus();
+      }
+    });
+  </script>
+</body>
+</html>
